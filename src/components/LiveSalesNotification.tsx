@@ -67,10 +67,10 @@ export default function LiveSalesNotification({ isStickyVisible }: LiveSalesNoti
   return (
     <div 
       id="live-sales-notification-toast" 
-      className={`fixed left-3 sm:left-4 z-40 max-w-[270px] w-[calc(100%-1.5rem)] pointer-events-none transition-all duration-[450ms] ease-in-out ${
+      className={`fixed left-3 sm:left-4 z-50 max-w-[270px] w-[calc(100%-1.5rem)] pointer-events-none transition-all duration-[450ms] ease-in-out ${
         isStickyVisible 
-          ? "bottom-[84px] sm:bottom-[104px]" 
-          : "bottom-4 sm:bottom-6"
+          ? "bottom-[84px] md:bottom-[140px]" 
+          : "bottom-4 md:bottom-6"
       }`}
     >
       <AnimatePresence>
