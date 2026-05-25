@@ -1,7 +1,7 @@
-import React, { useState, useRef, MouseEvent } from 'react';
+import React, { useState, useRef, useEffect, MouseEvent } from 'react';
 import { motion } from 'motion/react';
 import { VIDEO_REVIEWS } from '../data';
-import { Play, VolumeX, Volume2, Pause } from 'lucide-react';
+import { Play, VolumeX, Volume2, Pause, RotateCcw, RotateCw } from 'lucide-react';
 
 export default function VideoReviews() {
   return (
@@ -22,7 +22,6 @@ export default function VideoReviews() {
         </div>
 
         {/* Video Cards Grid */}
-        {/* Desktop: 2-column | Mobile: single-column. Compact. */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto">
           {VIDEO_REVIEWS.map((vReview) => (
             <VideoCard key={vReview.id} review={vReview} />
@@ -47,10 +46,37 @@ interface VideoCardProps {
 
 function VideoCard({ review }: VideoCardProps) {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
+  const [isMuted, setIsMuted] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  const togglePlay = () => {
+  // Listen to other video plays to pause when another starts
+  useEffect(() => {
+    const handleOtherVideoPlay = (e: Event) => {
+      const customEvent = e as CustomEvent<{ id: string }>;
+      if (customEvent.detail && customEvent.detail.id !== review.id) {
+        if (videoRef.current && !videoRef.current.paused) {
+          videoRef.current.pause();
+          setIsPlaying(false);
+        }
+      }
+    };
+    window.addEventListener('app-video-play', handleOtherVideoPlay);
+    return () => {
+      window.removeEventListener('app-video-play', handleOtherVideoPlay);
+    };
+  }, [review.id]);
+
+  const formatVideoTime = (seconds: number) => {
+    if (isNaN(seconds)) return '0:00';
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  const togglePlay = (e: MouseEvent | React.TouchEvent) => {
+    e.stopPropagation();
     if (!videoRef.current) return;
     if (isPlaying) {
       videoRef.current.pause();
@@ -58,18 +84,43 @@ function VideoCard({ review }: VideoCardProps) {
     } else {
       videoRef.current.play().then(() => {
         setIsPlaying(true);
+        window.dispatchEvent(new CustomEvent('app-video-play', { detail: { id: review.id } }));
       }).catch((err) => {
         console.log("Video play interrupted:", err);
       });
     }
   };
 
-  const toggleMute = (e: MouseEvent) => {
-    e.stopPropagation(); // prevent triggering play/pause
+  const handleSkip = (e: MouseEvent, seconds: number) => {
+    e.stopPropagation();
     if (!videoRef.current) return;
-    videoRef.current.muted = !isMuted;
-    setIsMuted(!isMuted);
+    const newTime = Math.max(0, Math.min(videoRef.current.duration || 0, videoRef.current.currentTime + seconds));
+    videoRef.current.currentTime = newTime;
+    setCurrentTime(newTime);
   };
+
+  const handleProgressClick = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    if (!videoRef.current || !duration) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const width = rect.width;
+    const percentage = clickX / width;
+    const newTime = percentage * duration;
+    videoRef.current.currentTime = newTime;
+    setCurrentTime(newTime);
+  };
+
+  const toggleMute = (e: MouseEvent) => {
+    e.stopPropagation();
+    if (!videoRef.current) return;
+    const targetMute = !isMuted;
+    videoRef.current.muted = targetMute;
+    setIsMuted(targetMute);
+  };
+
+  // Append #t=0.1 to video URL to make sure browsers render the first frame of the video as thumbnail
+  const videoSrcWithTimestamp = review.videoUrl.indexOf('#') === -1 ? `${review.videoUrl}#t=0.1` : review.videoUrl;
 
   return (
     <motion.div
@@ -79,57 +130,112 @@ function VideoCard({ review }: VideoCardProps) {
       className="glass-panel p-4 rounded-2xl border-purple-500/10 hover:border-pink-500/10 shadow-lg relative overflow-hidden group flex flex-col justify-between"
     >
       
-      {/* Video Container Aspect 16:9 */}
+      {/* Video Container Aspect 16:9 (Landscape) containing 9:16 Shorts */}
       <div 
         onClick={togglePlay}
-        className="relative aspect-video rounded-xl overflow-hidden bg-black cursor-pointer shadow-inner border border-purple-950/20"
+        className="relative aspect-video rounded-xl overflow-hidden bg-black cursor-pointer shadow-inner border border-purple-950/20 group/player w-full"
       >
         <video
           ref={videoRef}
-          src={review.videoUrl}
-          poster={review.thumbnail}
+          src={videoSrcWithTimestamp}
           loop
           muted={isMuted}
           playsInline
-          className="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity"
+          preload="auto"
+          onTimeUpdate={(e) => setCurrentTime(e.currentTarget.currentTime)}
+          onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
+          className="w-full h-full object-contain opacity-95 transition-transform duration-500"
         />
 
-        {/* Dark Cinematic overlay when paused */}
+        {/* Dynamic visual pause-state overlay with custom play button */}
         {!isPlaying && (
-          <div className="absolute inset-0 bg-black/45 backdrop-blur-[2px] transition-all duration-300 flex items-center justify-center">
-            {/* Play Button Icon pulsing */}
-            <motion.div
-              whileHover={{ scale: 1.15 }}
-              className="p-4 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg glow-purple"
+          <div 
+            onClick={togglePlay}
+            className="absolute inset-0 bg-black/60 backdrop-blur-[2px] transition-all flex flex-col items-center justify-center gap-3 z-25 cursor-pointer animate-fade-in"
+          >
+            <motion.div 
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-14 h-14 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center border-2 border-pink-400 shadow-[0_0_30px_rgba(236,72,153,0.6)] hover:shadow-[0_0_45px_rgba(236,72,153,0.8)] transition-shadow duration-300 pointer-events-auto"
             >
-              <Play className="w-5 h-5 fill-white shrink-0" />
+              <Play className="w-6 h-6 text-white fill-white ml-1" />
             </motion.div>
+            <span className="text-white text-[9px] sm:text-xs font-black uppercase tracking-widest font-mono bg-purple-950/95 border border-purple-500/40 px-3 sm:px-4.5 py-1.5 rounded-full shadow-[0_4px_25px_rgba(0,0,0,0.8)] glow-purple">
+              Click to play video
+            </span>
           </div>
         )}
 
-        {/* Media Controls inside player panel */}
-        <div className="absolute bottom-3 right-3 flex items-center gap-2 z-10">
-          {/* Mute button */}
-          <button
-            onClick={toggleMute}
-            className="p-2 rounded-lg bg-black/70 backdrop-blur-md border border-purple-500/20 text-white hover:text-pink-400 transition-colors pointer-events-auto cursor-pointer"
-            title={isMuted ? "Unmute" : "Mute"}
-          >
-            {isMuted ? <VolumeX className="w-4.5 h-4.5" /> : <Volume2 className="w-4.5 h-4.5 text-pink-500" />}
-          </button>
+        {/* Bottom Custom Navigation & Timeline Controls Panel */}
+        <div className="absolute bottom-0 left-0 right-0 p-2 sm:p-3 bg-gradient-to-t from-black/95 via-black/75 to-transparent z-20 flex flex-col gap-1.5 opacity-100 md:opacity-40 hover:opacity-100 group-hover/player:opacity-100 transition-opacity duration-300">
           
-          {/* Mini Play toggle */}
-          {isPlaying && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                togglePlay();
-              }}
-              className="p-2 rounded-lg bg-black/70 backdrop-blur-md border border-purple-500/20 text-white hover:text-pink-400 transition-colors pointer-events-auto cursor-pointer"
-            >
-              <Pause className="w-4.5 h-4.5 text-pink-500" />
-            </button>
-          )}
+          {/* 1. Timeline Progress Bar */}
+          <div 
+            onClick={handleProgressClick}
+            className="relative w-full h-1 bg-gray-800/80 rounded-full cursor-pointer group/progress transition-all"
+          >
+            <div 
+              className="absolute top-0 left-0 h-full bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 rounded-full"
+              style={{ width: `${duration ? (currentTime / duration) * 100 : 0}%` }}
+            />
+            <div 
+              className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-pink-400 border border-white shadow-xl transition-all scale-0 group-hover/progress:scale-100"
+              style={{ left: `${duration ? (currentTime / duration) * 100 : 0}%`, transform: 'translate(-50%, -50%)' }}
+            />
+          </div>
+
+          {/* 2. Controls and Actions Row */}
+          <div className="flex items-center justify-between gap-2 text-white pointer-events-auto">
+            
+            {/* Left elements: Play/Pause, Skip Back, Skip Forward */}
+            <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
+              <button
+                onClick={togglePlay}
+                className="p-1 rounded-lg hover:bg-white/10 text-white cursor-pointer hover:scale-105 active:scale-95 duration-150 transition-all shrink-0"
+                title={isPlaying ? "Pause Video" : "Play Video"}
+              >
+                {isPlaying ? <Pause className="w-3.5 h-3.5 text-pink-400" /> : <Play className="w-3.5 h-3.5 text-emerald-400 fill-emerald-400" />}
+              </button>
+
+              {/* Skip -10s */}
+              <button
+                onClick={(e) => handleSkip(e, -10)}
+                className="flex items-center gap-0.5 px-2 py-0.5 rounded-md bg-purple-950/60 hover:bg-purple-900/60 border border-purple-500/20 text-[9px] font-mono font-bold text-gray-200 cursor-pointer hover:scale-105 active:scale-95 transition-all shrink-0"
+                title="Rewind 10s"
+              >
+                <RotateCcw className="w-3 h-3 text-pink-400 shrink-0" />
+                <span>-10s</span>
+              </button>
+
+              {/* Skip +10s */}
+              <button
+                onClick={(e) => handleSkip(e, 10)}
+                className="flex items-center gap-0.5 px-2 py-0.5 rounded-md bg-purple-950/60 hover:bg-purple-900/60 border border-purple-500/20 text-[9px] font-mono font-bold text-gray-200 cursor-pointer hover:scale-105 active:scale-95 transition-all shrink-0"
+                title="Forward 10s"
+              >
+                <RotateCw className="w-3 h-3 text-purple-400 shrink-0" />
+                <span>+10s</span>
+              </button>
+
+              {/* Time displays */}
+              <div className="text-[9px] sm:text-[10px] font-mono text-gray-450 font-bold select-none ml-1.5 shrink-0">
+                {formatVideoTime(currentTime)} <span className="text-gray-600">/</span> {formatVideoTime(duration)}
+              </div>
+            </div>
+
+            {/* Right element: Mute/Unmute */}
+            <div className="flex items-center shrink-0">
+              <button
+                onClick={toggleMute}
+                className="p-1 rounded-lg hover:bg-white/10 text-white cursor-pointer duration-150 transition-colors"
+                title={isMuted ? "Unmute" : "Mute"}
+              >
+                {isMuted ? <VolumeX className="w-3.5 h-3.5 text-red-400 animate-pulse" /> : <Volume2 className="w-3.5 h-3.5 text-emerald-400" />}
+              </button>
+            </div>
+
+          </div>
+
         </div>
 
         {/* Subtle glow border around top */}
@@ -152,3 +258,4 @@ function VideoCard({ review }: VideoCardProps) {
     </motion.div>
   );
 }
+

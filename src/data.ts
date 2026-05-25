@@ -6,7 +6,7 @@ import { Testimonial, VideoReview, FAQItem, ScreenshotSlide, FeatureItem } from 
 export const CONFIG = {
   // Global CTA Redirect URL
   // Just change this once to update all buttons on the page!
-  ctaRedirectUrl: "https://imojo.in/meesho-auto-tool", 
+  ctaRedirectUrl: "https://superprofile.bio/vp/meesho-auto-listing---low-shipping-tool?checkout=true", 
 
   // Support details
   whatsappNumber: "6295429762",
@@ -19,7 +19,7 @@ export const CONFIG = {
   
   // Hero Video URL (Direct MP4 URL or embedded looping content)
   // We provide a premium fallback background loop by default, but it can be changed to any MP4 link.
-  heroVideoUrl: "https://res.cloudinary.com/dc062uhug/video/upload/v1779557506/demo_x1jw4l.mp4",
+  heroVideoUrl: "https://res.cloudinary.com/ddkdxc1lj/video/upload/v1779724599/InShot_20260525_212334170_de2rkp.mp4",
   
   // YouTube Backup ID if they want to use a YouTube embed instead of HTML5 video
   youtubeId: "", // e.g. "dQw4w9WgXcQ"
@@ -48,19 +48,19 @@ export const SCREENSHOT_SLIDES: ScreenshotSlide[] = [
     id: "slide-1",
     title: "1-Click Bulk Bulk Auto Listing Panel",
     description: "Upload up to 500 catalog items simultaneously. Automatically pre-fills product descriptions, dimensions, GST rates and optimized smart keywords.",
-    imageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80"
+    imageUrl: "https://i.ibb.co/jZ44n77q/6091285828404448992.jpg"
   },
   {
     id: "slide-2",
     title: "Low Shipping Pricing Custom Engine",
     description: "The secret trick applied in action. It manipulates Meesho weight parameters safely to lock delivery charges to the bare minimum slab legally.",
-    imageUrl: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1200&q=80"
+    imageUrl: "https://i.ibb.co/k6DY8KSJ/6091285828404448990.jpg"
   },
   {
     id: "slide-3",
     title: "Dynamic Smart Orders Monitor Dashboard",
     description: "Track the immediate boost in listings impressions. Watch traffic and order pipelines multiply from Day 1 inside your official vendor panel.",
-    imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80"
+    imageUrl: "https://i.ibb.co/dqq928L/6091285828404448991.jpg"
   }
 ];
 
@@ -205,14 +205,14 @@ export const VIDEO_REVIEWS: VideoReview[] = [
     name: "Rahul Verma (Meesho Master)",
     role: "Rs. 4.5 Lakhs Monthly Profit Seller",
     thumbnail: "https://images.unsplash.com/photo-1542744094-3a31f103e35f?auto=format&fit=crop&w=600&q=80",
-    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-hand-holding-a-smartphone-showing-a-stock-market-index-41908-large.mp4"
+    videoUrl: "https://res.cloudinary.com/ddkdxc1lj/video/upload/v1779724680/InShot_20260525_211127373_wjvbit.mp4"
   },
   {
     id: "v2",
     name: "Simran K. (Handicraft Vendor)",
     role: "Jaipur Boutique Owner",
     thumbnail: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=600&q=80",
-    videoUrl: "https://assets.mixkit.co/videos/preview/mixkit-woman-smiling-while-unboxing-a-parcel-42531-large.mp4"
+    videoUrl: "https://res.cloudinary.com/ddkdxc1lj/video/upload/v1779724689/InShot_20260525_211250193_qokyly.mp4"
   }
 ];
 

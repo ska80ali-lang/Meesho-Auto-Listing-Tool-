@@ -59,7 +59,7 @@ export default function ProofSlider() {
                 <img
                   src={SCREENSHOT_SLIDES[activeIdx].imageUrl}
                   alt={SCREENSHOT_SLIDES[activeIdx].title}
-                  className="max-w-full max-h-full w-auto h-auto object-contain mx-auto rounded-lg shadow-2xl transition-transform duration-500 group-hover:scale-[1.01] referrerPolicy"
+                  className="max-w-full max-h-full w-auto h-auto object-contain mx-auto rounded-lg shadow-2xl transition-transform duration-500 group-hover:scale-[1.01]"
                   referrerPolicy="no-referrer"
                 />
               </motion.div>

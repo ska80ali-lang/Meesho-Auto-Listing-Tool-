@@ -109,6 +109,23 @@ export default function App() {
     setHeroPlaying(false);
   }, []);
 
+  // Listen to other video plays to pause when another starts
+  useEffect(() => {
+    const handleOtherVideoPlay = (e: Event) => {
+      const customEvent = e as CustomEvent<{ id: string }>;
+      if (customEvent.detail && customEvent.detail.id !== 'hero') {
+        if (heroVideoRef.current && !heroVideoRef.current.paused) {
+          heroVideoRef.current.pause();
+          setHeroPlaying(false);
+        }
+      }
+    };
+    window.addEventListener('app-video-play', handleOtherVideoPlay);
+    return () => {
+      window.removeEventListener('app-video-play', handleOtherVideoPlay);
+    };
+  }, []);
+
   const formatStickyTime = (secondsTotal: number) => {
     const mins = Math.floor(secondsTotal / 60);
     const secs = secondsTotal % 60;
@@ -155,6 +172,7 @@ export default function App() {
       setHeroMuted(false);
       heroVideoRef.current.play().then(() => {
         setHeroPlaying(true);
+        window.dispatchEvent(new CustomEvent('app-video-play', { detail: { id: 'hero' } }));
       }).catch((err) => {
         console.log("Hero playback interrupted:", err);
       });
@@ -202,7 +220,8 @@ export default function App() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.35 }}
-              className="relative w-full max-w-4xl mx-auto rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_15px_60px_rgba(147,51,234,0.3)] border-2 border-purple-500/20 bg-black aspect-video group"
+              onClick={handleToggleHeroPlay}
+              className="relative w-full max-w-4xl mx-auto rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_15px_60px_rgba(147,51,234,0.3)] border-2 border-purple-500/20 bg-black aspect-video group cursor-pointer"
             >
               <video
                 ref={heroVideoRef}
@@ -676,7 +695,7 @@ export default function App() {
             className="h-10 sm:h-11 md:h-13 px-3 sm:px-5 md:px-6 rounded-lg sm:rounded-xl md:rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-extrabold text-[10px] sm:text-xs md:text-sm flex items-center gap-1.5 sm:gap-2 border border-pink-400/20 shadow-md cursor-pointer uppercase tracking-wider font-display shrink-0 transition-transform hover:scale-[1.02]"
           >
             <Zap className="w-3.5 h-3.5 text-yellow-300 fill-yellow-300 animate-pulse shrink-0" />
-            <span>Auto Get Access</span>
+            <span>Buy Now</span>
             <ArrowRight className="w-4 h-4 hidden sm:inline shrink-0" />
           </a>
 
