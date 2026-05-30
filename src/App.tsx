@@ -212,7 +212,7 @@ export default function App() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-tight font-display"
             >
-              1-Click <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 glow-text-purple">Meesho Auto Listing</span> Tool + Low Shipping Weight Trick
+              1-Click <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 glow-text-purple">Meesho Auto Listing</span> Tool + Low Shipping Cost Trick
             </motion.h1>
 
             {/* FULL WIDTH CINEMATIC VIDEO PLAYER (16:9) */}
