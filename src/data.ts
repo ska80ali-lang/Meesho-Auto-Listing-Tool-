@@ -19,7 +19,7 @@ export const CONFIG = {
   
   // Hero Video URL (Direct MP4 URL or embedded looping content)
   // We provide a premium fallback background loop by default, but it can be changed to any MP4 link.
-  heroVideoUrl: "https://res.cloudinary.com/ddkdxc1lj/video/upload/v1779724599/InShot_20260525_212334170_de2rkp.mp4",
+  heroVideoUrl: "",
   
   // YouTube Backup ID if they want to use a YouTube embed instead of HTML5 video
   youtubeId: "", // e.g. "dQw4w9WgXcQ"
