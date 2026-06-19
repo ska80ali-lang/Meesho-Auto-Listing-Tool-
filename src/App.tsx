@@ -39,6 +39,7 @@ import VideoReviews from './components/VideoReviews';
 import FAQSection from './components/FAQSection';
 import PricingCard from './components/PricingCard';
 import LiveSalesNotification from './components/LiveSalesNotification';
+import AiChatBot from './components/AiChatBot';
 
 export default function App() {
   // Global CTA Variable
@@ -342,22 +343,22 @@ export default function App() {
             </div>
 
             {/* Primary Action Call to Action (Instant purchase trigger) */}
-            <div ref={heroButtonRef} className="pt-4">
+            <div ref={heroButtonRef} className="pt-4 max-w-md sm:max-w-lg mx-auto px-1 sm:px-0">
               <motion.a 
                 href={globalCtaUrl}
                 target="_blank" 
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex h-15 px-8 md:px-10 rounded-2xl bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 hover:from-purple-500 hover:to-pink-500 text-white font-black text-sm md:text-base items-center gap-4 border border-pink-400/20 cursor-pointer shadow-[0_0_35px_rgba(236,72,153,0.3)] uppercase tracking-wider font-display"
+                className="flex w-full h-16 px-4 sm:px-8 rounded-2xl bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 hover:from-purple-500 hover:to-pink-500 text-white font-extrabold items-center justify-between gap-3 border border-pink-400/20 cursor-pointer shadow-[0_12px_40px_rgba(236,72,153,0.45)] uppercase tracking-wider font-sans"
               >
-                <Zap className="w-5 h-5 text-yellow-300 animate-pulse fill-yellow-300 shrink-0" />
-                <span>Buy Tool Now for ₹199 Only</span>
-                <ArrowRight className="w-5 h-5 text-white/90" />
+                <Zap className="w-5.5 h-5.5 text-yellow-300 animate-pulse fill-yellow-300 shrink-0" />
+                <span className="font-extrabold text-center tracking-wide leading-none flex-1 whitespace-nowrap text-[13px] min-[360px]:text-[14px] min-[380px]:text-[15.5px] sm:text-[17px] md:text-lg">BUY TOOL NOW FOR ₹199 ONLY</span>
+                <ArrowRight className="w-5.5 h-5.5 text-white/90 shrink-0" />
               </motion.a>
               
-              <p className="text-[10px] text-gray-500 font-mono mt-2 uppercase tracking-tight">
-                *One-Time Payment. Lifetime Updates Free. Instant Email Direct Delivery.
+              <p className="text-[10px] text-gray-500 font-mono mt-3 uppercase tracking-tight text-center">
+                *ONE-TIME PAYMENT. LIFETIME UPDATES FREE. INSTANT EMAIL DIRECT DELIVERY.
               </p>
             </div>
 
@@ -702,25 +703,8 @@ export default function App() {
         </div>
       </div>
 
-      {/* 14. FLOATING WHATSAPP CHAT BUTTON */}
-      <a
-        href={`https://wa.me/91${whatsappNumber}?text=Hi! I have some questions regarding the Meesho Auto Listing and Low Shipping pack.`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className={`fixed right-4 sm:right-6 z-40 bg-emerald-500 hover:bg-emerald-400 text-white p-3 sm:p-3.5 rounded-full shadow-[0_8px_24px_rgba(34,197,94,0.35)] duration-300 hover:scale-110 flex items-center justify-center cursor-pointer transition-all border border-emerald-400/25 pulse-glow ${
-          !isHeroButtonVisible 
-            ? "bottom-22 sm:bottom-24" 
-            : "bottom-4 sm:bottom-6"
-        }`}
-        title="Chat on WhatsApp"
-        aria-label="Chat on WhatsApp with Support"
-      >
-        <svg viewBox="0 0 24 24" className="w-5 h-5 fill-current shrink-0" xmlns="http://www.w3.org/2000/svg">
-          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 3.1 1.45 4.86 1.45 5.516 0 10.005-4.485 10.008-10 .002-2.67-1.031-5.18-2.903-7.05C16.74 1.7 14.253.66 11.58.66c-5.519 0-10.01 4.49-10.014 10.011 0 1.8.47 3.54 1.36 5.09l-.99 3.6 3.7-.97zm11.53-6.685c-.322-.162-1.905-.94-2.201-1.047-.297-.107-.512-.16-.728.162-.215.322-.835 1.047-1.024 1.262-.189.215-.378.242-.7.08-.322-.162-1.359-.5-2.589-1.6-.957-.852-1.6-1.906-1.787-2.23-.189-.322-.02-.497.14-.658.145-.145.322-.378.484-.567.162-.189.215-.322.322-.538.107-.215.054-.403-.027-.565-.08-.162-.728-1.751-.998-2.4-.264-.634-.53-.55-.728-.56-.189-.01-.403-.012-.619-.012-.215 0-.565.081-.861.403-.297.322-1.13 1.103-1.13 2.69 0 1.587 1.157 3.12 1.319 3.335.162.215 2.277 3.478 5.517 4.88 1.11.48 1.95.77 2.62.98.813.257 1.55.22 2.13.13.65-.1 1.9-.78 2.17-1.49.27-.72.27-1.34.19-1.47-.08-.13-.297-.215-.62-.378z"/>
-        </svg>
-        {/* Glowing ripple wave effect rings */}
-        <span className="absolute inset-0 rounded-full border border-emerald-400/50 animate-ping opacity-60" />
-      </a>
+      {/* 14. FLOATING AI ASSISTANT CHATBOT */}
+      <AiChatBot isStickyVisible={!isHeroButtonVisible} />
 
       {/* Live Sales Social Proof Toast Notification Component */}
       <LiveSalesNotification isStickyVisible={!isHeroButtonVisible} />

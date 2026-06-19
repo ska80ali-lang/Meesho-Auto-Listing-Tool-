@@ -229,8 +229,8 @@ export const FAQS: FAQItem[] = [
   },
   {
     id: "faq-3",
-    question: "How will I gain access after purchasing?",
-    answer: "Immediately upon completion of your ₹199 payment, you will receive an automatic redirect to the premium Google Drive access folder. You will also receive an automated email copy of the links, templates, and video guides on your provided billing email."
+    question: "How will I gain access after purchasing? Is there a redirect?",
+    answer: "Tension free rahiye! Jaise hi aapka payment complete hoga, system aapko automatically purely 2 seconds ke andar secure download page par redirect kar dega. Vahan aap 1-click me tools ko download kar sakte hain aur Hindi video guide par click karke direct play kar sakte hain instantly! Iske alawa, aapke billing details me diye gaye Email ID aur billing phone number par automatic backup support links dynamic WhatsApp aur Email ke jariye turant bhej diye jayenge."
   },
   {
     id: "faq-4",
@@ -246,5 +246,10 @@ export const FAQS: FAQItem[] = [
     id: "faq-6",
     question: "How fast can I start seeing increased catalog views and orders?",
     answer: "Most of our active Meesho sellers report preparing and listing their first bulk catalogs within 25 minutes of download. Since Meesho's algorithm rewards daily volume, sellers usually see catalog impressions and initial orders trending up within 24-48 hours after auto uploads go live."
+  },
+  {
+    id: "faq-7",
+    question: "What payment methods are supported? Can I pay using GPay or PhonePe?",
+    answer: "Yes, absolutely! Aap sabhi prakaar ke Online payments jaise PhonePe, Google Pay (GPay), Paytm, FamPay, any other UPI IDs, aur Net Banking ya Debit/Credit Cards se safely aur securely online payment instantly kar sakte hain."
   }
 ];
