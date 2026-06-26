@@ -270,6 +270,49 @@ export default function AiChatBot({ isStickyVisible = false }: AiChatBotProps) {
   const [isOptionsExpanded, setIsOptionsExpanded] = useState(true);
   const [playingVideoUrl, setPlayingVideoUrl] = useState<string | null>(null);
   
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Periodic auto-showing tooltip logic with a precise 6s cycle (3s visible, 3s hidden)
+  useEffect(() => {
+    if (isOpen) {
+      setShowTooltip(false);
+      return;
+    }
+
+    let timeoutId: NodeJS.Timeout;
+    let isCurrentlyVisible = false;
+
+    const runTimerCycle = () => {
+      if (isOpen) return;
+
+      if (isCurrentlyVisible) {
+        // Currently visible -> hide it and wait 3 seconds before showing again
+        setShowTooltip(false);
+        isCurrentlyVisible = false;
+        timeoutId = setTimeout(runTimerCycle, 3000);
+      } else {
+        // Currently hidden -> show it and keep visible for 3 seconds
+        setShowTooltip(true);
+        isCurrentlyVisible = true;
+        timeoutId = setTimeout(runTimerCycle, 3000);
+      }
+    };
+
+    // First appearance after a natural delay of 2.5 seconds
+    const initialTimer = setTimeout(() => {
+      setShowTooltip(true);
+      isCurrentlyVisible = true;
+      // Keep it visible for 3 seconds, then continue the cycle
+      timeoutId = setTimeout(runTimerCycle, 3000);
+    }, 2500);
+
+    return () => {
+      clearTimeout(initialTimer);
+      clearTimeout(timeoutId);
+    };
+  }, [isOpen]);
+
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
   const categories = [
@@ -330,33 +373,74 @@ export default function AiChatBot({ isStickyVisible = false }: AiChatBotProps) {
         : 'bottom-4 sm:bottom-6'
     }`}>
       
-      {/* 1. FLOATING CHAT BALLOON ELEMENT */}
-      <motion.button
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        onClick={() => setIsOpen(!isOpen)}
-        className="relative w-12 h-12 sm:w-13 sm:h-13 bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white rounded-full shadow-[0_8px_30px_rgba(236,72,153,0.5)] border border-pink-400/40 flex items-center justify-center cursor-pointer transition-all duration-300"
-        title="Open AI Support Assistant Chat"
-        aria-label="Open AI Support Assistant Chat"
-      >
-        {/* Animated Double Icon Effect with a small green online dot */}
-        <div className="relative flex items-center justify-center shrink-0">
+      {/* 1. FLOATING CHAT BALLOON ELEMENT WITH SMART PREMIUM AVATAR & TOOLTIP */}
+      <div className="relative w-12 h-12 sm:w-13 sm:h-13 ml-auto">
+        {/* Floating Tooltip "Need Help?" */}
+        <AnimatePresence>
+          {!isOpen && (showTooltip || isHovered) && (
+            <div className="absolute bottom-full mb-3.5 right-0 sm:right-auto sm:left-1/2 sm:-translate-x-1/2 z-30 select-none pointer-events-none">
+              <motion.div
+                initial={{ opacity: 0, y: 12, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 12, scale: 0.9 }}
+                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                className="bg-white text-gray-900 text-[11px] sm:text-xs font-extrabold py-2 px-3.5 rounded-2xl shadow-[0_10px_25px_rgba(0,0,0,0.25)] flex items-center gap-1.5 whitespace-nowrap border border-gray-100 relative"
+              >
+                <span className="relative flex h-2 w-2 shrink-0">
+                  <span className="animate-pulse absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
+                <span className="text-gray-900 font-sans tracking-wide">Need Help?</span>
+                
+                {/* Bottom speech caret triangle indicator pointing downwards */}
+                <div className="absolute bottom-[-5px] right-[19px] sm:right-auto sm:left-1/2 sm:-translate-x-1/2 w-2.5 h-2.5 bg-white rotate-45 border-r border-b border-gray-100" />
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>
+
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.95 }}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          onClick={() => setIsOpen(!isOpen)}
+          className={`relative w-full h-full rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 z-10 ${
+            isOpen
+              ? "bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white shadow-[0_8px_30px_rgba(236,72,153,0.5)] border border-pink-400/40"
+              : "border border-red-500/30 shadow-[0_8px_30px_rgba(220,38,38,0.25)]"
+          }`}
+          title="Open AI Support Assistant Chat"
+          aria-label="Open AI Support Assistant Chat"
+        >
           {isOpen ? (
             <X className="w-5 h-5" />
           ) : (
-            <div className="relative flex items-center justify-center">
-              <MessageSquare className="w-5.5 h-5.5 animate-pulse text-white fill-white/10" />
-              <span className="absolute -top-1.5 -right-1.5 flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-              </span>
-            </div>
-          )}
-        </div>
+            <>
+              {/* Perfect circle cropped avatar */}
+              <div className="absolute inset-0 rounded-full overflow-hidden">
+                <img
+                  src="/src/assets/images/support_avatar_1782473971645.jpg"
+                  alt="Support Assistant"
+                  referrerPolicy="no-referrer"
+                  className="w-full h-full object-cover select-none scale-[1.02]"
+                />
+              </div>
 
-        {/* Glowing surrounding wave reflection */}
-        <span className="absolute inset-0 rounded-full border border-purple-400/40 animate-ping opacity-35 pointer-events-none" style={{ animationDuration: '2.5s' }} />
-      </motion.button>
+              {/* Glowing surrounding wave reflection */}
+              <span className="absolute inset-0 rounded-full border border-red-500/30 animate-ping opacity-25 pointer-events-none" style={{ animationDuration: '2.5s' }} />
+            </>
+          )}
+        </motion.button>
+
+        {/* Small green online status dot with white outline and smooth pulse/fade animation (1s) */}
+        {!isOpen && (
+          <span className="absolute bottom-0.5 right-0.5 z-20 flex h-3.5 w-3.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" style={{ animationDuration: '1s' }}></span>
+            <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-white shadow-[0_0_8px_rgba(16,185,129,0.5)] animate-pulse" style={{ animationDuration: '1s' }}></span>
+          </span>
+        )}
+      </div>
 
       {/* 2. CHATBOX DIALOG */}
       <AnimatePresence>

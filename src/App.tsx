@@ -357,9 +357,71 @@ export default function App() {
                 <ArrowRight className="w-5.5 h-5.5 text-white/90 shrink-0" />
               </motion.a>
               
-              <p className="text-[10px] text-gray-500 font-mono mt-3 uppercase tracking-tight text-center">
-                *ONE-TIME PAYMENT. LIFETIME UPDATES FREE. INSTANT EMAIL DIRECT DELIVERY.
-              </p>
+              <div className="flex flex-wrap items-center justify-center gap-x-4 sm:gap-x-5 gap-y-3 mt-5 text-center text-[12px] sm:text-[13px] md:text-sm font-semibold font-sans select-none">
+                {/* Badge 1: No Monthly Charges */}
+                <div className="flex items-center gap-2 shrink-0">
+                  <span className="relative flex h-2.5 w-2.5 shrink-0">
+                    <span className="animate-pulse absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 blur-[1px]"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400 shadow-[0_0_10px_#10b981]"></span>
+                  </span>
+                  <span className="text-emerald-400 tracking-wide drop-shadow-[0_0_6px_rgba(16,185,129,0.35)]">No Monthly Charges</span>
+                </div>
+
+                <span className="hidden sm:inline text-white/10 select-none font-light">|</span>
+
+                {/* Badge 2: One-Time Payment */}
+                <div className="flex items-center gap-2 shrink-0">
+                  <span className="relative flex h-2.5 w-2.5 shrink-0">
+                    <span className="animate-pulse absolute inline-flex h-full w-full rounded-full bg-fuchsia-400 opacity-75 blur-[1px]"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-fuchsia-400 shadow-[0_0_10px_#e879f9]"></span>
+                  </span>
+                  <span className="text-fuchsia-400 tracking-wide drop-shadow-[0_0_6px_rgba(232,121,249,0.35)]">One-Time Payment</span>
+                </div>
+
+                <span className="hidden sm:inline text-white/10 select-none font-light">|</span>
+
+                {/* Badge 3: Lifetime Access */}
+                <div className="flex items-center gap-2 shrink-0">
+                  <span className="relative flex h-2.5 w-2.5 shrink-0">
+                    <span className="animate-pulse absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75 blur-[1px]"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-400 shadow-[0_0_10px_#f59e0b]"></span>
+                  </span>
+                  <span className="text-amber-400 tracking-wide drop-shadow-[0_0_6px_rgba(245,158,11,0.35)]">Lifetime Access</span>
+                </div>
+
+                <span className="hidden sm:inline text-white/10 select-none font-light">|</span>
+
+                {/* Badge 4: Unlimited Use */}
+                <div className="flex items-center gap-2 shrink-0">
+                  <span className="relative flex h-2.5 w-2.5 shrink-0">
+                    <span className="animate-pulse absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75 blur-[1px]"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-sky-400 shadow-[0_0_10px_#38bdf8]"></span>
+                  </span>
+                  <span className="text-sky-400 tracking-wide drop-shadow-[0_0_6px_rgba(56,189,248,0.35)]">Unlimited Use</span>
+                </div>
+
+                <span className="hidden sm:inline text-white/10 select-none font-light">|</span>
+
+                {/* Badge 5: Use on Mobile, PC & Laptop */}
+                <div className="flex items-center gap-2 shrink-0">
+                  <span className="relative flex h-2.5 w-2.5 shrink-0">
+                    <span className="animate-pulse absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75 blur-[1px]"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-orange-400 shadow-[0_0_10px_#fb923c]"></span>
+                  </span>
+                  <span className="text-orange-400 tracking-wide drop-shadow-[0_0_6px_rgba(251,146,60,0.35)]">Use on Mobile, PC & Laptop</span>
+                </div>
+
+                <span className="hidden sm:inline text-white/10 select-none font-light">|</span>
+
+                {/* Badge 6: 24/7 Support */}
+                <div className="flex items-center gap-2 shrink-0">
+                  <span className="relative flex h-2.5 w-2.5 shrink-0">
+                    <span className="animate-pulse absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75 blur-[1px]"></span>
+                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-indigo-400 shadow-[0_0_10px_#818cf8]"></span>
+                  </span>
+                  <span className="text-indigo-400 tracking-wide drop-shadow-[0_0_6px_rgba(129,140,248,0.35)]">24/7 Support</span>
+                </div>
+              </div>
             </div>
 
           </div>
