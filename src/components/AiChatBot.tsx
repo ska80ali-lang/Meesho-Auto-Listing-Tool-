@@ -120,6 +120,22 @@ function MessageVideo({ videoUrl, playingVideoUrl, onPlayVideo }: MessageVideoPr
     }
   }, [playingVideoUrl, videoUrl]);
 
+  useEffect(() => {
+    const handleGlobalVideoPlay = (e: Event) => {
+      const customEvent = e as CustomEvent<{ id: string }>;
+      if (customEvent.detail && customEvent.detail.id !== videoUrl) {
+        if (videoRef.current && !videoRef.current.paused) {
+          videoRef.current.pause();
+          onPlayVideo(null);
+        }
+      }
+    };
+    window.addEventListener('app-video-play', handleGlobalVideoPlay);
+    return () => {
+      window.removeEventListener('app-video-play', handleGlobalVideoPlay);
+    };
+  }, [videoUrl, onPlayVideo]);
+
   return (
     <div className="mt-3 overflow-hidden rounded-xl border border-pink-500/30 bg-[#0c051a] shadow-xl relative animate-fade-in">
       <video 
@@ -128,7 +144,10 @@ function MessageVideo({ videoUrl, playingVideoUrl, onPlayVideo }: MessageVideoPr
         controls 
         playsInline
         preload="metadata"
-        onPlay={() => onPlayVideo(videoUrl)}
+        onPlay={() => {
+          onPlayVideo(videoUrl);
+          window.dispatchEvent(new CustomEvent('app-video-play', { detail: { id: videoUrl } }));
+        }}
         className="w-full aspect-video rounded-t-xl object-cover hover:scale-101 transition-transform duration-300"
       />
       <div className="bg-gradient-to-r from-purple-950/80 to-pink-950/80 px-3 py-1.5 border-t border-purple-500/10 text-[9px] text-pink-300 flex items-center justify-between font-mono">
@@ -257,6 +276,7 @@ export default function AiChatBot({ isStickyVisible = false }: AiChatBotProps) {
     { name: "🔥 Popular Offers", icon: Flame, color: "text-red-400 bg-red-500/10" },
     { name: "🎬 Video Tutorials", icon: Play, color: "text-pink-400 bg-pink-500/10" },
     { name: "🛠️ Working & AI SEO", icon: Wrench, color: "text-blue-400 bg-blue-500/10" },
+    { name: "🚚 Shipping & Shield", icon: Truck, color: "text-teal-400 bg-teal-500/10" },
     { name: "💸 Price & Lifetime", icon: DollarSign, color: "text-emerald-400 bg-emerald-500/10" },
     { name: "📞 Owner Contact", icon: UserCheck, color: "text-amber-400 bg-amber-500/10" }
   ];
@@ -342,11 +362,12 @@ export default function AiChatBot({ isStickyVisible = false }: AiChatBotProps) {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.85, y: 50 }}
+            initial={{ opacity: 0, scale: 0.95, y: 15 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.85, y: 50 }}
-            transition={{ type: 'spring', damping: 20, stiffness: 180 }}
-            className="absolute bottom-18 sm:bottom-22 right-0 w-[94vw] sm:w-[430px] h-[610px] max-h-[82vh] rounded-3xl overflow-hidden shadow-[0_24px_65px_rgba(139,92,246,0.4)] border border-purple-500/20 bg-[#070310]/98 backdrop-blur-xl flex flex-col z-50 animate-fade-in"
+            exit={{ opacity: 0, scale: 0.95, y: 15 }}
+            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }} // Snappy ultra-smooth easeOut ease-curve
+            style={{ willChange: "transform, opacity" }} // Hardware acceleration to prevent any lag
+            className="absolute bottom-18 sm:bottom-22 right-0 w-[94vw] sm:w-[430px] h-[610px] max-h-[82vh] rounded-3xl overflow-hidden shadow-[0_15px_40px_rgba(139,92,246,0.25)] border border-purple-500/20 bg-[#070310] flex flex-col z-50"
           >
             {/* Header Area */}
             <div className="p-4 bg-gradient-to-r from-purple-950/80 via-[#0d0724]/90 to-purple-950/80 border-b border-purple-500/15 flex items-center justify-between">
