@@ -420,7 +420,7 @@ export default function AiChatBot({ isStickyVisible = false }: AiChatBotProps) {
               {/* Perfect circle cropped avatar */}
               <div className="absolute inset-0 rounded-full overflow-hidden">
                 <img
-                  src="/src/assets/images/support_avatar_1782473971645.jpg"
+                  src="/support_avatar_1782473971645.jpg"
                   alt="Support Assistant"
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-cover select-none scale-[1.02]"
