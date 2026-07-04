@@ -635,7 +635,7 @@ export default function AiChatBot({ isStickyVisible = false }: AiChatBotProps) {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="flex shadow-[0_0_15px_rgba(236,72,153,0.4)] hover:shadow-[0_0_25px_rgba(236,72,153,0.7)] group bg-gradient-to-r from-pink-600 via-purple-600 to-pink-600 border border-pink-400 text-white text-[11px] font-black uppercase tracking-wider py-2 px-4 rounded-xl items-center justify-center gap-1.5 transition-all text-center flex-1 cursor-pointer"
+                className="buy-btn-effect flex shadow-[0_0_15px_rgba(236,72,153,0.4)] hover:shadow-[0_0_25px_rgba(236,72,153,0.7)] group bg-gradient-to-r from-pink-600 via-purple-600 to-pink-600 border border-pink-400 text-white text-[11px] font-black uppercase tracking-wider py-2 px-4 rounded-xl items-center justify-center gap-1.5 transition-all text-center flex-1 cursor-pointer"
               >
                 <span>BUY NOW (LIFETIME)</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform animate-pulse text-white shrink-0" />

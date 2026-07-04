@@ -200,7 +200,7 @@ export default function PricingCard() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="w-full h-14 rounded-2xl bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold text-base flex justify-center items-center gap-3.5 border border-pink-400/20 cursor-pointer shadow-[0_0_30px_rgba(236,72,153,0.35)] transition-all duration-300 uppercase tracking-wider font-display"
+              className="buy-btn-effect w-full h-14 rounded-2xl bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold text-base flex justify-center items-center gap-3.5 border border-pink-400/20 cursor-pointer shadow-[0_0_30px_rgba(236,72,153,0.35)] transition-all duration-300 uppercase tracking-wider font-display"
             >
               <Zap className="w-5 h-5 text-yellow-300 animate-pulse fill-yellow-300" />
               Get Access Now (₹{price})
