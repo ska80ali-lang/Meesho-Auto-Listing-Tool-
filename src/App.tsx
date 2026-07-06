@@ -30,7 +30,8 @@ import {
   Building2,
   HelpCircle,
   CreditCard,
-  Check
+  Check,
+  ChevronRight
 } from 'lucide-react';
 
 // Data configs
@@ -47,11 +48,33 @@ import FAQSection from './components/FAQSection';
 import PricingCard from './components/PricingCard';
 import LiveSalesNotification from './components/LiveSalesNotification';
 import AiChatBot from './components/AiChatBot';
+import { CashfreeModal } from './components/CashfreeModal';
 
 export default function App() {
   // Global CTA Variable
   const globalCtaUrl = CONFIG.ctaRedirectUrl;
   const whatsappNumber = CONFIG.whatsappNumber;
+
+  // Cashfree Checkout Integration States
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [checkoutPlanId, setCheckoutPlanId] = useState<string>('combo_pack');
+  const [verifiedOrderId, setVerifiedOrderId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const orderId = params.get('order_id');
+      if (orderId) {
+        setVerifiedOrderId(orderId);
+      }
+    }
+  }, []);
+
+  const handleOpenCheckout = (planId: string = 'combo_pack') => {
+    setCheckoutPlanId(planId);
+    setIsCheckoutOpen(true);
+  };
+
 
   // Hero Video Control States
   const [heroPlaying, setHeroPlaying] = useState(false);
@@ -350,19 +373,37 @@ export default function App() {
             </div>
 
             {/* Primary Action Call to Action (Instant purchase trigger) */}
-            <div ref={heroButtonRef} className="pt-4 max-w-md sm:max-w-lg mx-auto px-1 sm:px-0">
-              <motion.a 
-                href={globalCtaUrl}
-                target="_blank" 
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                className="buy-btn-effect flex w-full h-16 px-4 sm:px-8 rounded-2xl bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 hover:from-purple-500 hover:to-pink-500 text-white font-extrabold items-center justify-between gap-3 border border-pink-400/20 cursor-pointer shadow-[0_12px_40px_rgba(236,72,153,0.45)] uppercase tracking-wider font-sans"
+            <div ref={heroButtonRef} className="pt-4 max-w-md sm:max-w-xl mx-auto px-1 sm:px-0 space-y-3">
+              {/* Primary Combo Suite Button */}
+              <motion.button 
+                type="button"
+                onClick={() => handleOpenCheckout('combo_pack')}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="buy-btn-effect flex w-full h-16 px-4 sm:px-6 rounded-2xl bg-gradient-to-r from-amber-500 via-pink-600 to-purple-600 hover:from-amber-400 hover:to-pink-500 text-white font-extrabold items-center justify-between gap-3 border border-yellow-400/40 cursor-pointer shadow-[0_12px_45px_rgba(245,158,11,0.45)] uppercase tracking-wider font-sans relative overflow-hidden group"
               >
-                <Zap className="w-5.5 h-5.5 text-yellow-300 animate-pulse fill-yellow-300 shrink-0" />
-                <span className="font-extrabold text-center tracking-wide leading-none flex-1 whitespace-nowrap text-[13px] min-[360px]:text-[14px] min-[380px]:text-[15.5px] sm:text-[17px] md:text-lg">BUY TOOL NOW FOR ₹199 ONLY</span>
-                <ArrowRight className="w-5.5 h-5.5 text-white/90 shrink-0" />
-              </motion.a>
+                <div className="absolute top-0 right-0 bg-yellow-400 text-black text-[9px] font-black px-2 py-0.5 rounded-bl font-mono uppercase tracking-widest shadow">
+                  FLAT ₹50 OFF COMBO
+                </div>
+                <Zap className="w-6 h-6 text-yellow-300 animate-pulse fill-yellow-300 shrink-0" />
+                <span className="font-black text-center tracking-wide leading-tight flex-1 text-[13px] sm:text-[16px] md:text-lg">
+                  BUY COMBO SUITE (MEESHO + FLIPKART) — ₹348
+                </span>
+                <ArrowRight className="w-5 h-5 text-white/90 shrink-0 group-hover:translate-x-1 transition-transform" />
+              </motion.button>
+
+              {/* Secondary Single Tool Button */}
+              <motion.button 
+                type="button"
+                onClick={() => handleOpenCheckout('meesho_single')}
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.99 }}
+                className="w-full py-3.5 px-4 rounded-xl bg-white/10 hover:bg-white/15 border border-purple-500/30 text-purple-200 hover:text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all cursor-pointer font-display"
+              >
+                <span>Or Buy Single Meesho Tool Only — ₹199 (Lifetime Access)</span>
+                <ChevronRight className="w-4 h-4 text-purple-400" />
+              </motion.button>
+
               
               <div className="flex flex-wrap items-center justify-center gap-x-4 sm:gap-x-5 gap-y-3 mt-5 text-center text-[12px] sm:text-[13px] md:text-sm font-semibold font-sans select-none">
                 {/* Badge 1: No Monthly Charges */}
@@ -652,7 +693,8 @@ export default function App() {
       <FAQSection />
 
       {/* 11. FINAL PRICING CARD */}
-      <PricingCard />
+      <PricingCard onOpenCheckout={handleOpenCheckout} />
+
 
       {/* 11.5 CASHFREE VERIFIED PAYMENT GATEWAY & MANDATORY LEGAL COMPLIANCE CENTER */}
       <section id="cashfree-compliance-center" className="py-12 bg-gradient-to-b from-[#020008] via-purple-950/20 to-[#020008] border-t border-b border-pink-500/30 relative overflow-hidden">
@@ -920,22 +962,23 @@ export default function App() {
           </div>
 
           {/* Right Action CTA Button */}
-          <a
-            href={globalCtaUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            type="button"
+            onClick={() => handleOpenCheckout('combo_pack')}
             className="buy-btn-effect h-10 sm:h-11 md:h-13 px-3 sm:px-5 md:px-6 rounded-lg sm:rounded-xl md:rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-extrabold text-[10px] sm:text-xs md:text-sm flex items-center gap-1.5 sm:gap-2 border border-pink-400/20 shadow-md cursor-pointer uppercase tracking-wider font-display shrink-0 transition-transform hover:scale-[1.02]"
           >
             <Zap className="w-3.5 h-3.5 text-yellow-300 fill-yellow-300 animate-pulse shrink-0" />
-            <span>Buy Now</span>
+            <span>Buy Via Cashfree</span>
             <ArrowRight className="w-4 h-4 hidden sm:inline shrink-0" />
-          </a>
+          </button>
+
 
         </div>
       </div>
 
       {/* 14. FLOATING AI ASSISTANT CHATBOT */}
-      <AiChatBot isStickyVisible={!isHeroButtonVisible} />
+      <AiChatBot isStickyVisible={!isHeroButtonVisible} onOpenCheckout={handleOpenCheckout} />
+
 
       {/* Live Sales Social Proof Toast Notification Component */}
       <LiveSalesNotification isStickyVisible={!isHeroButtonVisible} />
@@ -1221,6 +1264,80 @@ export default function App() {
         )}
       </AnimatePresence>
 
+      {/* Cashfree Verified Popup Checkout Modal */}
+      <CashfreeModal 
+        isOpen={isCheckoutOpen} 
+        onClose={() => setIsCheckoutOpen(false)} 
+        initialPlanId={checkoutPlanId} 
+      />
+
+      {/* Post-Payment Instant Download & Setup Training Access Modal */}
+      {verifiedOrderId && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-fade-in">
+          <div className="relative w-full max-w-xl bg-[#080512] border-2 border-emerald-500 rounded-3xl p-6 sm:p-8 text-center shadow-[0_0_60px_rgba(16,185,129,0.35)] space-y-6 overflow-hidden">
+            <div className="absolute -top-12 -right-12 w-36 h-36 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" />
+            
+            <div className="w-16 h-16 rounded-2xl bg-emerald-500/20 border border-emerald-400/40 text-emerald-400 flex items-center justify-center mx-auto shadow-inner animate-bounce">
+              <ShieldCheck className="w-10 h-10" />
+            </div>
+
+            <div>
+              <span className="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-300 border border-emerald-500/30 text-xs font-bold font-mono uppercase tracking-widest">
+                ✓ Cashfree Payment Verified
+              </span>
+              <h3 className="text-2xl sm:text-3xl font-black text-white font-display mt-3">
+                Welcome to AutoListing Suite!
+              </h3>
+              <p className="text-xs sm:text-sm text-gray-300 mt-2 font-sans leading-relaxed">
+                Aapka payment successfully clear ho gaya hai aur lifetime license key active kar di gayi hai. <span className="text-emerald-400 font-mono font-bold">(Order: {verifiedOrderId})</span>
+              </p>
+            </div>
+
+            <div className="p-4 rounded-2xl bg-gradient-to-br from-purple-950/50 to-black border border-purple-500/30 text-left space-y-3">
+              <h4 className="text-xs font-bold text-purple-300 uppercase tracking-wider font-mono border-b border-purple-900/40 pb-2">
+                📥 YOUR INSTANT ACCESS KIT:
+              </h4>
+              
+              <a
+                href={`https://wa.me/91${whatsappNumber}?text=${encodeURIComponent(`Hi Sir, I just completed payment on Cashfree! Order ID: ${verifiedOrderId}. Please send my lifetime license ZIP and setup guide.`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-400 hover:to-teal-500 text-black font-extrabold text-xs sm:text-sm uppercase font-mono tracking-wider flex items-center justify-between gap-2 shadow-lg transition-all cursor-pointer block text-center"
+              >
+                <span>🚀 CLICK TO GET SOFTWARE ZIP ON WHATSAPP</span>
+                <ArrowRight className="w-4 h-4 shrink-0" />
+              </a>
+
+              <a
+                href={`https://wa.me/91${whatsappNumber}?text=${encodeURIComponent("Please share the 7-minute Hindi video tutorial link.")}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-3 px-4 rounded-xl bg-white/10 hover:bg-white/15 border border-white/15 text-white font-bold text-xs flex items-center justify-between gap-2 transition-all cursor-pointer block"
+              >
+                <span>🎥 Watch 7-Minute Step-by-Step Hindi Training</span>
+                <span className="text-[10px] text-pink-400 font-mono">07:14 Min</span>
+              </a>
+            </div>
+
+            <p className="text-[11px] text-gray-400 font-sans">
+              Ek copy aapke registered phone number par bhi WhatsApp automation system ke dwara bhej di gayi hai. Kisi bhi help ke liye +91 {whatsappNumber} par contact karein.
+            </p>
+
+            <button
+              type="button"
+              onClick={() => {
+                setVerifiedOrderId(null);
+                window.history.replaceState({}, document.title, window.location.pathname);
+              }}
+              className="px-8 py-3 rounded-xl bg-gray-800 hover:bg-gray-700 text-gray-200 text-xs font-bold transition-colors cursor-pointer"
+            >
+              Continue to Website Dashboard
+            </button>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
+
