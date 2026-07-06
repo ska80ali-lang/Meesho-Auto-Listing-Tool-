@@ -1,4 +1,7 @@
 import { Testimonial, VideoReview, FAQItem, ScreenshotSlide, FeatureItem } from './types';
+import { STORE_CONFIG } from './config/storeConfig';
+
+export { STORE_CONFIG };
 
 // ==========================================
 // GLOBAL CONFIGURATION (EASY TO EDIT)
@@ -9,8 +12,12 @@ export const CONFIG = {
   ctaRedirectUrl: "https://superprofile.bio/vp/meesho-auto-listing---low-shipping-tool?checkout=true", 
 
   // Support details
-  whatsappNumber: "6295429762",
-  supportEmail: "ska80ali@gmail.com",
+  whatsappNumber: STORE_CONFIG.supportWhatsapp,
+  supportEmail: STORE_CONFIG.supportEmail,
+
+  // Instant Digital Delivery Links (WhatsApp / Setup Video access)
+  singleDeliveryUrl: STORE_CONFIG.singleDeliveryUrl,
+  comboDeliveryUrl: STORE_CONFIG.comboDeliveryUrl,
 
   // Pricing details
   originalPrice: 1999,

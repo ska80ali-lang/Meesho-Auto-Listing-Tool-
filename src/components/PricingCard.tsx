@@ -1,9 +1,13 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import { CONFIG } from '../data';
-import { ShieldCheck, Zap, Star, Flame, Trophy, RefreshCw, AlertCircle } from 'lucide-react';
+import { ShieldCheck, Zap, Star, Flame, Trophy, RefreshCw, AlertCircle, Sparkles } from 'lucide-react';
 
-export default function PricingCard() {
+interface PricingCardProps {
+  onOpenCheckout?: (plan: 'single' | 'combo') => void;
+}
+
+export default function PricingCard({ onOpenCheckout }: PricingCardProps) {
   const [timeLeft, setTimeLeft] = useState(898); // ~14m 58s in seconds
   const [seatsLeft, setSeatsLeft] = useState(8);
 
@@ -194,17 +198,16 @@ export default function PricingCard() {
 
           {/* Conversion CTA */}
           <div className="space-y-4">
-            <motion.a 
-              href={CONFIG.ctaRedirectUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+            <motion.button 
+              type="button"
+              onClick={() => onOpenCheckout ? onOpenCheckout('single') : window.open(CONFIG.ctaRedirectUrl, '_blank')}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="buy-btn-effect w-full h-14 rounded-2xl bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold text-base flex justify-center items-center gap-3.5 border border-pink-400/20 cursor-pointer shadow-[0_0_30px_rgba(236,72,153,0.35)] transition-all duration-300 uppercase tracking-wider font-display"
             >
               <Zap className="w-5 h-5 text-yellow-300 animate-pulse fill-yellow-300" />
-              Get Access Now (₹{price})
-            </motion.a>
+              <span>Get Access Now (₹{price})</span>
+            </motion.button>
 
             {/* Satisfaction / Security Notice Row */}
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-[10px] text-gray-400 pt-2 font-mono">
