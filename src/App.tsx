@@ -47,79 +47,11 @@ import FAQSection from './components/FAQSection';
 import PricingCard from './components/PricingCard';
 import LiveSalesNotification from './components/LiveSalesNotification';
 import AiChatBot from './components/AiChatBot';
-import CashfreeCheckoutModal from './components/CashfreeCheckoutModal';
-import CashfreeDeliveryModal from './components/CashfreeDeliveryModal';
-import AdminConfigGuideModal from './components/AdminConfigGuideModal';
 
 export default function App() {
   // Global CTA Variable
   const globalCtaUrl = CONFIG.ctaRedirectUrl;
   const whatsappNumber = CONFIG.whatsappNumber;
-
-  // Cashfree Checkout & Delivery Modals State
-  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
-  const [checkoutPlan, setCheckoutPlan] = useState<'single' | 'combo'>('single');
-  const [isDeliveryOpen, setIsDeliveryOpen] = useState(false);
-  const [verifiedOrderId, setVerifiedOrderId] = useState('');
-  const [verifiedPlanType, setVerifiedPlanType] = useState<'single' | 'combo'>('single');
-  const [verifiedAmount, setVerifiedAmount] = useState<number | undefined>(undefined);
-  
-  // Admin Config & Delivery Link Guide State
-  const [isAdminGuideOpen, setIsAdminGuideOpen] = useState(false);
-
-  const handleOpenCheckout = (plan: 'single' | 'combo' = 'single') => {
-    setCheckoutPlan(plan);
-    setIsCheckoutOpen(true);
-  };
-
-  const handleTestDelivery = (plan: 'single' | 'combo' = 'single') => {
-    const randomOrderId = "TEST_" + Math.floor(100000 + Math.random() * 900000);
-    setVerifiedOrderId(randomOrderId);
-    setVerifiedPlanType(plan);
-    setVerifiedAmount(plan === 'combo' ? 348 : 199);
-    setIsDeliveryOpen(true);
-  };
-
-  // Check URL params for post-payment redirect from Cashfree
-  useEffect(() => {
-    if (typeof window === 'undefined') return;
-    const params = new URLSearchParams(window.location.search);
-    const orderId = params.get('order_id');
-    const planParam = params.get('plan') || localStorage.getItem('cashfree_last_plan_type') || 'single';
-
-    if (orderId) {
-      console.info("Detected Cashfree return redirect with order_id:", orderId);
-      fetch(`/api/verify-cashfree-order?order_id=${encodeURIComponent(orderId)}&plan=${encodeURIComponent(planParam)}`)
-        .then(res => res.json())
-        .then(data => {
-          if (data && (data.verified || data.success)) {
-            setVerifiedOrderId(data.order_id || orderId);
-            setVerifiedPlanType((data.plan_type as 'single' | 'combo') || (planParam as 'single' | 'combo') || 'single');
-            setVerifiedAmount(data.order_amount);
-            setIsDeliveryOpen(true);
-            try {
-              window.history.replaceState({}, document.title, window.location.pathname);
-            } catch (e) {}
-          } else {
-            setVerifiedOrderId(orderId);
-            setVerifiedPlanType((planParam as 'single' | 'combo') || 'single');
-            setIsDeliveryOpen(true);
-            try {
-              window.history.replaceState({}, document.title, window.location.pathname);
-            } catch (e) {}
-          }
-        })
-        .catch(err => {
-          console.warn("Verification fetch error, opening delivery modal via fallback:", err);
-          setVerifiedOrderId(orderId);
-          setVerifiedPlanType((planParam as 'single' | 'combo') || 'single');
-          setIsDeliveryOpen(true);
-          try {
-            window.history.replaceState({}, document.title, window.location.pathname);
-          } catch (e) {}
-        });
-    }
-  }, []);
 
   // Hero Video Control States
   const [heroPlaying, setHeroPlaying] = useState(false);
@@ -267,25 +199,6 @@ export default function App() {
 
         <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
           
-          {/* Top Brand Navbar & Support Hotline */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pb-4 mb-6 border-b border-purple-900/30">
-            <div className="flex items-center gap-2.5 font-display font-extrabold text-base sm:text-lg text-white tracking-wide">
-              <span className="p-1.5 rounded-xl bg-gradient-to-tr from-purple-600 to-pink-500 shadow-md flex items-center justify-center text-sm">🚀</span>
-              <span className="bg-gradient-to-r from-white via-purple-100 to-gray-300 bg-clip-text text-transparent">Meesho Auto Listing Tool</span>
-              <span className="text-[10px] bg-purple-500/20 text-purple-300 border border-purple-500/30 px-2 py-0.5 rounded-full font-mono hidden md:inline-block font-semibold">PRO SUITE</span>
-            </div>
-            <div className="flex items-center gap-3 text-xs font-mono">
-              <a href={`https://wa.me/91${whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-900 transition-all font-bold shadow-sm">
-                <span>💬 WhatsApp Support:</span>
-                <span className="text-white underline">+91 {whatsappNumber}</span>
-              </a>
-              <a href={`mailto:${CONFIG.supportEmail}`} className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-950/80 border border-purple-500/40 text-purple-300 hover:bg-purple-900 transition-all font-bold shadow-sm">
-                <span>✉️ Email:</span>
-                <span className="text-white underline">{CONFIG.supportEmail}</span>
-              </a>
-            </div>
-          </div>
-
           {/* Hero Main Grid/Column content */}
           <div className="text-center max-w-4xl mx-auto space-y-6 pt-2">
             
@@ -438,9 +351,10 @@ export default function App() {
 
             {/* Primary Action Call to Action (Instant purchase trigger) */}
             <div ref={heroButtonRef} className="pt-4 max-w-md sm:max-w-lg mx-auto px-1 sm:px-0">
-              <motion.button 
-                type="button"
-                onClick={() => handleOpenCheckout('single')}
+              <motion.a 
+                href={globalCtaUrl}
+                target="_blank" 
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 className="buy-btn-effect flex w-full h-16 px-4 sm:px-8 rounded-2xl bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 hover:from-purple-500 hover:to-pink-500 text-white font-extrabold items-center justify-between gap-3 border border-pink-400/20 cursor-pointer shadow-[0_12px_40px_rgba(236,72,153,0.45)] uppercase tracking-wider font-sans"
@@ -448,7 +362,7 @@ export default function App() {
                 <Zap className="w-5.5 h-5.5 text-yellow-300 animate-pulse fill-yellow-300 shrink-0" />
                 <span className="font-extrabold text-center tracking-wide leading-none flex-1 whitespace-nowrap text-[13px] min-[360px]:text-[14px] min-[380px]:text-[15.5px] sm:text-[17px] md:text-lg">BUY TOOL NOW FOR ₹199 ONLY</span>
                 <ArrowRight className="w-5.5 h-5.5 text-white/90 shrink-0" />
-              </motion.button>
+              </motion.a>
               
               <div className="flex flex-wrap items-center justify-center gap-x-4 sm:gap-x-5 gap-y-3 mt-5 text-center text-[12px] sm:text-[13px] md:text-sm font-semibold font-sans select-none">
                 {/* Badge 1: No Monthly Charges */}
@@ -738,7 +652,7 @@ export default function App() {
       <FAQSection />
 
       {/* 11. FINAL PRICING CARD */}
-      <PricingCard onOpenCheckout={handleOpenCheckout} />
+      <PricingCard />
 
       {/* 11.5 CASHFREE VERIFIED PAYMENT GATEWAY & MANDATORY LEGAL COMPLIANCE CENTER */}
       <section id="cashfree-compliance-center" className="py-12 bg-gradient-to-b from-[#020008] via-purple-950/20 to-[#020008] border-t border-b border-pink-500/30 relative overflow-hidden">
@@ -978,13 +892,6 @@ export default function App() {
               >
                 Contact Support
               </button>
-              <span>•</span>
-              <button 
-                onClick={() => setIsAdminGuideOpen(true)}
-                className="hover:text-yellow-300 text-yellow-400 font-bold transition-colors cursor-pointer bg-purple-950/80 px-2.5 py-0.5 rounded border border-yellow-500/40 text-xs font-mono"
-              >
-                ⚙️ Admin Config & Links
-              </button>
             </div>
           </div>
 
@@ -1013,21 +920,22 @@ export default function App() {
           </div>
 
           {/* Right Action CTA Button */}
-          <button
-            type="button"
-            onClick={() => handleOpenCheckout('single')}
+          <a
+            href={globalCtaUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="buy-btn-effect h-10 sm:h-11 md:h-13 px-3 sm:px-5 md:px-6 rounded-lg sm:rounded-xl md:rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-extrabold text-[10px] sm:text-xs md:text-sm flex items-center gap-1.5 sm:gap-2 border border-pink-400/20 shadow-md cursor-pointer uppercase tracking-wider font-display shrink-0 transition-transform hover:scale-[1.02]"
           >
             <Zap className="w-3.5 h-3.5 text-yellow-300 fill-yellow-300 animate-pulse shrink-0" />
             <span>Buy Now</span>
             <ArrowRight className="w-4 h-4 hidden sm:inline shrink-0" />
-          </button>
+          </a>
 
         </div>
       </div>
 
       {/* 14. FLOATING AI ASSISTANT CHATBOT */}
-      <AiChatBot isStickyVisible={!isHeroButtonVisible} onOpenCheckout={handleOpenCheckout} />
+      <AiChatBot isStickyVisible={!isHeroButtonVisible} />
 
       {/* Live Sales Social Proof Toast Notification Component */}
       <LiveSalesNotification isStickyVisible={!isHeroButtonVisible} />
@@ -1313,42 +1221,6 @@ export default function App() {
         )}
       </AnimatePresence>
 
-      {/* Cashfree Payment Gateway Checkout Modal (with Flipkart Add-on) */}
-      <CashfreeCheckoutModal
-        isOpen={isCheckoutOpen}
-        onClose={() => setIsCheckoutOpen(false)}
-        initialPlan={checkoutPlan}
-      />
-
-      {/* Cashfree Instant Digital Delivery & Automated Redirect Modal */}
-      <CashfreeDeliveryModal
-        isOpen={isDeliveryOpen}
-        onClose={() => setIsDeliveryOpen(false)}
-        orderId={verifiedOrderId}
-        planType={verifiedPlanType}
-        orderAmount={verifiedAmount}
-      />
-
-      {/* Admin Config & Delivery Setup Guide Modal */}
-      <AdminConfigGuideModal
-        isOpen={isAdminGuideOpen}
-        onClose={() => setIsAdminGuideOpen(false)}
-        onTestDelivery={handleTestDelivery}
-        onOpenCheckout={handleOpenCheckout}
-      />
-
-      {/* FLOATING ADMIN CONFIG & TEST SIMULATOR BUTTON (Bottom Left) */}
-      <button
-        type="button"
-        onClick={() => setIsAdminGuideOpen(true)}
-        className="fixed bottom-4 left-4 z-40 bg-[#0e0720]/95 hover:bg-purple-950 border-2 border-yellow-500/60 text-yellow-300 hover:text-white px-3.5 py-2.5 rounded-full text-xs font-mono font-extrabold shadow-[0_10px_30px_rgba(168,85,247,0.5)] flex items-center gap-2 backdrop-blur-md transition-all cursor-pointer group hover:scale-105"
-        title="Store Settings, Coupons & Delivery Simulator"
-      >
-        <span className="animate-spin-slow">⚙️</span>
-        <span>Admin Config &amp; Links</span>
-      </button>
-
     </div>
   );
 }
-
