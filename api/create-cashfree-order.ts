@@ -19,8 +19,8 @@ export default async function handler(req: any, res: any) {
 
   const { planId, planName, price, customerName, customerPhone, customerEmail, returnUrl } = req.body || {};
 
-  const appId = process.env.CASHFREE_APP_ID;
-  const secretKey = process.env.CASHFREE_SECRET_KEY;
+  const appId = process.env.CASHFREE_APP_ID || "1328720fa4876cfc5f2d083d40b0278231";
+  const secretKey = process.env.CASHFREE_SECRET_KEY || "cfsk_ma_prod_191a5a5fa4c7f489f3101dbe6712549a_fcb45fb9";
   const env = (process.env.CASHFREE_ENVIRONMENT || "production").toLowerCase();
 
   if (!appId || !secretKey || appId.includes("your_") || appId.trim() === "") {

@@ -218,8 +218,8 @@ Tone: Strictly text-oriented. No voice calls, mics, speaking, voice playback ref
   app.post("/api/create-cashfree-order", async (req, res) => {
     const { planId, planName, price, customerName, customerPhone, customerEmail } = req.body;
 
-    const appId = process.env.CASHFREE_APP_ID;
-    const secretKey = process.env.CASHFREE_SECRET_KEY;
+    const appId = process.env.CASHFREE_APP_ID || "1328720fa4876cfc5f2d083d40b0278231";
+    const secretKey = process.env.CASHFREE_SECRET_KEY || "cfsk_ma_prod_191a5a5fa4c7f489f3101dbe6712549a_fcb45fb9";
     const env = (process.env.CASHFREE_ENVIRONMENT || "production").toLowerCase();
 
     // If API credentials are not set yet, return clear setup instructions for the merchant
@@ -296,8 +296,8 @@ Tone: Strictly text-oriented. No voice calls, mics, speaking, voice playback ref
   // Cashfree Order Status Verification Endpoint (For instant delivery after redirect)
   app.get("/api/verify-cashfree-order/:orderId", async (req, res) => {
     const { orderId } = req.params;
-    const appId = process.env.CASHFREE_APP_ID;
-    const secretKey = process.env.CASHFREE_SECRET_KEY;
+    const appId = process.env.CASHFREE_APP_ID || "1328720fa4876cfc5f2d083d40b0278231";
+    const secretKey = process.env.CASHFREE_SECRET_KEY || "cfsk_ma_prod_191a5a5fa4c7f489f3101dbe6712549a_fcb45fb9";
     const env = (process.env.CASHFREE_ENVIRONMENT || "production").toLowerCase();
 
     if (!appId || !secretKey || appId.includes("your_")) {
