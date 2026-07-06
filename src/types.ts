@@ -36,14 +36,3 @@ export interface FeatureItem {
   description: string;
   icon: string;
 }
-
-export interface CheckoutPlan {
-  id: 'meesho_single' | 'flipkart_single' | 'combo_pack';
-  name: string;
-  badge: string;
-  price: number;
-  originalPrice: number;
-  description: string;
-  features: string[];
-}
-

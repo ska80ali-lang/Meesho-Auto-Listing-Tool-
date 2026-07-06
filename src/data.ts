@@ -1,11 +1,12 @@
-import { Testimonial, VideoReview, FAQItem, ScreenshotSlide, FeatureItem, CheckoutPlan } from './types';
+import { Testimonial, VideoReview, FAQItem, ScreenshotSlide, FeatureItem } from './types';
 
 // ==========================================
 // GLOBAL CONFIGURATION (EASY TO EDIT)
 // ==========================================
 export const CONFIG = {
-  // Cashfree Checkout Integration Mode
-  ctaRedirectUrl: "#checkout", 
+  // Global CTA Redirect URL
+  // Just change this once to update all buttons on the page!
+  ctaRedirectUrl: "https://superprofile.bio/vp/meesho-auto-listing---low-shipping-tool?checkout=true", 
 
   // Support details
   whatsappNumber: "6295429762",
@@ -17,66 +18,12 @@ export const CONFIG = {
   currency: "₹",
   
   // Hero Video URL (Direct MP4 URL or embedded looping content)
+  // We provide a premium fallback background loop by default, but it can be changed to any MP4 link.
   heroVideoUrl: "https://res.cloudinary.com/dutdmkrhc/video/upload/v1781288334/InShot_20260525_212334170_de2rkp_kdf2ho.mp4",
   
   // YouTube Backup ID if they want to use a YouTube embed instead of HTML5 video
   youtubeId: "", // e.g. "dQw4w9WgXcQ"
 };
-
-// ==========================================
-// CASHFREE VERIFIED CHECKOUT PLANS
-// ==========================================
-export const CHECKOUT_PLANS: Record<string, CheckoutPlan> = {
-  meesho_single: {
-    id: 'meesho_single',
-    name: 'Meesho Auto Listing Tool',
-    badge: 'Standard Single Plan',
-    price: 199,
-    originalPrice: 1999,
-    description: 'Complete 1-Click Auto Listing Extension with Low Shipping trick & AI SEO Optimizer for Meesho Sellers.',
-    features: [
-      '1-Click Auto Fill Catalog Forms',
-      'Low Shipping Trick (₹35-₹45 Slabs)',
-      'AI SEO Keyword & Title Generator',
-      'Dynamic Duplication Warning Shield',
-      'Instant 2-Sec Download & Hindi Guide',
-      'Lifetime Access (No Monthly Fees)'
-    ]
-  },
-  flipkart_single: {
-    id: 'flipkart_single',
-    name: 'Flipkart Auto Listing Tool',
-    badge: 'Standard Single Plan',
-    price: 199,
-    originalPrice: 1999,
-    description: 'High-speed automated bulk catalog lister and AI SEO tag booster for Flipkart Seller Portal.',
-    features: [
-      '1-Click Flipkart Auto Fill System',
-      'Smart Attribute & Dimension Mapping',
-      'AI SEO Title & Description Generator',
-      'Bypass Indexing Duplication Errors',
-      'Instant 2-Sec Download & Setup Kit',
-      'Lifetime Access (No Monthly Fees)'
-    ]
-  },
-  combo_pack: {
-    id: 'combo_pack',
-    name: 'Meesho + Flipkart Combo Suite',
-    badge: '⚡ MOST POPULAR (FLAT ₹50 OFF)',
-    price: 348,
-    originalPrice: 3998,
-    description: 'Get BOTH Meesho & Flipkart automation suites together at a discounted combo price. Maximize sales on both portals!',
-    features: [
-      'INCLUDES: Both Meesho & Flipkart Tools',
-      'Flat ₹50 Combo Discount Applied',
-      'Double Catalog Upload Speed & Reach',
-      'Low Shipping Trick & AI SEO Suites',
-      'Direct WhatsApp Setup Support Hotline',
-      'Lifetime Access for Both Extensions'
-    ]
-  }
-};
-
 
 // ==========================================
 // LANDING PAGE SECTIONS CONTENT
