@@ -16,10 +16,15 @@ interface CashfreeCheckoutModalProps {
 }
 
 export default function CashfreeCheckoutModal({ isOpen, onClose, initialPlan = 'single' }: CashfreeCheckoutModalProps) {
-  const [name, setName] = useState('Sk Ali Asgar');
-  // Email removed from UI as requested by seller ("email id ko remove kar do"), using silent default
-  const [email] = useState('ska80ali@gmail.com');
-  const [phone, setPhone] = useState('7365890209');
+  const [name, setName] = useState(() => {
+    try { return localStorage.getItem('cashfree_last_customer_name') || 'Sk Ali Asgar'; } catch (e) { return 'Sk Ali Asgar'; }
+  });
+  const [email, setEmail] = useState(() => {
+    try { return localStorage.getItem('cashfree_last_customer_email') || 'ska80ali@gmail.com'; } catch (e) { return 'ska80ali@gmail.com'; }
+  });
+  const [phone, setPhone] = useState(() => {
+    try { return localStorage.getItem('cashfree_last_customer_phone') || '7365890209'; } catch (e) { return '7365890209'; }
+  });
   const [isCombo, setIsCombo] = useState(initialPlan === 'combo');
   
   // Full screen details modal state for Flipkart tool
@@ -78,10 +83,13 @@ export default function CashfreeCheckoutModal({ isOpen, onClose, initialPlan = '
     setLoading(true);
 
     try {
-      // Save plan type in localStorage so landing page can identify it immediately after redirect
+      // Save plan type and customer info in localStorage for automated EmailJS delivery post-payment
       const planType = isCombo ? "combo" : "single";
       try {
         localStorage.setItem("cashfree_last_plan_type", planType);
+        localStorage.setItem("cashfree_last_customer_email", email);
+        localStorage.setItem("cashfree_last_customer_name", name);
+        localStorage.setItem("cashfree_last_customer_phone", phone);
       } catch (e) {
         console.warn("localStorage not available:", e);
       }
@@ -197,6 +205,21 @@ export default function CashfreeCheckoutModal({ isOpen, onClose, initialPlan = '
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Sk Ali Asgar"
                 className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:border-purple-600 focus:ring-2 focus:ring-purple-600/20 outline-none text-sm font-medium bg-white text-gray-900 transition-all"
+              />
+            </div>
+
+            <div className="space-y-1">
+              <span className="text-[11px] font-medium text-gray-500 flex items-center justify-between">
+                <span>Email ID (For Automatic Instant Tool Delivery) *</span>
+                <span className="text-[10px] text-emerald-600 font-bold">⚡ Instant Email Access</span>
+              </span>
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="ska80ali@gmail.com"
+                required
+                className="w-full px-3.5 py-2.5 rounded-xl border border-gray-300 focus:border-purple-600 focus:ring-2 focus:ring-purple-600/20 outline-none text-sm font-medium bg-white text-gray-900 transition-all font-mono"
               />
             </div>
           </div>

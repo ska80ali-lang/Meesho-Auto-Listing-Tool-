@@ -267,6 +267,25 @@ export default function App() {
 
         <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
           
+          {/* Top Brand Navbar & Support Hotline */}
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pb-4 mb-6 border-b border-purple-900/30">
+            <div className="flex items-center gap-2.5 font-display font-extrabold text-base sm:text-lg text-white tracking-wide">
+              <span className="p-1.5 rounded-xl bg-gradient-to-tr from-purple-600 to-pink-500 shadow-md flex items-center justify-center text-sm">🚀</span>
+              <span className="bg-gradient-to-r from-white via-purple-100 to-gray-300 bg-clip-text text-transparent">Meesho Auto Listing Tool</span>
+              <span className="text-[10px] bg-purple-500/20 text-purple-300 border border-purple-500/30 px-2 py-0.5 rounded-full font-mono hidden md:inline-block font-semibold">PRO SUITE</span>
+            </div>
+            <div className="flex items-center gap-3 text-xs font-mono">
+              <a href={`https://wa.me/91${whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-900 transition-all font-bold shadow-sm">
+                <span>💬 WhatsApp Support:</span>
+                <span className="text-white underline">+91 {whatsappNumber}</span>
+              </a>
+              <a href={`mailto:${CONFIG.supportEmail}`} className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-950/80 border border-purple-500/40 text-purple-300 hover:bg-purple-900 transition-all font-bold shadow-sm">
+                <span>✉️ Email:</span>
+                <span className="text-white underline">{CONFIG.supportEmail}</span>
+              </a>
+            </div>
+          </div>
+
           {/* Hero Main Grid/Column content */}
           <div className="text-center max-w-4xl mx-auto space-y-6 pt-2">
             

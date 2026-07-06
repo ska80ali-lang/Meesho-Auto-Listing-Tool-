@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, ShieldCheck, Tag, ExternalLink, Sparkles, CheckCircle2, FileCode, HelpCircle, Zap, ArrowRight, Settings } from 'lucide-react';
+import { X, ShieldCheck, Tag, ExternalLink, Sparkles, CheckCircle2, FileCode, HelpCircle, Zap, ArrowRight, Settings, Mail } from 'lucide-react';
 import { STORE_CONFIG } from '../config/storeConfig';
+import { sendOrderConfirmationEmail } from '../utils/emailService';
 
 interface AdminConfigGuideModalProps {
   isOpen: boolean;
@@ -16,6 +17,29 @@ export default function AdminConfigGuideModal({
   onTestDelivery,
   onOpenCheckout
 }: AdminConfigGuideModalProps) {
+  const [testEmail, setTestEmail] = useState('ska80ali@gmail.com');
+  const [testStatus, setTestStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [testMsg, setTestMsg] = useState('');
+
+  const handleSendTestEmail = async () => {
+    setTestStatus('sending');
+    setTestMsg('⏳ Sending test delivery email via EmailJS...');
+    const res = await sendOrderConfirmationEmail({
+      email: testEmail,
+      orderId: 'TEST_' + Math.floor(100000 + Math.random() * 900000),
+      planType: 'combo',
+      customerName: 'Sk Ali Asgar (Seller Live Test)',
+      amountPaid: 348
+    });
+    if (res.success) {
+      setTestStatus('success');
+      setTestMsg('✅ Test Email Sent! Check your inbox (' + testEmail + ')');
+    } else {
+      setTestStatus('error');
+      setTestMsg('❌ Failed: ' + (res.message || 'Check EmailJS template setup'));
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -106,7 +130,50 @@ export default function AdminConfigGuideModal({
           </p>
         </div>
 
-        {/* Section 3: Live Test Actions for Seller */}
+        {/* Section 3: EmailJS Automatic Delivery Setup & Test */}
+        <div className="p-4 rounded-2xl bg-gradient-to-r from-blue-950/60 via-purple-950/60 to-indigo-950/60 border border-blue-500/40 space-y-3 text-left font-sans">
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2 text-yellow-300 font-bold text-sm sm:text-base">
+              <Mail className="w-5 h-5 shrink-0" />
+              <span>3. ऑटोमैटिक ईमेल डिलीवरी (EmailJS Active ✅)</span>
+            </div>
+            <span className="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 px-2 py-0.5 rounded-full font-bold uppercase">
+              Live &amp; Ready
+            </span>
+          </div>
+          <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
+            आपके दिए गए <strong>Service Key</strong> (<code className="text-pink-300">service_zaez5jj</code>), <strong>Template ID</strong> (<code className="text-emerald-300">template_v62f7oz</code>) और <strong>Public Key</strong> को सिस्टम में कनेक्ट कर दिया गया है! पेमेंट के तुरंत बाद कस्टमर को ऑटोमैटिक ईमेल और टूल का लिंक चला जाएगा।
+          </p>
+          <div className="bg-black/60 p-3 rounded-xl border border-gray-800 space-y-2.5 text-xs">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2">
+              <span className="text-gray-400 font-medium">टेस्ट ईमेल आईडी:</span>
+              <input
+                type="email"
+                value={testEmail}
+                onChange={(e) => setTestEmail(e.target.value)}
+                placeholder="ska80ali@gmail.com"
+                className="flex-1 bg-gray-900 border border-gray-700 px-3 py-1.5 rounded-lg text-white font-mono text-xs outline-none focus:border-purple-500 transition-all"
+              />
+            </div>
+            <button
+              onClick={handleSendTestEmail}
+              disabled={testStatus === 'sending'}
+              className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs flex items-center justify-center gap-2 cursor-pointer transition-all disabled:opacity-50 shadow-md"
+            >
+              <span>{testStatus === 'sending' ? "⏳ ईमेल भेज रहे हैं..." : "🧪 अभी लाइव टेस्ट ईमेल भेजें (Send Test Email Now)"}</span>
+            </button>
+            {testMsg && (
+              <div className={`p-2.5 rounded-xl text-[11px] font-medium text-center ${testStatus === 'success' ? 'bg-emerald-950/80 text-emerald-300 border border-emerald-500/40' : 'bg-red-950/80 text-red-300 border border-red-500/40'}`}>
+                {testMsg}
+              </div>
+            )}
+          </div>
+          <p className="text-[11px] text-gray-400">
+            💡 <strong>टिप:</strong> आप ऊपर अपनी ईमेल आईडी डालकर <strong className="text-yellow-300">"अभी लाइव टेस्ट ईमेल भेजें"</strong> बटन दबाएं। कुछ ही सेकंड में आपके इनबॉक्स में आर्डर डिलीवरी ईमेल आ जाएगा!
+          </p>
+        </div>
+
+        {/* Section 4: Live Test Actions for Seller */}
         <div className="p-4 rounded-2xl bg-gradient-to-r from-emerald-950/50 via-purple-950/50 to-emerald-950/50 border border-emerald-500/40 space-y-3 text-center">
           <h4 className="font-bold text-sm text-emerald-300">⚡ 1-Click Live Simulator (बिना पेमेंट किए टेस्ट करें)</h4>
           <p className="text-xs text-gray-300">

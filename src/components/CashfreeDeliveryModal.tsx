@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { CheckCircle, Download, MessageSquare, ExternalLink, ShieldCheck, Zap, ArrowRight, X, Clock } from 'lucide-react';
+import { CheckCircle, Download, MessageSquare, ExternalLink, ShieldCheck, Zap, ArrowRight, X, Clock, Mail } from 'lucide-react';
 import { CONFIG } from '../data';
+import { sendOrderConfirmationEmail } from '../utils/emailService';
 
 interface CashfreeDeliveryModalProps {
   isOpen: boolean;
@@ -20,10 +21,42 @@ export default function CashfreeDeliveryModal({
 }: CashfreeDeliveryModalProps) {
   const [countdown, setCountdown] = useState(4);
   const [redirectTriggered, setRedirectTriggered] = useState(false);
+  const [emailStatus, setEmailStatus] = useState<'sending' | 'sent' | 'error' | 'idle'>('idle');
+  const [targetEmail, setTargetEmail] = useState('');
 
   // Construct target WhatsApp / Download delivery URL
   const baseDeliveryUrl = planType === 'combo' ? CONFIG.comboDeliveryUrl : CONFIG.singleDeliveryUrl;
   const deliveryUrl = `${baseDeliveryUrl}${encodeURIComponent(orderId)}`;
+
+  // Automatically trigger EmailJS order confirmation on modal open
+  useEffect(() => {
+    if (!isOpen) return;
+    const storedEmail = localStorage.getItem('cashfree_last_customer_email') || 'ska80ali@gmail.com';
+    const storedName = localStorage.getItem('cashfree_last_customer_name') || 'Valued Seller';
+    setTargetEmail(storedEmail);
+
+    const sentKey = `emailjs_sent_${orderId}`;
+    if (localStorage.getItem(sentKey)) {
+      setEmailStatus('sent');
+      return;
+    }
+
+    setEmailStatus('sending');
+    sendOrderConfirmationEmail({
+      email: storedEmail,
+      orderId: orderId,
+      planType: planType,
+      customerName: storedName,
+      amountPaid: orderAmount
+    }).then(res => {
+      if (res.success) {
+        setEmailStatus('sent');
+        try { localStorage.setItem(sentKey, 'true'); } catch(e){}
+      } else {
+        setEmailStatus('error');
+      }
+    });
+  }, [isOpen, orderId, planType, orderAmount]);
 
   useEffect(() => {
     if (!isOpen || redirectTriggered) return;
@@ -113,6 +146,32 @@ export default function CashfreeDeliveryModal({
               <span>Amount Paid:</span>
               <span className="font-bold text-white">₹{orderAmount} (Paid in Full)</span>
             </div>
+          )}
+        </div>
+
+        {/* EmailJS Automatic Delivery Status Banner */}
+        <div className="p-3.5 rounded-2xl bg-gradient-to-r from-purple-950/90 via-indigo-950/90 to-purple-950/90 border border-purple-500/50 text-left flex items-center justify-between gap-3 font-sans shadow-lg">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-400/30 flex items-center justify-center shrink-0">
+              <Mail className="w-5 h-5 text-yellow-300 animate-pulse" />
+            </div>
+            <div className="min-w-0 flex-1">
+              <div className="font-bold text-xs sm:text-sm text-purple-200 flex items-center gap-1.5">
+                {emailStatus === 'sending' && "📧 Sending Instant Access Email..."}
+                {emailStatus === 'sent' && "✅ Access Link Sent to Email!"}
+                {emailStatus === 'error' && "⚠️ Email Delivery Notice"}
+                {emailStatus === 'idle' && "⚡ Preparing Email Delivery..."}
+              </div>
+              <div className="text-[11px] text-gray-300 font-mono truncate">
+                Sent to: <strong className="text-yellow-300 underline">{targetEmail}</strong>
+              </div>
+            </div>
+          </div>
+          {emailStatus === 'sent' && (
+            <span className="text-[10px] font-bold tracking-wider uppercase bg-emerald-500/20 text-emerald-300 border border-emerald-400/40 px-2.5 py-1 rounded-lg shrink-0 flex items-center gap-1">
+              <span>Delivered</span>
+              <span className="animate-bounce">✓</span>
+            </span>
           )}
         </div>
 

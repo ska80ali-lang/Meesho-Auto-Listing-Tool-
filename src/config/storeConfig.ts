@@ -74,6 +74,16 @@ export const STORE_CONFIG = {
     }
   ] as CouponCode[],
 
+  // ==========================================================================
+  // 3. AUTOMATIC EMAIL DELIVERY CONFIG (EmailJS - पेमेंट के बाद ऑटोमैटिक ईमेल भेजने के लिए)
+  // ==========================================================================
+  emailjs: {
+    serviceId: "service_zaez5jj",      // Your EmailJS Service ID
+    templateId: "template_v62f7oz",    // Your EmailJS Template ID
+    publicKey: "CSaUWlrxqThlBwlRF",    // Your EmailJS Public Key
+    enabled: true,                     // Automatically send delivery email when payment succeeds
+  },
+
   // Support WhatsApp Number & Email
   supportWhatsapp: "6295429762",
   supportEmail: "ska80ali@gmail.com",
