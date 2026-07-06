@@ -73,6 +73,10 @@ export const CashfreeModal: React.FC<CashfreeModalProps> = ({
     }
 
     try {
+      const returnUrl = typeof window !== 'undefined' 
+        ? `${window.location.origin}/?order_id={order_id}&payment_status={order_status}`
+        : undefined;
+
       const res = await fetch('/api/create-cashfree-order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -82,9 +86,26 @@ export const CashfreeModal: React.FC<CashfreeModalProps> = ({
           price: currentPlan.price,
           customerName: name || 'Meesho Seller',
           customerPhone: phone,
-          customerEmail: email || 'seller@meesho.com'
+          customerEmail: email || 'seller@meesho.com',
+          returnUrl
         })
       });
+
+      const contentType = res.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        const textResponse = await res.text();
+        console.error("Non-JSON API response (likely Vercel 404 or routing error):", textResponse);
+        // Fallback to clear setup instructions for Vercel users
+        setSetupRequiredInfo({
+          status: "setup_required",
+          message: "Aapka website Vercel par deployed hai lekin Vercel backend API connect nahi ho paya. Vercel Settings -> Environment Variables me CASHFREE_APP_ID aur CASHFREE_SECRET_KEY add karein aur latest code deploy karein.",
+          requiredKeys: ["CASHFREE_APP_ID", "CASHFREE_SECRET_KEY", "CASHFREE_ENVIRONMENT"],
+          amount: currentPlan.price,
+          planName: currentPlan.name
+        });
+        setIsLoading(false);
+        return;
+      }
 
       const data = await res.json();
       setIsLoading(false);
@@ -112,7 +133,12 @@ export const CashfreeModal: React.FC<CashfreeModalProps> = ({
       }
     } catch (err: any) {
       setIsLoading(false);
-      setErrorMsg('Network connectivity error. Please check internet connection.');
+      console.error("Payment exception:", err);
+      if (err?.message?.includes("Unexpected token") || !navigator.onLine) {
+        setErrorMsg('Network or Server error. Agar aap Vercel par host kar rahe hain, toh Vercel Environment Variables me CASHFREE_APP_ID aur CASHFREE_SECRET_KEY add karein.');
+      } else {
+        setErrorMsg(err.message || 'Network connectivity error. Please check internet connection.');
+      }
     }
   };
 
@@ -122,8 +148,11 @@ export const CashfreeModal: React.FC<CashfreeModalProps> = ({
       setIsSimulatingSuccess(false);
       setSimulatedSuccess(true);
       setTimeout(() => {
-        // Automatically redirect or show success after 2 seconds
-      }, 2000);
+        onClose();
+        if (typeof window !== 'undefined') {
+          window.location.href = `/?order_id=DEMO_${Date.now()}&payment_status=SUCCESS`;
+        }
+      }, 1500);
     }, 1500);
   };
 
