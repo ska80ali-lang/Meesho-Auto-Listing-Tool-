@@ -83,14 +83,14 @@
     left: -150%;
     opacity: 0;
   }
-  4% {
+  5% {
     opacity: 1;
   }
-  40% {
+  55% {
     left: 200%;
     opacity: 1;
   }
-  41% {
+  56% {
     left: 200%;
     opacity: 0;
   }
@@ -101,28 +101,28 @@
 }
 
 @keyframes buttonShake {
-  0%, 40% {
+  0%, 55% {
     transform: translate(0, 0);
   }
-  44% {
+  59% {
     transform: translate(-5px, 0);
   }
-  48% {
+  63% {
     transform: translate(5px, 0);
   }
-  52% {
+  67% {
     transform: translate(-4px, 0);
   }
-  56% {
+  71% {
     transform: translate(4px, 0);
   }
-  60% {
+  75% {
     transform: translate(-2px, 0);
   }
-  64% {
+  79% {
     transform: translate(2px, 0);
   }
-  68%, 100% {
+  83%, 100% {
     transform: translate(0, 0);
   }
 }
@@ -130,7 +130,7 @@
 .buy-btn-effect {
   position: relative !important;
   overflow: hidden !important;
-  animation: buttonShake 2.6s infinite ease-in-out;
+  animation: buttonShake 2.8s infinite ease-in-out;
 }
 
 .buy-btn-effect::after {
@@ -150,7 +150,7 @@
   );
   transform: skewX(-25deg);
   pointer-events: none;
-  animation: buttonShine 2.6s infinite ease-in-out;
+  animation: buttonShine 2.8s infinite ease-in-out;
   z-index: 20;
 }
 
