@@ -23,14 +23,7 @@ import {
   RotateCcw,
   RotateCw,
   Volume2,
-  VolumeX,
-  FileText,
-  RefreshCw,
-  Truck,
-  Building2,
-  HelpCircle,
-  CreditCard,
-  Check
+  VolumeX
 } from 'lucide-react';
 
 // Data configs
@@ -61,7 +54,7 @@ export default function App() {
   const [heroDuration, setHeroDuration] = useState(0);
 
   // Compliance Modals State
-  const [activeModal, setActiveModal] = useState<'privacy' | 'terms' | 'refund' | 'shipping' | 'support' | 'merchant' | null>(null);
+  const [activeModal, setActiveModal] = useState<'privacy' | 'terms' | 'support' | null>(null);
 
   // Track Hero main button visibility to conditionally show sticky bar on mobile
   const [isHeroButtonVisible, setIsHeroButtonVisible] = useState(true);
@@ -654,126 +647,13 @@ export default function App() {
       {/* 11. FINAL PRICING CARD */}
       <PricingCard />
 
-      {/* 11.5 CASHFREE VERIFIED PAYMENT GATEWAY & MANDATORY LEGAL COMPLIANCE CENTER */}
-      <section id="cashfree-compliance-center" className="py-12 bg-gradient-to-b from-[#020008] via-purple-950/20 to-[#020008] border-t border-b border-pink-500/30 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
-          
-          <div className="text-center max-w-3xl mx-auto mb-8">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-400/30 text-emerald-300 text-xs font-bold uppercase tracking-wider font-mono mb-3 shadow-[0_0_20px_rgba(16,185,129,0.2)]">
-              <ShieldCheck className="w-4 h-4 text-emerald-400 animate-pulse" />
-              <span>Cashfree Verified 100% Secure Gateway</span>
-            </div>
-            <h3 className="text-xl md:text-3xl font-extrabold text-white font-display tracking-tight">
-              Legal Compliance & <span className="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-purple-400">Payment Guidelines</span>
-            </h3>
-            <p className="text-xs md:text-sm text-gray-300 mt-2 font-sans">
-              We strictly adhere to all mandatory guidelines set by Cashfree Payments India. Review our transparent terms, refund policies, instant digital delivery SLA, and verified merchant support details below.
-            </p>
-          </div>
-
-          {/* 6 Prominent Compliance Policy Grid Buttons */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4 mb-8">
-            
-            <button
-              onClick={() => setActiveModal('terms')}
-              className="glass-panel p-4 rounded-2xl border border-purple-500/30 hover:border-pink-500 hover:bg-purple-900/40 transition-all text-center flex flex-col items-center justify-center gap-2.5 group cursor-pointer shadow-lg"
-            >
-              <div className="w-10 h-10 rounded-xl bg-purple-500/20 group-hover:bg-pink-500/30 flex items-center justify-center text-purple-300 group-hover:text-pink-300 transition-colors">
-                <FileText className="w-5 h-5" />
-              </div>
-              <span className="text-xs font-extrabold text-white group-hover:text-pink-300 font-display">Terms &amp; Conditions</span>
-              <span className="text-[10px] text-gray-400 font-mono">Usage rules &amp; license</span>
-            </button>
-
-            <button
-              onClick={() => setActiveModal('privacy')}
-              className="glass-panel p-4 rounded-2xl border border-purple-500/30 hover:border-pink-500 hover:bg-purple-900/40 transition-all text-center flex flex-col items-center justify-center gap-2.5 group cursor-pointer shadow-lg"
-            >
-              <div className="w-10 h-10 rounded-xl bg-emerald-500/20 group-hover:bg-pink-500/30 flex items-center justify-center text-emerald-300 group-hover:text-pink-300 transition-colors">
-                <Lock className="w-5 h-5" />
-              </div>
-              <span className="text-xs font-extrabold text-white group-hover:text-pink-300 font-display">Privacy Policy</span>
-              <span className="text-[10px] text-gray-400 font-mono">AES-256 SSL Encryption</span>
-            </button>
-
-            <button
-              onClick={() => setActiveModal('refund')}
-              className="glass-panel p-4 rounded-2xl border border-pink-500/40 hover:border-yellow-400 hover:bg-pink-950/40 transition-all text-center flex flex-col items-center justify-center gap-2.5 group cursor-pointer shadow-[0_0_20px_rgba(236,72,153,0.15)] bg-pink-950/20"
-            >
-              <div className="w-10 h-10 rounded-xl bg-pink-500/30 group-hover:bg-yellow-400/30 flex items-center justify-center text-pink-300 group-hover:text-yellow-300 transition-colors">
-                <RefreshCw className="w-5 h-5 animate-spin-slow" />
-              </div>
-              <span className="text-xs font-extrabold text-white group-hover:text-yellow-300 font-display">Refund Policy</span>
-              <span className="text-[10px] text-pink-300 font-mono font-bold">7-Day Guarantee</span>
-            </button>
-
-            <button
-              onClick={() => setActiveModal('shipping')}
-              className="glass-panel p-4 rounded-2xl border border-purple-500/30 hover:border-pink-500 hover:bg-purple-900/40 transition-all text-center flex flex-col items-center justify-center gap-2.5 group cursor-pointer shadow-lg"
-            >
-              <div className="w-10 h-10 rounded-xl bg-blue-500/20 group-hover:bg-pink-500/30 flex items-center justify-center text-blue-300 group-hover:text-pink-300 transition-colors">
-                <Truck className="w-5 h-5" />
-              </div>
-              <span className="text-xs font-extrabold text-white group-hover:text-pink-300 font-display">Shipping / Delivery</span>
-              <span className="text-[10px] text-gray-400 font-mono">Instant 0-5m Access</span>
-            </button>
-
-            <button
-              onClick={() => setActiveModal('merchant')}
-              className="glass-panel p-4 rounded-2xl border border-purple-500/30 hover:border-pink-500 hover:bg-purple-900/40 transition-all text-center flex flex-col items-center justify-center gap-2.5 group cursor-pointer shadow-lg"
-            >
-              <div className="w-10 h-10 rounded-xl bg-amber-500/20 group-hover:bg-pink-500/30 flex items-center justify-center text-amber-300 group-hover:text-pink-300 transition-colors">
-                <Building2 className="w-5 h-5" />
-              </div>
-              <span className="text-xs font-extrabold text-white group-hover:text-pink-300 font-display">Merchant Details</span>
-              <span className="text-[10px] text-gray-400 font-mono">Surat &amp; Jaipur Office</span>
-            </button>
-
-            <button
-              onClick={() => setActiveModal('support')}
-              className="glass-panel p-4 rounded-2xl border border-purple-500/30 hover:border-pink-500 hover:bg-purple-900/40 transition-all text-center flex flex-col items-center justify-center gap-2.5 group cursor-pointer shadow-lg"
-            >
-              <div className="w-10 h-10 rounded-xl bg-indigo-500/20 group-hover:bg-pink-500/30 flex items-center justify-center text-indigo-300 group-hover:text-pink-300 transition-colors">
-                <HelpCircle className="w-5 h-5" />
-              </div>
-              <span className="text-xs font-extrabold text-white group-hover:text-pink-300 font-display">Contact Us</span>
-              <span className="text-[10px] text-gray-400 font-mono">WhatsApp &amp; Email Support</span>
-            </button>
-
-          </div>
-
-          {/* Cashfree Verified Trust Banner */}
-          <div className="glass-panel p-4 md:p-5 rounded-2xl border border-emerald-500/30 bg-gradient-to-r from-emerald-950/40 via-black to-emerald-950/40 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-3.5 text-left">
-              <div className="p-3 rounded-xl bg-emerald-500/20 text-emerald-400 shrink-0">
-                <CreditCard className="w-6 h-6" />
-              </div>
-              <div>
-                <h4 className="text-sm md:text-base font-extrabold text-white font-display flex items-center gap-2">
-                  <span>Cashfree Payment Gateway Verified Merchant</span>
-                  <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] bg-emerald-500 text-black font-black uppercase tracking-wider">Active</span>
-                </h4>
-                <p className="text-xs text-gray-300 font-sans mt-0.5">
-                  100% RBI &amp; PCI-DSS compliant checkout. Supports UPI (GPay, PhonePe, Paytm), All Bank Credit/Debit Cards, Net Banking &amp; RuPay.
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2 shrink-0">
-              <span className="text-xs font-bold font-mono text-emerald-300">✓ Instant Access Verified</span>
-              <span className="text-xs font-bold font-mono text-pink-300">• ✓ SSL Secured</span>
-            </div>
-          </div>
-
-        </div>
-      </section>
-
       {/* 12. FOOTER */}
       <footer className="bg-[#020008] border-t border-purple-950/45 py-12 pb-28 md:pb-20 relative">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             
             {/* Column 1: Info */}
-            <div className="space-y-3.5 md:col-span-1">
+            <div className="space-y-3.5">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center border border-pink-400/20">
                   <Cpu className="w-4.5 h-4.5 text-white" />
@@ -787,66 +667,31 @@ export default function App() {
               </p>
             </div>
 
-            {/* Column 2: Legal & Cashfree Compliance Links */}
-            <div className="space-y-2.5 text-left md:col-span-1">
-              <h4 className="text-xs font-bold uppercase tracking-widest text-emerald-400 font-mono mb-2 flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5" />
-                <span>Legal Policies</span>
-              </h4>
-              <ul className="space-y-2 text-xs font-sans">
-                <li>
-                  <button onClick={() => setActiveModal('terms')} className="text-gray-300 hover:text-pink-400 font-medium transition-colors cursor-pointer text-left bg-transparent border-none p-0">
-                    → Terms &amp; Conditions
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => setActiveModal('privacy')} className="text-gray-300 hover:text-pink-400 font-medium transition-colors cursor-pointer text-left bg-transparent border-none p-0">
-                    → Privacy Policy
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => setActiveModal('refund')} className="text-pink-300 hover:text-yellow-300 font-bold transition-colors cursor-pointer text-left bg-transparent border-none p-0">
-                    → Refund &amp; Cancellation Policy
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => setActiveModal('shipping')} className="text-gray-300 hover:text-pink-400 font-medium transition-colors cursor-pointer text-left bg-transparent border-none p-0">
-                    → Shipping &amp; Delivery Policy
-                  </button>
-                </li>
-              </ul>
-            </div>
-
-            {/* Column 3: Quick trust highlights */}
-            <div className="space-y-2 text-left md:col-span-1">
+            {/* Column 2: Quick trust highlights */}
+            <div className="space-y-2 text-left">
               <h4 className="text-xs font-bold uppercase tracking-widest text-[#ec4899] font-mono mb-2">Legal Disclaimer</h4>
               <p className="text-[10px] text-gray-500 font-sans leading-relaxed">
                 This digital tool is designed for optimization and efficiency. We are an independent software helper and are NOT officially endorsed by, affiliated with, or partnered with Meesho Pvt. Ltd. Vendor results vary based on marketplace trends and catalogs content.
               </p>
             </div>
 
-            {/* Column 4: Contact support & Merchant details */}
-            <div className="space-y-3 md:col-span-1">
-              <h4 className="text-xs font-bold uppercase tracking-widest text-purple-400 font-mono">Merchant &amp; Support</h4>
+            {/* Column 3: Contact support details */}
+            <div className="space-y-3">
+              <h4 className="text-xs font-bold uppercase tracking-widest text-purple-400 font-mono">Instant Support</h4>
               <p className="text-xs text-gray-400 font-sans leading-relaxed">
-                Registered Merchant: <strong>Meesho AutoListing Automation Suites</strong>
+                Need manual setting assistance or direct billing files? Send an email or message on WhatsApp.
               </p>
               
               <div className="space-y-1.5 font-mono text-xs">
                 <div className="flex items-center gap-2 text-pink-400">
-                  <MessageSquare className="w-4 h-4 shrink-0" />
-                  <a href={`https://wa.me/91${whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="hover:underline truncate">
+                  <MessageSquare className="w-4 h-4" />
+                  <a href={`https://wa.me/91${whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="hover:underline">
                     WhatsApp: +91 {whatsappNumber}
                   </a>
                 </div>
                 <div className="flex items-center gap-2 text-purple-400">
-                  <Layers className="w-4 h-4 shrink-0" />
-                  <span className="truncate">Support: {CONFIG.supportEmail}</span>
-                </div>
-                <div className="pt-1">
-                  <button onClick={() => setActiveModal('merchant')} className="text-[11px] text-amber-400 hover:underline font-sans cursor-pointer bg-transparent border-none p-0 font-bold">
-                    → View Registered Office Address
-                  </button>
+                  <Layers className="w-4 h-4" />
+                  <span>Support: {CONFIG.supportEmail}</span>
                 </div>
               </div>
             </div>
@@ -854,43 +699,29 @@ export default function App() {
           </div>
 
           {/* Copyright bar */}
-          <div className="mt-8 pt-6 border-t border-purple-950/20 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-400 font-mono">
+          <div className="mt-8 pt-6 border-t border-purple-950/20 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-gray-500 font-mono">
             <span>© 2026 Meesho AutoListing Automation Suites. All Rights Saved.</span>
             
-            <div className="flex flex-wrap justify-center gap-3 md:gap-4 font-semibold">
+            <div className="flex flex-wrap justify-center gap-4">
               <button 
                 onClick={() => setActiveModal('privacy')}
-                className="hover:text-pink-400 transition-colors cursor-pointer bg-transparent border-none text-xs font-mono text-gray-300"
+                className="hover:text-pink-400 transition-colors cursor-pointer bg-transparent border-none text-[10px] font-mono text-gray-400 font-medium"
               >
                 Privacy Policy
               </button>
               <span>•</span>
               <button 
                 onClick={() => setActiveModal('terms')}
-                className="hover:text-pink-400 transition-colors cursor-pointer bg-transparent border-none text-xs font-mono text-gray-300"
+                className="hover:text-pink-400 transition-colors cursor-pointer bg-transparent border-none text-[10px] font-mono text-gray-400 font-medium"
               >
                 Terms of Service
               </button>
               <span>•</span>
               <button 
-                onClick={() => setActiveModal('refund')}
-                className="hover:text-yellow-300 transition-colors cursor-pointer bg-transparent border-none text-xs font-mono text-pink-300 font-bold"
-              >
-                Refund Policy
-              </button>
-              <span>•</span>
-              <button 
-                onClick={() => setActiveModal('shipping')}
-                className="hover:text-pink-400 transition-colors cursor-pointer bg-transparent border-none text-xs font-mono text-gray-300"
-              >
-                Shipping Policy
-              </button>
-              <span>•</span>
-              <button 
                 onClick={() => setActiveModal('support')}
-                className="hover:text-pink-400 transition-colors cursor-pointer bg-transparent border-none text-xs font-mono text-gray-300"
+                className="hover:text-pink-400 transition-colors cursor-pointer bg-transparent border-none text-[10px] font-mono text-gray-400 font-medium"
               >
-                Contact Support
+                Contact Support Help
               </button>
             </div>
           </div>
@@ -1071,137 +902,6 @@ export default function App() {
 
                     <p className="text-[11px] text-gray-400">
                       *Our specialists are active from <strong>9:00 AM to 10:00 PM (IST)</strong>. Standard WhatsApp feedback time is under 15 minutes. Manual billing configuration sheets are sent immediately if needed.
-                    </p>
-                  </div>
-                </div>
-              )}
-
-              {activeModal === 'refund' && (
-                <div className="space-y-4">
-                  <h3 className="text-lg font-extrabold text-white font-display flex items-center gap-2 border-b border-pink-500/30 pb-3">
-                    <span className="w-2.5 h-2.5 bg-yellow-400 rounded-full animate-pulse" />
-                    Refund &amp; Cancellation Policy (Cashfree Guidelines)
-                  </h3>
-                  <div className="text-xs md:text-sm text-gray-300 space-y-3.5 leading-relaxed">
-                    <p>
-                      <strong>Effective Date:</strong> May 2026 &bull; <strong>Compliance:</strong> Cashfree Merchant Guidelines
-                    </p>
-                    <p className="font-bold text-pink-400">
-                      1. 7-Day Money-Back Guarantee (Technical Incompatibility)
-                    </p>
-                    <p>
-                      We strive to provide 100% functional and tested Google Sheets &amp; Excel automation scripts for Meesho sellers. If you experience technical incompatibility or script execution failure that our technical support team cannot resolve within 7 days of purchase, you are eligible for a full refund of ₹199.
-                    </p>
-                    <p className="font-bold text-pink-400">
-                      2. How to Request a Refund / Cancellation
-                    </p>
-                    <p>
-                      To request an order cancellation or refund, simply contact our Customer Desk via email at <strong className="text-white">{CONFIG.supportEmail}</strong> or message our WhatsApp helpline (<strong className="text-white">+91 {whatsappNumber}</strong>) along with your Cashfree Payment Order ID or registered phone number.
-                    </p>
-                    <p className="font-bold text-pink-400">
-                      3. Refund Processing Time (Cashfree SLA)
-                    </p>
-                    <p>
-                      Once approved by our support team, refund requests are initiated immediately through the <strong className="text-emerald-400">Cashfree Payment Gateway</strong>. The refunded amount will be credited back to your original source of payment (Bank Account / UPI / Credit or Debit Card) within <strong className="text-white">5 to 7 working days</strong> as per RBI standard banking timelines.
-                    </p>
-                    <p className="font-bold text-pink-400">
-                      4. Exceptions
-                    </p>
-                    <p>
-                      Refunds cannot be claimed if the user violates our single-seat license policy (e.g. reselling or publicly distributing our copyrighted automation scripts).
-                    </p>
-                  </div>
-                </div>
-              )}
-
-              {activeModal === 'shipping' && (
-                <div className="space-y-4">
-                  <h3 className="text-lg font-extrabold text-white font-display flex items-center gap-2 border-b border-purple-900/30 pb-3">
-                    <span className="w-2.5 h-2.5 bg-blue-400 rounded-full animate-pulse" />
-                    Shipping &amp; Delivery Policy
-                  </h3>
-                  <div className="text-xs md:text-sm text-gray-300 space-y-3.5 leading-relaxed">
-                    <p>
-                      <strong>Delivery Model:</strong> Instant Electronic Access (Zero Physical Shipping)
-                    </p>
-                    <p className="font-bold text-pink-400">
-                      1. Instant Digital Delivery (0 to 5 Minutes)
-                    </p>
-                    <p>
-                      Our product is a digital SaaS &amp; Automation Suite consisting of downloadable Google Sheets templates, macros, dynamic formulas, and video tutorials. Upon successful payment verification via Cashfree, you will be instantly redirected to the secure member access page.
-                    </p>
-                    <p className="font-bold text-pink-400">
-                      2. WhatsApp &amp; Email Confirmation
-                    </p>
-                    <p>
-                      In addition to the immediate browser redirect, an automated confirmation containing your permanent download link and setup tutorial is sent to your registered email address and WhatsApp number within 0-5 minutes.
-                    </p>
-                    <p className="font-bold text-pink-400">
-                      3. Delivery Failure or Technical Lags
-                    </p>
-                    <p>
-                      If you do not receive your access link due to a network delay or browser popup blocker, message our WhatsApp support (+91 {whatsappNumber}) immediately. Our team will manually hand-deliver your licensed copy within 15 minutes during active support hours (9 AM - 10 PM IST).
-                    </p>
-                    <p className="font-bold text-pink-400">
-                      4. Shipping Charges
-                    </p>
-                    <p>
-                      Because this is a 100% digital software product, there are <strong className="text-emerald-400">₹0 shipping or handling fees</strong>. You pay strictly the advertised one-time price of ₹199.
-                    </p>
-                  </div>
-                </div>
-              )}
-
-              {activeModal === 'merchant' && (
-                <div className="space-y-4">
-                  <h3 className="text-lg font-extrabold text-white font-display flex items-center gap-2 border-b border-purple-900/30 pb-3">
-                    <span className="w-2.5 h-2.5 bg-amber-400 rounded-full animate-pulse" />
-                    Merchant &amp; Legal Business Details
-                  </h3>
-                  <div className="text-xs md:text-sm text-gray-300 space-y-4 leading-relaxed">
-                    <p>
-                      In compliance with Cashfree Payment Gateway merchant onboarding and RBI consumer protection guidelines, here are our official business registration details:
-                    </p>
-                    
-                    <div className="glass-panel p-4 rounded-xl border-amber-500/20 space-y-3 font-sans">
-                      <div>
-                        <p className="text-[10px] text-gray-400 uppercase font-mono">Legal Merchant Name</p>
-                        <p className="text-sm font-extrabold text-white">Meesho AutoListing Automation Suites</p>
-                      </div>
-
-                      <div className="border-t border-gray-800 pt-2">
-                        <p className="text-[10px] text-gray-400 uppercase font-mono">Registered Office / Operational Address</p>
-                        <p className="text-xs text-gray-200 mt-1 leading-normal">
-                          &bull; <strong>Surat Office:</strong> 402, Trade Center, Ring Road, Surat, Gujarat - 395002, India<br />
-                          &bull; <strong>Jaipur Office:</strong> 2nd Floor, Cyber Arcade, M.I. Road, Jaipur, Rajasthan - 302001, India
-                        </p>
-                      </div>
-
-                      <div className="border-t border-gray-800 pt-2 grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        <div>
-                          <p className="text-[10px] text-gray-400 uppercase font-mono">Customer Support Email</p>
-                          <a href={`mailto:${CONFIG.supportEmail}`} className="text-xs font-bold text-purple-300 hover:underline">
-                            {CONFIG.supportEmail}
-                          </a>
-                        </div>
-                        <div>
-                          <p className="text-[10px] text-gray-400 uppercase font-mono">Helpline / WhatsApp</p>
-                          <a href={`https://wa.me/91${whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="text-xs font-bold text-emerald-300 hover:underline">
-                            +91 {whatsappNumber}
-                          </a>
-                        </div>
-                      </div>
-
-                      <div className="border-t border-gray-800 pt-2">
-                        <p className="text-[10px] text-gray-400 uppercase font-mono">Payment Gateway Partner</p>
-                        <p className="text-xs text-emerald-400 font-bold flex items-center gap-1.5 mt-0.5">
-                          <Check className="w-3.5 h-3.5" /> Cashfree Payments India Private Limited (100% Verified)
-                        </p>
-                      </div>
-                    </div>
-
-                    <p className="text-[11px] text-gray-400">
-                      All consumer queries regarding orders, billing, refunds, and technical support are resolved by our dedicated helpdesk within 1 to 2 hours during operational hours (9 AM - 10 PM IST).
                     </p>
                   </div>
                 </div>
