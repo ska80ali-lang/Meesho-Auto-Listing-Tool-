@@ -54,7 +54,7 @@ export default function App() {
   const [heroDuration, setHeroDuration] = useState(0);
 
   // Compliance Modals State
-  const [activeModal, setActiveModal] = useState<'privacy' | 'terms' | 'support' | null>(null);
+  const [activeModal, setActiveModal] = useState<'privacy' | 'terms' | 'support' | 'refund' | 'shipping' | null>(null);
 
   // Track Hero main button visibility to conditionally show sticky bar on mobile
   const [isHeroButtonVisible, setIsHeroButtonVisible] = useState(true);
@@ -718,6 +718,20 @@ export default function App() {
               </button>
               <span>•</span>
               <button 
+                onClick={() => setActiveModal('refund')}
+                className="hover:text-pink-400 transition-colors cursor-pointer bg-transparent border-none text-[10px] font-mono text-gray-400 font-medium"
+              >
+                Refund Policy
+              </button>
+              <span>•</span>
+              <button 
+                onClick={() => setActiveModal('shipping')}
+                className="hover:text-pink-400 transition-colors cursor-pointer bg-transparent border-none text-[10px] font-mono text-gray-400 font-medium"
+              >
+                Shipping & Delivery
+              </button>
+              <span>•</span>
+              <button 
                 onClick={() => setActiveModal('support')}
                 className="hover:text-pink-400 transition-colors cursor-pointer bg-transparent border-none text-[10px] font-mono text-gray-400 font-medium"
               >
@@ -799,30 +813,37 @@ export default function App() {
                   </h3>
                   <div className="text-xs md:text-sm text-gray-300 space-y-3.5 leading-relaxed">
                     <p>
-                      <strong>Effective Date:</strong> May 2026
+                      <strong>Effective Date:</strong> July 6, 2026
                     </p>
                     <p>
-                      Welcome to Meesho AutoListing Automation Suites. We respect your security and privacy details. 
-                      This privacy policy details how we handle information to make your automation fast and safe.
+                      Welcome to Meesho AutoListing Automation Suites (operated by <strong>Sk Ali Asgar</strong>). We respect your privacy and are committed to protecting your personal data. This privacy policy outlines how we handle information to make your automation experience fast, safe, and secure.
                     </p>
                     <p className="font-bold text-pink-400">
-                      1. Client Data Security (No Data Stored)
+                      1. Information We Collect
                     </p>
                     <p>
-                      Our 1-Click Excel script and bulk automation tool run strictly inside your own browser tab or secure private sheets. 
-                      We DO NOT collect, store, transmit, or share your Meesho Seller credentials, catalog descriptions, passwords, or invoice details. All processes are 100% server-isolated and client-confined.
+                      We collect basic personal information to handle your registration and transaction through our partner Cashfree:
+                      <br />• <strong>Personal Information:</strong> Name, Email Address, Contact/WhatsApp Phone Number, and Billing Details.
+                      <br />• <strong>Non-Personal Data:</strong> IP Address, browser type, cookies, and standard session details.
                     </p>
                     <p className="font-bold text-pink-400">
-                      2. Payment Processing
+                      2. Client Data Security (Absolute Local Sandbox)
                     </p>
                     <p>
-                      Payments are processed via our verified secure financial partner gateways. Your transaction and card/UPI information is fully encrypted with AES-256 standard SSL protocols. We never store credit cards, UPI codes, or bank passwords inside our server environments.
+                      Our 1-Click Excel script and bulk automation tools run strictly local inside your own browser tab or secure sheets. 
+                      We <strong>DO NOT</strong> collect, store, transmit, or share your Meesho Seller credentials, catalog descriptions, passwords, shop keys, or invoice details. All automation processes are 100% server-isolated and client-confined.
                     </p>
                     <p className="font-bold text-pink-400">
-                      3. WhatsApp & Support Interactions
+                      3. Secured Payment Processing (Cashfree Gateway)
                     </p>
                     <p>
-                      When you contact our active WhatsApp assistance, we use your number solely for sending setup links and offering personalized support guidance. Your details will never be sold or used for spam.
+                      All checkout transactions are processed via our verified secure payment partner gateway, <strong>Cashfree Payments</strong>. Your transaction, card details, or UPI information are fully encrypted using SSL with AES-256 standards. We never store credit cards, UPI codes, or bank passwords inside our server environments.
+                    </p>
+                    <p className="font-bold text-pink-400">
+                      4. WhatsApp & Customer Support Interactions
+                    </p>
+                    <p>
+                      When you contact our active customer help hotline, we use your phone number and name solely to dispatch setup credentials, manual backup templates, and offer troubleshooting guides. We strictly never sell or rent your contact details to third parties.
                     </p>
                   </div>
                 </div>
@@ -832,32 +853,108 @@ export default function App() {
                 <div className="space-y-4">
                   <h3 className="text-lg font-extrabold text-white font-display flex items-center gap-2 border-b border-purple-900/30 pb-3">
                     <span className="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse" />
-                    Terms of Service / Condition of Use
+                    Terms of Service / Conditions of Use
                   </h3>
                   <div className="text-xs md:text-sm text-gray-300 space-y-3.5 leading-relaxed">
                     <p>
-                      <strong>Effective Date:</strong> May 2026
+                      <strong>Effective Date:</strong> July 6, 2026
                     </p>
                     <p>
-                      By checking out and purchasing our tool suites, you agree to comply with the following simple terms.
+                      This website is owned and operated by <strong>Sk Ali Asgar</strong>, Haldia, Purba Medinipur, West Bengal, India, PIN: 721628. By browsing or purchasing from our platform, you agree to comply with the following simple terms and conditions of use.
                     </p>
                     <p className="font-bold text-pink-400">
                       1. Lifetime Personal Use License
                     </p>
                     <p>
-                      Your ₹199 charge entitles you to a single-seat personal license for your designated seller accounts. You are strictly forbidden from distributing, cracking, selling, or modifying the sheets code or automation binaries to secondary users.
+                      Your one-time fee of ₹199 entitles you to a single-seat personal license for your designated seller accounts. You are strictly forbidden from copying, distributing, cracking, selling, or modifying the sheets code or automation binaries to secondary users.
                     </p>
                     <p className="font-bold text-pink-400">
-                      2. Companion Automation Disclaimer
+                      2. Companion Productivity Tool Disclaimer
                     </p>
                     <p>
-                      This automation tool serves strictly as a high-speed productivity helper to compile and submit catalogs faster. High-volume uploads should be supervised closely by vendor operators. We make every effort to optimize code algorithms, but the ultimate marketplace sales performance relies on product quality and trends.
+                      This automation tool serves strictly as a high-speed productivity helper to compile and submit catalogs faster. High-volume uploads should be supervised closely by vendor operators. We make every effort to optimize code algorithms, but the ultimate marketplace sales performance relies on your product quality, trends, and compliance with respective marketplace terms. The tool is provided "as is" without warranty of any kind.
                     </p>
                     <p className="font-bold text-pink-400">
-                      3. Instant Non-Physical Delivery
+                      3. Instant Digital Fulfilment & Payments
                     </p>
                     <p>
-                      Because our product is fully electronic (consisting of Google Sheets templates, dynamic coding tricks, and pre-recorded videos), immediate download links are dispatched upon payment redirect. If you face any setting lags, our WhatsApp support guarantees handloaded manual configuration files.
+                      All prices listed on our platform are in Indian Rupees (INR). Payments must be cleared via our secure gateway Cashfree. Because our product is fully electronic (Google Sheets templates, coding macros, and video guides), links are dispatched instantly upon successful payment.
+                    </p>
+                    <p className="font-bold text-pink-400">
+                      4. Governing Law & Jurisdiction
+                    </p>
+                    <p>
+                      These Terms of Service and any separate agreements shall be governed by and construed in accordance with the laws of India. Any disputes or claims arising out of this website shall be subject to the exclusive jurisdiction of the competent courts in <strong>Haldia, West Bengal, India</strong>.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {activeModal === 'refund' && (
+                <div className="space-y-4">
+                  <h3 className="text-lg font-extrabold text-white font-display flex items-center gap-2 border-b border-purple-900/30 pb-3">
+                    <span className="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse" />
+                    Refund, Cancellation & Return Policy
+                  </h3>
+                  <div className="text-xs md:text-sm text-gray-300 space-y-3.5 leading-relaxed">
+                    <p>
+                      <strong>Effective Date:</strong> July 6, 2026
+                    </p>
+                    <p>
+                      At Meesho AutoListing Automation Suites, we strive to maintain transparency. Since our product suite is 100% digital, we have designed the following balanced refund policy:
+                    </p>
+                    <p className="font-bold text-pink-400">
+                      1. Cancellation Policy
+                    </p>
+                    <p>
+                      Cancellations are accepted only prior to downloading or receiving the files on your email or phone. Once the digital download link is clicked or files are generated and dispatched to your email, the transaction cannot be cancelled.
+                    </p>
+                    <p className="font-bold text-pink-400">
+                      2. Refund Eligibility & Support Guarantee
+                    </p>
+                    <p>
+                      We want you to be fully successful. If you face any technical difficulties, setup lags, or device compatibility errors after purchase:
+                      <br />• You must contact our customer support desk on WhatsApp (<strong>+91 6295429762</strong>) or email (<strong>ska80ali@gmail.com</strong>).
+                      <br />• Our engineering team will assist you to set up the tool or provide manual customized configuration sheets matching your device within 24-48 hours.
+                      <br />• In the rare scenario that our support specialists cannot resolve the technical problem and the tool remains completely unusable on your specified device, a <strong>full refund of ₹199</strong> will be approved immediately.
+                    </p>
+                    <p className="font-bold text-pink-400">
+                      3. Refund Processing & Timelines
+                    </p>
+                    <p>
+                      Once approved, refund transactions are processed back to the original source of payment (UPI, Netbanking, or Debit/Credit Card) through our payment processor Cashfree.
+                      <br />• The refunded amount will typically reflect in your bank account or card statement within <strong>5 to 7 working days</strong>, as per standard banking channel settlement times.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {activeModal === 'shipping' && (
+                <div className="space-y-4">
+                  <h3 className="text-lg font-extrabold text-white font-display flex items-center gap-2 border-b border-purple-900/30 pb-3">
+                    <span className="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse" />
+                    Shipping & Delivery Policy
+                  </h3>
+                  <div className="text-xs md:text-sm text-gray-300 space-y-3.5 leading-relaxed">
+                    <p>
+                      <strong>Effective Date:</strong> July 6, 2026
+                    </p>
+                    <p>
+                      All products and services sold on Meesho AutoListing Automation Suites are 100% digital, virtual software sheets, instructions, and video packages. <strong>No physical delivery or courier shipment is required.</strong>
+                    </p>
+                    <p className="font-bold text-pink-400">
+                      1. Delivery Mechanism
+                    </p>
+                    <p>
+                      • <strong>Instant Web Redirect:</strong> Immediately after completing payment via Cashfree, our secure billing system will redirect you automatically to our high-speed secure download page inside 2 seconds.
+                      <br />• <strong>Automatic Email Delivery:</strong> A confirmation email enclosing download credentials, setup files, and video tutorial links is dispatched to your registered billing email within <strong>5 to 10 minutes</strong>.
+                      <br />• <strong>WhatsApp Backup:</strong> A backup link with manual templates is also sent to your registered billing WhatsApp contact number automatically.
+                    </p>
+                    <p className="font-bold text-pink-400">
+                      2. Delayed Delivery Handling
+                    </p>
+                    <p>
+                      If you do not receive the email or WhatsApp message within 10 minutes due to unexpected network congestion or incorrect email/phone entry, please contact us at <strong>ska80ali@gmail.com</strong> or WhatsApp us directly at <strong>+91 6295429762</strong>. Our specialized support operator will manually handload and send the files to you directly within 1 hour.
                     </p>
                   </div>
                 </div>
@@ -867,22 +964,22 @@ export default function App() {
                 <div className="space-y-4">
                   <h3 className="text-lg font-extrabold text-white font-display flex items-center gap-2 border-b border-purple-900/30 pb-3">
                     <span className="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse" />
-                    Contact Support & Help Center
+                    Contact Us / Help Center
                   </h3>
                   <div className="text-xs md:text-sm text-gray-300 space-y-4 leading-relaxed">
                     <p>
-                      Have questions before buying or need immediate manual assistance with the configuration steps? Our Surat & Jaipur specialist helpdesk is here to guide you inside 1-2 hours!
+                      Need immediate help, customized sheets, or have any pre-purchase billing questions? Our helpdesk is active to serve you inside 15 minutes!
                     </p>
                     
-                    <div className="glass-panel p-4 rounded-xl border-purple-500/20 space-y-3">
+                    <div className="glass-panel p-4 rounded-xl border-purple-500/20 space-y-3 bg-purple-950/20">
                       <div className="flex items-center gap-3">
                         <div className="p-2.5 rounded-lg bg-emerald-500/20 text-emerald-400">
                           <MessageSquare className="w-5 h-5 flex-shrink-0" />
                         </div>
                         <div>
-                          <p className="text-[10px] text-gray-400 uppercase font-mono">Fast Track Support</p>
+                          <p className="text-[10px] text-gray-400 uppercase font-mono">Immediate WhatsApp Support</p>
                           <a href={`https://wa.me/91${whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="text-xs sm:text-sm font-bold text-white hover:underline hover:text-emerald-300 transition-colors break-all">
-                            WhatsApp Chat: +91 {whatsappNumber}
+                            WhatsApp: +91 {whatsappNumber}
                           </a>
                         </div>
                       </div>
@@ -892,16 +989,28 @@ export default function App() {
                           <Layers className="w-5 h-5 flex-shrink-0" />
                         </div>
                         <div>
-                          <p className="text-[10px] text-gray-400 uppercase font-mono">Email Support Queue</p>
+                          <p className="text-[10px] text-gray-400 uppercase font-mono">Support Email ID</p>
                           <a href={`mailto:${CONFIG.supportEmail}`} className="text-xs sm:text-sm font-bold text-white hover:underline hover:text-purple-300 transition-colors break-all">
                             {CONFIG.supportEmail}
                           </a>
                         </div>
                       </div>
+
+                      <div className="flex items-start gap-3">
+                        <div className="p-2.5 rounded-lg bg-pink-500/20 text-pink-400 mt-0.5">
+                          <Lock className="w-5 h-5 flex-shrink-0" />
+                        </div>
+                        <div>
+                          <p className="text-[10px] text-gray-400 uppercase font-mono">Full Business Address</p>
+                          <p className="text-xs sm:text-sm font-bold text-white leading-tight">
+                            Sk Ali Asgar, Haldia, Purba Medinipur, West Bengal, PIN: 721628, India
+                          </p>
+                        </div>
+                      </div>
                     </div>
 
-                    <p className="text-[11px] text-gray-400">
-                      *Our specialists are active from <strong>9:00 AM to 10:00 PM (IST)</strong>. Standard WhatsApp feedback time is under 15 minutes. Manual billing configuration sheets are sent immediately if needed.
+                    <p className="text-[11px] text-gray-400 font-mono">
+                      *Operating Support Hours: <strong>Daily 09:00 AM to 10:00 PM (IST)</strong>. Standard response time is under 15 minutes.
                     </p>
                   </div>
                 </div>
