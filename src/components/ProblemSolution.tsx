@@ -20,7 +20,7 @@ export default function ProblemSolution() {
             {title}
           </h2>
           <p className="text-gray-400 text-xs md:text-sm mt-1 max-w-sm mx-auto">
-            Why 93% of Meesho retail vendors fail, and how our premium tool creates immediate winners.
+            Why many Meesho sellers struggle to grow, and how our automation tool helps you scale successfully.
           </p>
         </div>
 

@@ -213,7 +213,7 @@ export default function App() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-tight font-display"
             >
-              1-Click <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-300 to-blue-400 glow-text-purple">Meesho Auto Listing</span> Tool + Low Shipping Cost Trick
+              1-Click <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-300 to-blue-400 glow-text-purple">Meesho Auto Listing</span> Tool & Reduce Shipping Charges
             </motion.h1>
 
             {/* FULL WIDTH CINEMATIC VIDEO PLAYER (16:9) */}
@@ -477,10 +477,10 @@ export default function App() {
                 <Cpu className="w-5.5 h-5.5" />
               </div>
               <h3 className="text-base font-bold text-white font-display group-hover:text-[#3B82F6] transition-colors">
-                Robotic Auto Listing
+                Automated Bulk Listing
               </h3>
               <p className="text-xs text-gray-400 leading-relaxed mt-2 font-sans">
-                Upload hundreds of items effortlessly. Say goodbye to manual back-breaking typing and single catalog creations.
+                Upload hundreds of products in minutes. Eliminate manual data entry and list entire collections with ease.
               </p>
             </motion.div>
 
@@ -493,10 +493,10 @@ export default function App() {
                 <Table className="w-5.5 h-5.5" />
               </div>
               <h3 className="text-base font-bold text-white font-display group-hover:text-[#3B82F6] transition-colors">
-                Smart Bulk Spreadsheet
+                Pre-Configured Smart Spreadsheet
               </h3>
               <p className="text-xs text-gray-400 leading-relaxed mt-2 font-sans">
-                Fully preconfigured template. Just copy-paste image paths & specifications, and watch catalogs auto-deploy successfully.
+                A highly intuitive, fully set up template. Simply enter your product details and let the automation handle the rest.
               </p>
             </motion.div>
 
@@ -509,10 +509,10 @@ export default function App() {
                 <TrendingDown className="w-5.5 h-5.5" />
               </div>
               <h3 className="text-base font-bold text-white font-display group-hover:text-[#3B82F6] transition-colors">
-                Low Shipping Code-Trick
+                Reduce Shipping Charges
               </h3>
               <p className="text-xs text-gray-400 leading-relaxed mt-2 font-sans">
-                Exclusive weight adjustment formula. Triggers Meesho's absolute lowest local shipping slabs (saves up to ₹40-₹70 per parcel).
+                Apply correct weight and dimension adjustments to legally classify your parcels under the lowest available delivery rate slabs.
               </p>
             </motion.div>
 
@@ -525,10 +525,10 @@ export default function App() {
                 <Smartphone className="w-5.5 h-5.5" />
               </div>
               <h3 className="text-base font-bold text-white font-display group-hover:text-[#3B82F6] transition-colors">
-                100% Mobile Friendly
+                100% Mobile-Friendly Setup
               </h3>
               <p className="text-xs text-gray-400 leading-relaxed mt-2 font-sans">
-                Don't own a laptop? No problem. Use our specialized Google Sheets phone bypass tool to upload instantly straight from Android.
+                No computer? No problem. Use our specialized mobile bypass template to upload directly from your Android or iOS device.
               </p>
             </motion.div>
 
@@ -541,10 +541,10 @@ export default function App() {
                 <Sparkles className="w-5.5 h-5.5 animate-pulse" />
               </div>
               <h3 className="text-base font-bold text-white font-display group-hover:text-[#3B82F6] transition-colors">
-                Beginner Friendly Video
+                Step-by-Step Video Guide
               </h3>
               <p className="text-xs text-gray-400 leading-relaxed mt-2 font-sans">
-                Includes incredibly simple 7-minute visual training guides in simple Hindi. Absolutely zero coding, tech, or sales background required.
+                Includes a simple 7-minute video tutorial in Hindi. Absolutely no coding or technical background required.
               </p>
             </motion.div>
 
@@ -557,10 +557,10 @@ export default function App() {
                 <Clock className="w-5.5 h-5.5" />
               </div>
               <h3 className="text-base font-bold text-white font-display group-hover:text-[#3B82F6] transition-colors">
-                Time & Money Optimizer
+                Maximize Time & Exposure
               </h3>
               <p className="text-xs text-gray-400 leading-relaxed mt-2 font-sans">
-                Saves up to 25+ human labor hours per week, while automatically gaining booster points to push catalog listings to trending search feeds.
+                Save up to 25+ hours of work every week while improving your store's search presence and organic order volume.
               </p>
             </motion.div>
 

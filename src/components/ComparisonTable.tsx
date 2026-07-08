@@ -14,7 +14,7 @@ export default function ComparisonTable() {
             The Difference Is <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-emerald-400 glow-text-purple">Day & Night</span>
           </h2>
           <p className="text-gray-400 text-xs md:text-sm mt-1 max-w-md mx-auto">
-            Compare how a generic seller struggles versus the automated seller using our low-shipping trick formula.
+            Compare how a generic seller struggles versus the automated seller using our shipping charge reduction formula.
           </p>
         </div>
 

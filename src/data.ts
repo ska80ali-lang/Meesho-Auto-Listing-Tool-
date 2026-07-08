@@ -30,15 +30,15 @@ export const CONFIG = {
 // ==========================================
 
 export const TRUST_BADGES = [
-  { id: '1', title: "Instant Access", desc: "Get download link immediately", icon: "Zap" },
-  { id: '2', title: "Secure Payment", desc: "UPI, Cards, Netbanking", icon: "ShieldCheck" },
-  { id: '3', title: "Lifetime Access", desc: "No monthly subscription", icon: "Award" },
-  { id: '4', title: "Mobile Friendly", desc: "Works on phone & laptop", icon: "Smartphone" }
+  { id: '1', title: "Instant Access", desc: "Get your download link immediately after purchase", icon: "Zap" },
+  { id: '2', title: "Secure Payment", desc: "Supports UPI, Cards, and Net Banking", icon: "ShieldCheck" },
+  { id: '3', title: "Lifetime Access", desc: "One-time purchase, no monthly subscription", icon: "Award" },
+  { id: '4', title: "Mobile Friendly", desc: "Works seamlessly on phones and laptops", icon: "Smartphone" }
 ];
 
 export const STATS = [
   { id: '1', value: 14200, suffix: "+", label: "Total Listings Uploaded", icon: "Layers" },
-  { id: '2', value: 1850, suffix: "+", label: "Active Low-Shipping Sellers", icon: "Users" },
+  { id: '2', value: 1850, suffix: "+", label: "Active Meesho Sellers Using This Tool", icon: "Users" },
   { id: '3', value: 98, suffix: "%", label: "Seller Satisfaction Rate", icon: "TrendingUp" },
   { id: '4', value: 4.5, suffix: " Hrs", label: "Daily Time Saved Per Seller", icon: "Clock" }
 ];
@@ -46,20 +46,20 @@ export const STATS = [
 export const SCREENSHOT_SLIDES: ScreenshotSlide[] = [
   {
     id: "slide-1",
-    title: "1-Click Bulk Bulk Auto Listing Panel",
-    description: "Upload up to 500 catalog items simultaneously. Automatically pre-fills product descriptions, dimensions, GST rates and optimized smart keywords.",
+    title: "1-Click Bulk Auto Listing Panel",
+    description: "Upload up to 500 catalog items simultaneously. Automatically pre-fills product descriptions, dimensions, GST rates, and optimized search keywords.",
     imageUrl: "https://i.ibb.co/jZ44n77q/6091285828404448992.jpg"
   },
   {
     id: "slide-2",
     title: "Low Shipping Pricing Custom Engine",
-    description: "The secret trick applied in action. It manipulates Meesho weight parameters safely to lock delivery charges to the bare minimum slab legally.",
+    description: "Our optimization formula in action. It sets Meesho weight parameters accurately to secure the lowest possible shipping tier legally.",
     imageUrl: "https://i.ibb.co/k6DY8KSJ/6091285828404448990.jpg"
   },
   {
     id: "slide-3",
     title: "Dynamic Smart Orders Monitor Dashboard",
-    description: "Track the immediate boost in listings impressions. Watch traffic and order pipelines multiply from Day 1 inside your official vendor panel.",
+    description: "Track the immediate boost in listings impressions. Watch traffic and orders grow steadily inside your official seller panel.",
     imageUrl: "https://i.ibb.co/dqq928L/6091285828404448991.jpg"
   }
 ];
@@ -73,85 +73,85 @@ export const COMPARISONS = [
   },
   {
     criteria: "Average Time Required",
-    withoutTool: "3 to 4 Hours of boring manual typing",
-    withTool: "Less than 5 Miniutes",
+    withoutTool: "3 to 4 hours of tedious manual typing",
+    withTool: "Less than 5 minutes",
     highlight: true
   },
   {
     criteria: "Shipping Rates Slab",
     withoutTool: "₹79 - ₹120 standard rates",
-    withTool: "₹35 - ₹45 (Low Shipping Trick Applied)",
+    withTool: "₹35 - ₹45 (Reduce Shipping Charges Applied)",
     highlight: true
   },
   {
     criteria: "Device Compatibility",
-    withoutTool: "Computer necessary for bulk templates",
-    withTool: "Works fully on Mobile & Laptop",
+    withoutTool: "Desktop computer required for templates",
+    withTool: "Works on both Mobile & Laptop",
     highlight: false
   },
   {
     criteria: "Tech Knowledge",
-    withoutTool: "Needs advanced listing Excel skills",
-    withTool: "Copy-paste easy (100% Beginner Friendly)",
+    withoutTool: "Requires advanced Excel & listing skills",
+    withTool: "Simple copy-paste (100% Beginner Friendly)",
     highlight: false
   },
   {
-    criteria: "Updates",
-    withoutTool: "Pay extra every time regulations change",
-    withTool: "Lifetime Free Automated Updates",
+    criteria: "Software Updates",
+    withoutTool: "Extra fees whenever regulations change",
+    withTool: "Lifetime free automated updates",
     highlight: false
   }
 ];
 
 export const PROBLEMS_SOLUTIONS = {
-  title: "Why Meesho Sellers Fail vs How You Will Win",
+  title: "Overcome Common Seller Pitfalls and Maximize Your Growth",
   problems: [
-    { title: "Manual Listing Burnout", desc: "Typing titles, tags, and uploading photos for 20 colors and sizes takes hours." },
-    { title: "High Shipping Cost Killer", desc: "High logistics weights raise delivery cost. Buyers cancel orders instantly due to ₹99 shipping extra." },
-    { title: "Zero Catalog Views", desc: "Manually created listings lack the volume needed for the Meesho algorithm to pick up impressions." }
+    { title: "Manual Listing Burnout", desc: "Manually typing titles, tags, and uploading photos for multiple colors and sizes takes hours of effort." },
+    { title: "High Shipping Charges", desc: "Inaccurate package weights increase shipping rates, leading to abandoned carts and low conversions." },
+    { title: "Low Catalog Visibility", desc: "Creating a few manual listings makes it difficult to get noticed by the Meesho recommendation algorithm." }
   ],
   solutions: [
-    { title: "No-Excel Auto Listing Tool", desc: "Fully automated robotic tool parses sheets or directories and uploads catalogs in seconds under human supervise." },
-    { title: "Low-Weight Slab Algorithm", desc: "Unlock the hidden weight config parameters that automatically trigger Meesho's absolute lowest local shipping slabs (₹35-₹45)." },
-    { title: "Algorithmic Inundation", desc: "Multiply listings immediately. High listings quantity triggers Meesho free booster points and pushes catalogs into search trends." }
+    { title: "1-Click Auto Listing Tool", desc: "Our bulk tool automatically processes catalog directories and uploads listings in seconds, saving you days of work." },
+    { title: "Optimized Weight Slabs", desc: "Accurately calibrate package weights and dimensional parameters to trigger Meesho's lowest local shipping slabs (₹35-₹45)." },
+    { title: "Algorithmic Visibility Boost", desc: "Consistently scale your catalog volume to trigger algorithmic recommendation points and boost organic search ranking." }
   ]
 };
 
 export const FEATURES: FeatureItem[] = [
   {
     id: "f1",
-    title: "Robotic Auto Listing",
-    description: "Upload hundreds of items effortlessly. Say goodbye to manual back-breaking typing and single uploads.",
+    title: "Automated Bulk Listing",
+    description: "Upload hundreds of products in minutes. Eliminate manual data entry and list entire collections with ease.",
     icon: "Cpu"
   },
   {
     id: "f2",
-    title: "Smart Bulk Spreadsheet",
-    description: "Fully pre-configured template. Paste image links and catalog info, and let the robotic script loop through.",
+    title: "Pre-Configured Smart Spreadsheet",
+    description: "A highly intuitive, fully set up template. Simply enter your product details and let the automation handle the rest.",
     icon: "Table"
   },
   {
     id: "f3",
-    title: "Low Shipping Code-Trick",
-    description: "Exclusive weight dimension adjustment method that legalizes standard parcels to get classified under the lowest possible delivery charge slabs.",
+    title: "Reduce Shipping Charges",
+    description: "Apply correct weight and dimension adjustments to legally classify your parcels under the lowest available delivery rate slabs.",
     icon: "TrendingDown"
   },
   {
     id: "f4",
-    title: "100% Mobile Friendly",
-    description: "Do not own a computer? No problem. Use our specialized mobile bypass sheet to upload straight from your Android device.",
+    title: "100% Mobile-Friendly Setup",
+    description: "No computer? No problem. Use our specialized mobile bypass template to upload directly from your Android or iOS device.",
     icon: "Smartphone"
   },
   {
     id: "f5",
-    title: "Beginner Friendly Video",
-    description: "Includes simple 7-minute step-by-step video instructions in Hindi. Zero coding or technical background required.",
+    title: "Step-by-Step Video Guide",
+    description: "Includes a simple 7-minute video tutorial in Hindi. Absolutely no coding or technical background required.",
     icon: "Sparkles"
   },
   {
     id: "f6",
-    title: "Time & Money Optimizer",
-    description: "Saves up to 25+ hours of manual labor per week while significantly boosting daily orders by delivering maximum catalog exposure.",
+    title: "Maximize Time & Exposure",
+    description: "Save up to 25+ hours of work every week while improving your store's search presence and organic order volume.",
     icon: "Clock"
   }
 ];
@@ -164,7 +164,7 @@ export const REVIEWS: Testimonial[] = [
     avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80",
     rating: 5,
     date: "2 Days ago",
-    review: "Surat cloth seller hu aur pehle manual catalog dalte sir dard ho jata tha. This tool is life saving! Ek click me automatic listings create ho jati hai. Best part is the low shipping trick - delivery rates ₹41 per piece ho gye!",
+    review: "Surat cloth seller hu aur pehle manual catalog dalte sir dard ho jata tha. This tool is life saving! Ek click me automatic listings create ho jati hai. Best part is the low shipping method - delivery rates ₹41 per piece ho gye!",
     verified: true
   },
   {
@@ -219,37 +219,37 @@ export const VIDEO_REVIEWS: VideoReview[] = [
 export const FAQS: FAQItem[] = [
   {
     id: "faq-1",
-    question: "Is this tool beginner friendly and language simple?",
-    answer: "Yes, 100%! The tool is designed in simple English and the visual video explanations are in straightforward Hindi. Absolutely no computer coding background, no complex Excel scripting or API knowledge is required. It's copy-paste easy."
+    question: "Is this tool suitable for beginners?",
+    answer: "Absolutely! The tool is designed to be highly intuitive, and the video guides explain everything step-by-step in Hindi. You don't need any coding experience, complex Excel skills, or technical knowledge. It is as simple as copying and pasting."
   },
   {
     id: "faq-2",
-    question: "Does it work fully on Android and iOS Mobile phones?",
-    answer: "Yes! While high-volume listing managers often use computers, we have designed a specialized bulk upload bypass sheet that is 100% optimized for Google Sheets on mobile phones. You can launch auto listings directly using your smartphone."
+    question: "Does it work on Android and iOS mobile phones?",
+    answer: "Yes! While many high-volume sellers prefer using a computer, we have created a specialized mobile-optimized template for Google Sheets. This allows you to set up and manage your bulk auto listings directly from your smartphone."
   },
   {
     id: "faq-3",
-    question: "How will I gain access after purchasing? Is there a redirect?",
-    answer: "Tension free rahiye! Jaise hi aapka payment complete hoga, system aapko automatically purely 2 seconds ke andar secure download page par redirect kar dega. Vahan aap 1-click me tools ko download kar sakte hain aur Hindi video guide par click karke direct play kar sakte hain instantly! Iske alawa, aapke billing details me diye gaye Email ID aur billing phone number par automatic backup support links dynamic WhatsApp aur Email ke jariye turant bhej diye jayenge."
+    question: "How do I access the tool after payment?",
+    answer: "Immediately after your payment is completed, you will be automatically redirected to a secure download page in under 2 seconds. From there, you can download the tool with a single click and watch the Hindi video guide instantly. Additionally, we will instantly send backup download links and support info to your email address and WhatsApp number."
   },
   {
     id: "faq-4",
-    question: "Are updates included, or is there a monthly fee?",
-    answer: "There are absolutely ZERO recurring fees! No active monthly subscription required. Your single purchase of ₹199 unlocks lifetime membership access including all future algorithms versions or updates free of charge."
+    question: "Are updates included, or is there a monthly subscription fee?",
+    answer: "There are absolutely no monthly subscription fees or recurring costs. Your one-time purchase of ₹199 unlocks lifetime access, which includes all future optimization updates and versions free of charge."
   },
   {
     id: "faq-5",
-    question: "What is this 'Low Shipping Trick' exactly? Is it legal and safe?",
-    answer: "Absolutely 100% legal and risk-free. It does not violate any Meesho Vendor Terms of Service. It adjusts specific catalog packing weights and dimensional parameters within official rules to ensure Meesho automatically places your listings into the lowest shipping weight slabs (saving you ₹40-₹70 per parcel)."
+    question: "How does the Shipping Charge Reduction method work?",
+    answer: "This method is 100% compliant and safe. It does not violate any Meesho Vendor Terms of Service. It adjusts specific catalog packing weights and dimensional parameters within official rules to ensure Meesho automatically places your listings into the lowest shipping weight slabs (saving you ₹40-₹70 per parcel)."
   },
   {
     id: "faq-6",
-    question: "How fast can I start seeing increased catalog views and orders?",
-    answer: "Most of our active Meesho sellers report preparing and listing their first bulk catalogs within 25 minutes of download. Since Meesho's algorithm rewards daily volume, sellers usually see catalog impressions and initial orders trending up within 24-48 hours after auto uploads go live."
+    question: "How long does it take to see results?",
+    answer: "Most sellers set up and launch their first bulk catalog within 25 minutes of downloading the tool. Because Meesho's algorithm favors consistent product volume, sellers typically see a noticeable rise in listing impressions and initial orders within 24 to 48 hours."
   },
   {
     id: "faq-7",
-    question: "What payment methods are supported? Can I pay using GPay or PhonePe?",
-    answer: "Yes, absolutely! Aap sabhi prakaar ke Online payments jaise PhonePe, Google Pay (GPay), Paytm, FamPay, any other UPI IDs, aur Net Banking ya Debit/Credit Cards se safely aur securely online payment instantly kar sakte hain."
+    question: "Which payment methods are supported?",
+    answer: "We support all major payment methods, including Google Pay, PhonePe, Paytm, other UPI apps, Net Banking, and Debit/Credit cards. All transactions are handled securely and instantly."
   }
 ];

@@ -33,7 +33,7 @@ export default function ProofSlider() {
             Visual Proof & Tool Interface
           </span>
           <h2 className="text-2xl md:text-3xl font-extrabold text-white font-display">
-            Screegrab & Proof <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-sky-400">Slider</span>
+            Screenshots & Seller <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-sky-400">Proofs</span>
           </h2>
           <p className="text-gray-400 text-xs md:text-sm mt-1 max-w-lg mx-auto">
             Swipe or use arrow keys to inspect the simple auto-listing workflow.
