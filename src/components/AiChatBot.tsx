@@ -255,10 +255,11 @@ function renderFormattedContent(
 
 interface AiChatBotProps {
   isStickyVisible?: boolean;
+  isOpen: boolean;
+  setIsOpen: (isOpen: boolean) => void;
 }
 
-export default function AiChatBot({ isStickyVisible = false }: AiChatBotProps) {
-  const [isOpen, setIsOpen] = useState(false);
+export default function AiChatBot({ isStickyVisible = false, isOpen, setIsOpen }: AiChatBotProps) {
   const [messages, setMessages] = useState<Message[]>([
     { 
       role: 'model', 
@@ -270,48 +271,18 @@ export default function AiChatBot({ isStickyVisible = false }: AiChatBotProps) {
   const [isOptionsExpanded, setIsOptionsExpanded] = useState(true);
   const [playingVideoUrl, setPlayingVideoUrl] = useState<string | null>(null);
   
-  const [showTooltip, setShowTooltip] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  // Periodic auto-showing tooltip logic with a precise 6s cycle (3s visible, 3s hidden)
   useEffect(() => {
-    if (isOpen) {
-      setShowTooltip(false);
-      return;
-    }
-
-    let timeoutId: NodeJS.Timeout;
-    let isCurrentlyVisible = false;
-
-    const runTimerCycle = () => {
-      if (isOpen) return;
-
-      if (isCurrentlyVisible) {
-        // Currently visible -> hide it and wait 3 seconds before showing again
-        setShowTooltip(false);
-        isCurrentlyVisible = false;
-        timeoutId = setTimeout(runTimerCycle, 3000);
-      } else {
-        // Currently hidden -> show it and keep visible for 3 seconds
-        setShowTooltip(true);
-        isCurrentlyVisible = true;
-        timeoutId = setTimeout(runTimerCycle, 3000);
-      }
+    if (typeof window === 'undefined') return;
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
     };
-
-    // First appearance after a natural delay of 2.5 seconds
-    const initialTimer = setTimeout(() => {
-      setShowTooltip(true);
-      isCurrentlyVisible = true;
-      // Keep it visible for 3 seconds, then continue the cycle
-      timeoutId = setTimeout(runTimerCycle, 3000);
-    }, 2500);
-
-    return () => {
-      clearTimeout(initialTimer);
-      clearTimeout(timeoutId);
-    };
-  }, [isOpen]);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
@@ -366,92 +337,105 @@ export default function AiChatBot({ isStickyVisible = false }: AiChatBotProps) {
     ]);
   };
 
+  const dialogVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: isMobile ? "100%" : 30,
+      scale: isMobile ? 1 : 0.95
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      scale: 1,
+      transition: { type: "spring", damping: 25, stiffness: 350 }
+    },
+    exit: { 
+      opacity: 0, 
+      y: isMobile ? "100%" : 20,
+      scale: isMobile ? 1 : 0.95,
+      transition: { duration: 0.2 }
+    }
+  };
+
   return (
-    <div id="ai-chat-root" className={`fixed right-4 sm:right-6 transition-all duration-300 z-50 font-sans text-gray-150 ${
-      isStickyVisible 
-        ? 'bottom-[92px] sm:bottom-[100px]' 
-        : 'bottom-4 sm:bottom-6'
-    }`}>
-      
-      {/* 1. FLOATING CHAT BALLOON ELEMENT WITH SMART PREMIUM AVATAR & TOOLTIP */}
-      <div className="relative w-12 h-12 sm:w-13 sm:h-13 ml-auto">
-        {/* Floating Tooltip "Need Help?" */}
-        <AnimatePresence>
-          {!isOpen && (showTooltip || isHovered) && (
-            <div className="absolute bottom-full mb-3.5 right-0 sm:right-auto sm:left-1/2 sm:-translate-x-1/2 z-30 select-none pointer-events-none">
-              <motion.div
-                initial={{ opacity: 0, y: 12, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 12, scale: 0.9 }}
-                transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-                className="bg-white text-gray-900 text-[11px] sm:text-xs font-extrabold py-2 px-3.5 rounded-2xl shadow-[0_10px_25px_rgba(0,0,0,0.25)] flex items-center gap-1.5 whitespace-nowrap border border-gray-100 relative"
-              >
-                <span className="relative flex h-2 w-2 shrink-0">
-                  <span className="animate-pulse absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </span>
-                <span className="text-gray-900 font-sans tracking-wide">Need Help?</span>
-                
-                {/* Bottom speech caret triangle indicator pointing downwards */}
-                <div className="absolute bottom-[-5px] right-[19px] sm:right-auto sm:left-1/2 sm:-translate-x-1/2 w-2.5 h-2.5 bg-white rotate-45 border-r border-b border-gray-100" />
-              </motion.div>
-            </div>
-          )}
-        </AnimatePresence>
-
-        <motion.button
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.95 }}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          onClick={() => setIsOpen(!isOpen)}
-          className={`relative w-full h-full rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 z-10 ${
-            isOpen
-              ? "bg-[#3B82F6] text-white shadow-[0_8px_30px_rgba(59,130,246,0.5)] border border-blue-400/40"
-              : "border border-[#334155]/60 shadow-[0_8px_30px_rgba(30,41,59,0.25)]"
-          }`}
-          title="Open AI Support Assistant Chat"
-          aria-label="Open AI Support Assistant Chat"
-        >
-          {isOpen ? (
-            <X className="w-5 h-5" />
-          ) : (
-            <>
-              {/* Perfect circle cropped avatar */}
-              <div className="absolute inset-0 rounded-full overflow-hidden">
-                <img
-                  src="/support_avatar_1782473971645.jpg"
-                  alt="Support Assistant"
-                  referrerPolicy="no-referrer"
-                  className="w-full h-full object-cover select-none scale-[1.02]"
-                />
-              </div>
-
-              {/* Glowing surrounding wave reflection */}
-              <span className="absolute inset-0 rounded-full border border-blue-500/20 animate-ping opacity-25 pointer-events-none" style={{ animationDuration: '2.5s' }} />
-            </>
-          )}
-        </motion.button>
-
-        {/* Small green online status dot with white outline and smooth pulse/fade animation (1s) */}
-        {!isOpen && (
-          <span className="absolute bottom-0.5 right-0.5 z-20 flex h-3.5 w-3.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" style={{ animationDuration: '1s' }}></span>
-            <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-white shadow-[0_0_8px_rgba(16,185,129,0.5)] animate-pulse" style={{ animationDuration: '1s' }}></span>
-          </span>
-        )}
-      </div>
-
-      {/* 2. CHATBOX DIALOG */}
+    <>
+      {/* Backdrop Overlay & Blurred Backdrop */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 15 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 15 }}
-            transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }} // Snappy ultra-smooth easeOut ease-curve
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={() => setIsOpen(false)}
+            className="fixed inset-0 z-45 bg-[#0A0F1E]/60 backdrop-blur-[10px] pointer-events-auto"
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Floating Trigger Button Container (Trigger retains existing sticky shifting logic) */}
+      <div id="ai-chat-root" className={`fixed right-4 sm:right-6 transition-all duration-300 z-50 font-sans text-gray-150 ${
+        isStickyVisible 
+          ? 'bottom-[92px] sm:bottom-[100px]' 
+          : 'bottom-4 sm:bottom-6'
+      }`}>
+        
+        {/* Floating Chat WhatsApp Icon with Online Status Indicator */}
+        <div className="relative w-12 h-12 sm:w-13 sm:h-13 ml-auto">
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            onClick={() => setIsOpen(!isOpen)}
+            className={`relative w-full h-full rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 z-10 ${
+              isOpen
+                ? "bg-slate-800 text-white shadow-[0_8px_30px_rgba(15,23,42,0.5)] border border-[#334155]"
+                : "bg-[#25D366] border border-green-400/20 shadow-[0_8px_30px_rgba(37,211,102,0.4)]"
+            }`}
+            title="Open AI Support Assistant Chat"
+            aria-label="Open AI Support Assistant Chat"
+          >
+            {isOpen ? (
+              <X className="w-5 h-5 text-white" />
+            ) : (
+              <>
+                {/* Perfect circle cropped WhatsApp Icon */}
+                <div className="absolute inset-0 rounded-full overflow-hidden bg-[#25D366] flex items-center justify-center p-2.5">
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+                    alt="WhatsApp Chat Support"
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-contain select-none"
+                  />
+                </div>
+
+                {/* Glowing surrounding wave reflection */}
+                <span className="absolute inset-0 rounded-full border border-green-400/30 animate-ping opacity-25 pointer-events-none" style={{ animationDuration: '2.5s' }} />
+              </>
+            )}
+          </motion.button>
+
+          {/* Small green online status dot */}
+          {!isOpen && (
+            <span className="absolute bottom-0.5 right-0.5 z-20 flex h-3.5 w-3.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" style={{ animationDuration: '1s' }}></span>
+              <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500 border-2 border-white shadow-[0_0_8px_rgba(16,185,129,0.5)] animate-pulse" style={{ animationDuration: '1s' }}></span>
+            </span>
+          )}
+        </div>
+      </div>
+
+      {/* CHATBOX DIALOG */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            variants={dialogVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
             style={{ willChange: "transform, opacity" }} // Hardware acceleration to prevent any lag
-            className="absolute bottom-18 sm:bottom-22 right-0 w-[94vw] sm:w-[430px] h-[610px] max-h-[82vh] rounded-3xl overflow-hidden shadow-[0_15px_40px_rgba(59,130,246,0.25)] border border-[#334155] bg-[#1E293B] flex flex-col z-50"
+            className="fixed bottom-0 left-0 right-0 w-full h-[88vh] rounded-t-[24px] rounded-b-none md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:bottom-auto md:right-auto md:w-[430px] md:h-[610px] md:max-h-[82vh] md:rounded-3xl overflow-hidden shadow-[0_15px_40px_rgba(59,130,246,0.25)] border border-[#334155] bg-[#1E293B] flex flex-col z-50 pointer-events-auto"
           >
             {/* Header Area */}
             <div className="p-4 bg-[#1E293B] border-b border-[#334155] flex items-center justify-between">
@@ -471,16 +455,28 @@ export default function AiChatBot({ isStickyVisible = false }: AiChatBotProps) {
                 </div>
               </div>
 
-              {/* Refresh Action */}
-              <button
-                type="button"
-                onClick={resetChat}
-                className="p-1.5 rounded-lg bg-[#0F172A] border border-[#334155] text-gray-400 hover:text-white transition-all cursor-pointer active:scale-95"
-                title="Reset conversation logs"
-                aria-label="Reset conversation logs"
-              >
-                <RotateCcw className="w-3.5 h-3.5" />
-              </button>
+              <div className="flex items-center gap-1.5">
+                {/* Refresh Action */}
+                <button
+                  type="button"
+                  onClick={resetChat}
+                  className="p-1.5 rounded-lg bg-[#0F172A] border border-[#334155] text-gray-400 hover:text-white transition-all cursor-pointer active:scale-95"
+                  title="Reset conversation logs"
+                  aria-label="Reset conversation logs"
+                >
+                  <RotateCcw className="w-3.5 h-3.5" />
+                </button>
+                {/* Direct Close Button in Header */}
+                <button
+                  type="button"
+                  onClick={() => setIsOpen(false)}
+                  className="p-1.5 rounded-lg bg-[#0F172A] border border-[#334155] text-gray-400 hover:text-white hover:bg-red-500/10 hover:border-red-500/30 transition-all cursor-pointer active:scale-95"
+                  title="Close chat"
+                  aria-label="Close chat"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              </div>
             </div>
 
             {/* Chat Messages Log list */}
@@ -603,7 +599,7 @@ export default function AiChatBot({ isStickyVisible = false }: AiChatBotProps) {
                     >
                       <div className="p-3 max-h-[165px] overflow-y-auto space-y-2.5 scrollbar-thin scrollbar-thumb-[#1E293B] overscroll-contain">
                         <div className="grid grid-cols-1 gap-2">
-                          {FAQ_DATA.filter(faq => faq.category === activeCategory).map((faq, idx) => (
+                           {FAQ_DATA.filter(faq => faq.category === activeCategory).map((faq, idx) => (
                             <motion.button
                               whileHover={{ scale: 1.015, x: 2 }}
                               whileTap={{ scale: 0.98 }}
@@ -656,7 +652,6 @@ export default function AiChatBot({ isStickyVisible = false }: AiChatBotProps) {
           </motion.div>
         )}
       </AnimatePresence>
-
-    </div>
+    </>
   );
 }

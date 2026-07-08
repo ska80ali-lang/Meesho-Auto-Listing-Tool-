@@ -58,6 +58,7 @@ export default function App() {
 
   // Track Hero main button visibility to conditionally show sticky bar on mobile
   const [isHeroButtonVisible, setIsHeroButtonVisible] = useState(true);
+  const [isChatOpen, setIsChatOpen] = useState(false);
   const heroButtonRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -746,7 +747,10 @@ export default function App() {
       </footer>
 
       {/* 13. STICKY BUY BAR (Bottom centered glass bar desktop, pill mobile) */}
-      <div className={`fixed bottom-4 left-0 right-0 mx-auto z-45 w-[92%] max-w-sm sm:max-w-lg md:max-w-xl px-1 transition-all duration-300 ${!isHeroButtonVisible ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-10 pointer-events-none"}`}>
+      <div 
+        className={`fixed bottom-4 left-0 right-0 mx-auto z-45 w-[92%] max-w-sm sm:max-w-lg md:max-w-xl px-1 transition-all duration-300 ${!isHeroButtonVisible ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-10 pointer-events-none"} ${isChatOpen ? "hidden" : ""}`}
+        style={isChatOpen ? { display: 'none' } : undefined}
+      >
         <div className="w-full glass-panel-heavy p-2.5 sm:p-3 md:p-4 rounded-xl sm:rounded-2xl md:rounded-3xl shadow-[0_15px_40px_rgba(0,0,0,0.8)] border border-blue-500/20 flex items-center justify-between gap-3 sm:gap-4 pointer-events-auto">
           
           {/* Left info */}
@@ -782,10 +786,10 @@ export default function App() {
       </div>
 
       {/* 14. FLOATING AI ASSISTANT CHATBOT */}
-      <AiChatBot isStickyVisible={!isHeroButtonVisible} />
+      <AiChatBot isStickyVisible={!isHeroButtonVisible} isOpen={isChatOpen} setIsOpen={setIsChatOpen} />
 
       {/* Live Sales Social Proof Toast Notification Component */}
-      <LiveSalesNotification isStickyVisible={!isHeroButtonVisible} />
+      <LiveSalesNotification isStickyVisible={!isHeroButtonVisible} isChatOpen={isChatOpen} />
 
       {/* 15. COMPLIANCE MODALS (PRIVACY, TERMS, SUPPORT HELP) */}
       <AnimatePresence>

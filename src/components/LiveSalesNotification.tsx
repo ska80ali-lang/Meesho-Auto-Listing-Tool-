@@ -23,9 +23,10 @@ const RealisticSalesList: SaleNotification[] = [
 
 interface LiveSalesNotificationProps {
   isStickyVisible: boolean;
+  isChatOpen?: boolean;
 }
 
-export default function LiveSalesNotification({ isStickyVisible }: LiveSalesNotificationProps) {
+export default function LiveSalesNotification({ isStickyVisible, isChatOpen = false }: LiveSalesNotificationProps) {
   const [current, setCurrent] = useState<SaleNotification | null>(null);
   const [visible, setVisible] = useState(false);
 
@@ -71,7 +72,8 @@ export default function LiveSalesNotification({ isStickyVisible }: LiveSalesNoti
         isStickyVisible 
           ? "bottom-[84px] md:bottom-[140px]" 
           : "bottom-4 md:bottom-6"
-      }`}
+      } ${isChatOpen ? "hidden" : ""}`}
+      style={isChatOpen ? { display: 'none' } : undefined}
     >
       <AnimatePresence>
         {visible && current && (
