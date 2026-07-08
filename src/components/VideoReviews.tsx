@@ -5,16 +5,16 @@ import { Play, VolumeX, Volume2, Pause, RotateCcw, RotateCw } from 'lucide-react
 
 export default function VideoReviews() {
   return (
-    <section id="video-reviews-section" className="py-16 bg-[#04000c] relative">
+    <section id="video-reviews-section" className="py-16 bg-[#0F172A] relative">
       <div className="max-w-5xl mx-auto px-4 md:px-8">
         
         {/* Header */}
         <div className="text-center mb-10">
-          <span className="text-xs font-mono font-bold text-pink-400 uppercase tracking-widest block mb-1">
+          <span className="text-xs font-mono font-bold text-[#3B82F6] uppercase tracking-widest block mb-1">
             Real Sellers, Real Stories
           </span>
           <h2 className="text-2xl md:text-3xl font-extrabold text-white font-display">
-            Video <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-450 glow-text-purple">Testimonials</span>
+            Video <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-sky-400">Testimonials</span>
           </h2>
           <p className="text-gray-400 text-xs md:text-sm mt-1 max-w-sm mx-auto">
             Watch short video reviews from Indian sellers who upgraded their Meesho listings speed.
@@ -127,13 +127,13 @@ function VideoCard({ review }: VideoCardProps) {
       initial={{ opacity: 0, scale: 0.98 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
-      className="glass-panel p-4 rounded-2xl border-purple-500/10 hover:border-pink-500/10 shadow-lg relative overflow-hidden group flex flex-col justify-between"
+      className="bg-[#1E293B] border border-[#334155] p-4 rounded-2xl hover:border-blue-500/10 shadow-lg relative overflow-hidden group flex flex-col justify-between"
     >
       
       {/* Video Container Aspect 16:9 (Landscape) containing 9:16 Shorts */}
       <div 
         onClick={togglePlay}
-        className="relative aspect-video rounded-xl overflow-hidden bg-black cursor-pointer shadow-inner border border-purple-950/20 group/player w-full"
+        className="relative aspect-video rounded-xl overflow-hidden bg-black cursor-pointer shadow-inner border border-[#334155]/40 group/player w-full"
       >
         <video
           ref={videoRef}
@@ -156,11 +156,11 @@ function VideoCard({ review }: VideoCardProps) {
             <motion.div 
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="w-14 h-14 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center border-2 border-pink-400 shadow-[0_0_30px_rgba(236,72,153,0.6)] hover:shadow-[0_0_45px_rgba(236,72,153,0.8)] transition-shadow duration-300 pointer-events-auto"
+              className="w-14 h-14 rounded-full bg-gradient-to-r from-[#3B82F6] to-[#2563EB] flex items-center justify-center border-2 border-blue-400 shadow-[0_0_30px_rgba(59,130,246,0.6)] hover:shadow-[0_0_45px_rgba(59,130,246,0.8)] transition-shadow duration-300 pointer-events-auto"
             >
               <Play className="w-6 h-6 text-white fill-white ml-1" />
             </motion.div>
-            <span className="text-white text-[9px] sm:text-xs font-black uppercase tracking-widest font-mono bg-purple-950/95 border border-purple-500/40 px-3 sm:px-4.5 py-1.5 rounded-full shadow-[0_4px_25px_rgba(0,0,0,0.8)] glow-purple">
+            <span className="text-white text-[9px] sm:text-xs font-black uppercase tracking-widest font-mono bg-[#0F172A]/95 border border-[#334155] px-3 sm:px-4.5 py-1.5 rounded-full shadow-[0_4px_25px_rgba(0,0,0,0.8)]">
               Click to play video
             </span>
           </div>
@@ -175,11 +175,11 @@ function VideoCard({ review }: VideoCardProps) {
             className="relative w-full h-1 bg-gray-800/80 rounded-full cursor-pointer group/progress transition-all"
           >
             <div 
-              className="absolute top-0 left-0 h-full bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 rounded-full"
+              className="absolute top-0 left-0 h-full bg-gradient-to-r from-[#3B82F6] via-sky-500 to-[#2563EB] rounded-full"
               style={{ width: `${duration ? (currentTime / duration) * 100 : 0}%` }}
             />
             <div 
-              className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-pink-400 border border-white shadow-xl transition-all scale-0 group-hover/progress:scale-100"
+              className="absolute top-1/2 -translate-y-1/2 w-2.5 h-2.5 rounded-full bg-blue-400 border border-white shadow-xl transition-all scale-0 group-hover/progress:scale-100"
               style={{ left: `${duration ? (currentTime / duration) * 100 : 0}%`, transform: 'translate(-50%, -50%)' }}
             />
           </div>
@@ -194,26 +194,26 @@ function VideoCard({ review }: VideoCardProps) {
                 className="p-1 rounded-lg hover:bg-white/10 text-white cursor-pointer hover:scale-105 active:scale-95 duration-150 transition-all shrink-0"
                 title={isPlaying ? "Pause Video" : "Play Video"}
               >
-                {isPlaying ? <Pause className="w-3.5 h-3.5 text-pink-400" /> : <Play className="w-3.5 h-3.5 text-emerald-400 fill-emerald-400" />}
+                {isPlaying ? <Pause className="w-3.5 h-3.5 text-blue-400" /> : <Play className="w-3.5 h-3.5 text-emerald-400 fill-emerald-400" />}
               </button>
 
               {/* Skip -10s */}
               <button
                 onClick={(e) => handleSkip(e, -10)}
-                className="flex items-center gap-0.5 px-2 py-0.5 rounded-md bg-purple-950/60 hover:bg-purple-900/60 border border-purple-500/20 text-[9px] font-mono font-bold text-gray-200 cursor-pointer hover:scale-105 active:scale-95 transition-all shrink-0"
+                className="flex items-center gap-0.5 px-2 py-0.5 rounded-md bg-[#0F172A]/60 hover:bg-[#1E293B] border border-[#334155]/20 text-[9px] font-mono font-bold text-gray-200 cursor-pointer hover:scale-105 active:scale-95 transition-all shrink-0"
                 title="Rewind 10s"
               >
-                <RotateCcw className="w-3 h-3 text-pink-400 shrink-0" />
+                <RotateCcw className="w-3 h-3 text-blue-400 shrink-0" />
                 <span>-10s</span>
               </button>
 
               {/* Skip +10s */}
               <button
                 onClick={(e) => handleSkip(e, 10)}
-                className="flex items-center gap-0.5 px-2 py-0.5 rounded-md bg-purple-950/60 hover:bg-purple-900/60 border border-purple-500/20 text-[9px] font-mono font-bold text-gray-200 cursor-pointer hover:scale-105 active:scale-95 transition-all shrink-0"
+                className="flex items-center gap-0.5 px-2 py-0.5 rounded-md bg-[#0F172A]/60 hover:bg-[#1E293B] border border-[#334155]/20 text-[9px] font-mono font-bold text-gray-200 cursor-pointer hover:scale-105 active:scale-95 transition-all shrink-0"
                 title="Forward 10s"
               >
-                <RotateCw className="w-3 h-3 text-purple-400 shrink-0" />
+                <RotateCw className="w-3 h-3 text-sky-400 shrink-0" />
                 <span>+10s</span>
               </button>
 
@@ -239,14 +239,14 @@ function VideoCard({ review }: VideoCardProps) {
         </div>
 
         {/* Subtle glow border around top */}
-        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-pink-400/30 to-transparent opacity-80" />
+        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-450/30 to-transparent opacity-80" />
       </div>
 
       {/* Info label on bottom */}
       <div className="mt-3.5 flex items-center justify-between">
         <div>
           <h4 className="text-xs font-bold text-white font-display">{review.name}</h4>
-          <p className="text-[10px] text-pink-400 font-mono mt-0.5">{review.role}</p>
+          <p className="text-[10px] text-[#3B82F6] font-mono mt-0.5">{review.role}</p>
         </div>
         <div className="flex items-center gap-1">
           <span className="text-[10px] text-emerald-400 font-bold bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20 font-mono">

@@ -5,10 +5,10 @@ import * as Icons from 'lucide-react';
 
 export default function StatsCounter() {
   return (
-    <section id="live-stats-section" className="py-16 relative overflow-hidden bg-radial from-[#0c051a] via-[#03000a] to-[#03000a]">
+    <section id="live-stats-section" className="py-16 relative overflow-hidden bg-[#0F172A]">
       {/* Visual neon circles */}
-      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-64 h-64 bg-purple-600/5 blur-[120px] rounded-full pointer-events-none" />
-      <div className="absolute top-1/3 right-1/4 -translate-y-1/2 w-80 h-80 bg-pink-500/5 blur-[140px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-64 h-64 bg-blue-600/5 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-1/3 right-1/4 -translate-y-1/2 w-80 h-80 bg-blue-500/5 blur-[140px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
         
@@ -18,9 +18,9 @@ export default function StatsCounter() {
             initial={{ opacity: 0, y: -10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/30 bg-purple-950/20 text-xs font-semibold text-purple-300 mb-3 uppercase tracking-wider font-mono shadow-[0_0_15px_rgba(147,51,234,0.1)]"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-950/20 text-xs font-semibold text-[#3B82F6] mb-3 uppercase tracking-wider font-mono shadow-[0_0_15px_rgba(59,130,246,0.1)]"
           >
-            <Icons.Activity className="w-3.5 h-3.5 animate-pulse text-purple-400" />
+            <Icons.Activity className="w-3.5 h-3.5 animate-pulse text-[#3B82F6]" />
             Live Platform Performance
           </motion.div>
           <motion.h2
@@ -30,7 +30,7 @@ export default function StatsCounter() {
             transition={{ duration: 0.5 }}
             className="text-2xl md:text-4xl font-extrabold text-white tracking-tight font-display"
           >
-            Numbers Jo <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 animate-gradient glow-text-purple">Jhooth Nahi Bolte</span>
+            Numbers Jo <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-sky-400">Jhooth Nahi Bolte</span>
           </motion.h2>
           <motion.p
             initial={{ opacity: 0 }}
@@ -61,6 +61,7 @@ export default function StatsCounter() {
           })}
         </div>
 
+        {/* Counters Grid Ends */}
       </div>
     </section>
   );
@@ -110,15 +111,15 @@ function CounterCard({ value, suffix, label, icon: Icon, delayIndex }: CounterCa
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: delayIndex * 0.1 }}
       whileHover={{ y: -5, scale: 1.02 }}
-      className="glass-panel p-5 md:p-6 rounded-2xl relative overflow-hidden group hover:border-pink-500/30 transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
+      className="bg-[#1E293B] border border-[#334155] p-5 md:p-6 rounded-2xl relative overflow-hidden group hover:border-blue-500/30 transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
     >
       {/* Holographic light reflection on hover */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-pink-500 opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
-      <div className="absolute -right-8 -bottom-8 w-24 h-24 bg-purple-500/5 rounded-full blur-xl group-hover:bg-purple-500/10 transition-colors" />
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-[#3B82F6] to-[#2563EB] opacity-60 group-hover:opacity-100 transition-opacity duration-300" />
+      <div className="absolute -right-8 -bottom-8 w-24 h-24 bg-blue-500/5 rounded-full blur-xl group-hover:bg-blue-500/10 transition-colors" />
 
       {/* Top row with icon & status pulse */}
       <div className="flex justify-between items-center mb-4">
-        <div className="p-3 bg-purple-950/40 rounded-xl text-purple-400 group-hover:text-pink-400 border border-purple-900/30 group-hover:border-pink-500/20 transition-all duration-300">
+        <div className="p-3 bg-[#0F172A] rounded-xl text-[#3B82F6] group-hover:text-blue-400 border border-[#334155] group-hover:border-blue-500/20 transition-all duration-300">
           <Icon className="w-5 h-5" />
         </div>
         <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-mono border border-emerald-500/20">
@@ -129,7 +130,7 @@ function CounterCard({ value, suffix, label, icon: Icon, delayIndex }: CounterCa
 
       {/* Numbers */}
       <div className="mb-2">
-        <span className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-100 to-pink-100 font-display">
+        <span className="text-3xl md:text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-blue-200 font-display">
           {displayVal}{suffix}
         </span>
       </div>

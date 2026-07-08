@@ -4,7 +4,7 @@ import * as Icons from 'lucide-react';
 
 export default function TrustBadges() {
   return (
-    <div id="trust-badges-section" className="py-6 border-y border-purple-950/40 bg-[#080315]/50 backdrop-blur-sm">
+    <div id="trust-badges-section" className="py-6 border-y border-[#334155]/40 bg-[#1E293B]/50 backdrop-blur-sm">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         
         {/* Desktop View: Horizontal 1-row */}
@@ -19,9 +19,9 @@ export default function TrustBadges() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.1 }}
-                className="flex items-center gap-4 flex-1 justify-center border-r last:border-r-0 border-purple-950/20 py-2"
+                className="flex items-center gap-4 flex-1 justify-center border-r last:border-r-0 border-[#334155]/20 py-2"
               >
-                <div className="p-2.5 rounded-full bg-purple-950/30 text-pink-500 border border-purple-900/40 glow-purple">
+                <div className="p-2.5 rounded-full bg-[#0F172A] text-[#3B82F6] border border-[#334155]">
                   <IconComponent className="w-5 h-5" />
                 </div>
                 <div>
@@ -44,9 +44,9 @@ export default function TrustBadges() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: idx * 0.05 }}
-                className="flex flex-col items-center text-center p-3.5 rounded-xl bg-purple-950/10 border border-purple-950/30"
+                className="flex flex-col items-center text-center p-3.5 rounded-xl bg-[#1E293B]/30 border border-[#334155]/30"
               >
-                <div className="p-2 rounded-full bg-purple-950/40 text-pink-500 mb-2 border border-purple-900/30">
+                <div className="p-2 rounded-full bg-[#0F172A] text-[#3B82F6] mb-2 border border-[#334155]">
                   <IconComponent className="w-4.5 h-4.5" />
                 </div>
                 <h4 className="text-xs font-bold text-gray-100 font-display">{badge.title}</h4>

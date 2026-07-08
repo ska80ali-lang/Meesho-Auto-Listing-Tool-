@@ -137,7 +137,7 @@ function MessageVideo({ videoUrl, playingVideoUrl, onPlayVideo }: MessageVideoPr
   }, [videoUrl, onPlayVideo]);
 
   return (
-    <div className="mt-3 overflow-hidden rounded-xl border border-pink-500/30 bg-[#0c051a] shadow-xl relative animate-fade-in">
+    <div className="mt-3 overflow-hidden rounded-xl border border-blue-500/30 bg-[#1E293B] shadow-xl relative animate-fade-in">
       <video 
         ref={videoRef}
         src={videoUrl} 
@@ -150,7 +150,7 @@ function MessageVideo({ videoUrl, playingVideoUrl, onPlayVideo }: MessageVideoPr
         }}
         className="w-full aspect-video rounded-t-xl object-cover hover:scale-101 transition-transform duration-300"
       />
-      <div className="bg-gradient-to-r from-purple-950/80 to-pink-950/80 px-3 py-1.5 border-t border-purple-500/10 text-[9px] text-pink-300 flex items-center justify-between font-mono">
+      <div className="bg-[#1E293B] px-3 py-1.5 border-t border-[#334155]/30 text-[9px] text-blue-400 flex items-center justify-between font-mono">
         <span className="flex items-center gap-1.5 font-bold">
           <span className="relative flex h-1.5 w-1.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -212,7 +212,7 @@ function renderFormattedContent(
           }
           // Push bold text with pink highlighted gradient styling
           parts.push(
-            <strong key={match.index} className="font-extrabold text-[#f472b6] tracking-wide">
+            <strong key={match.index} className="font-extrabold text-[#3B82F6] tracking-wide">
               {match[1]}
             </strong>
           );
@@ -226,7 +226,7 @@ function renderFormattedContent(
         if (isBullet) {
           return (
             <div key={lineIdx} className="flex items-start gap-2 pl-1.5 py-0.5 group text-[11.5px] leading-relaxed text-gray-200">
-              <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 shrink-0 mt-1.5 group-hover:scale-125 transition-transform" />
+              <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-r from-blue-500 to-sky-400 shrink-0 mt-1.5 group-hover:scale-125 transition-transform" />
               <span>
                 {parts.length > 0 ? parts : cleanedText}
               </span>
@@ -317,7 +317,7 @@ export default function AiChatBot({ isStickyVisible = false }: AiChatBotProps) {
 
   const categories = [
     { name: "🔥 Popular Offers", icon: Flame, color: "text-red-400 bg-red-500/10" },
-    { name: "🎬 Video Tutorials", icon: Play, color: "text-pink-400 bg-pink-500/10" },
+    { name: "🎬 Video Tutorials", icon: Play, color: "text-blue-400 bg-blue-500/10" },
     { name: "🛠️ Working & AI SEO", icon: Wrench, color: "text-blue-400 bg-blue-500/10" },
     { name: "🚚 Shipping & Shield", icon: Truck, color: "text-teal-400 bg-teal-500/10" },
     { name: "💸 Price & Lifetime", icon: DollarSign, color: "text-emerald-400 bg-emerald-500/10" },
@@ -407,8 +407,8 @@ export default function AiChatBot({ isStickyVisible = false }: AiChatBotProps) {
           onClick={() => setIsOpen(!isOpen)}
           className={`relative w-full h-full rounded-full flex items-center justify-center cursor-pointer transition-all duration-300 z-10 ${
             isOpen
-              ? "bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 text-white shadow-[0_8px_30px_rgba(236,72,153,0.5)] border border-pink-400/40"
-              : "border border-red-500/30 shadow-[0_8px_30px_rgba(220,38,38,0.25)]"
+              ? "bg-[#3B82F6] text-white shadow-[0_8px_30px_rgba(59,130,246,0.5)] border border-blue-400/40"
+              : "border border-[#334155]/60 shadow-[0_8px_30px_rgba(30,41,59,0.25)]"
           }`}
           title="Open AI Support Assistant Chat"
           aria-label="Open AI Support Assistant Chat"
@@ -428,7 +428,7 @@ export default function AiChatBot({ isStickyVisible = false }: AiChatBotProps) {
               </div>
 
               {/* Glowing surrounding wave reflection */}
-              <span className="absolute inset-0 rounded-full border border-red-500/30 animate-ping opacity-25 pointer-events-none" style={{ animationDuration: '2.5s' }} />
+              <span className="absolute inset-0 rounded-full border border-blue-500/20 animate-ping opacity-25 pointer-events-none" style={{ animationDuration: '2.5s' }} />
             </>
           )}
         </motion.button>
@@ -451,23 +451,23 @@ export default function AiChatBot({ isStickyVisible = false }: AiChatBotProps) {
             exit={{ opacity: 0, scale: 0.95, y: 15 }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }} // Snappy ultra-smooth easeOut ease-curve
             style={{ willChange: "transform, opacity" }} // Hardware acceleration to prevent any lag
-            className="absolute bottom-18 sm:bottom-22 right-0 w-[94vw] sm:w-[430px] h-[610px] max-h-[82vh] rounded-3xl overflow-hidden shadow-[0_15px_40px_rgba(139,92,246,0.25)] border border-purple-500/20 bg-[#070310] flex flex-col z-50"
+            className="absolute bottom-18 sm:bottom-22 right-0 w-[94vw] sm:w-[430px] h-[610px] max-h-[82vh] rounded-3xl overflow-hidden shadow-[0_15px_40px_rgba(59,130,246,0.25)] border border-[#334155] bg-[#1E293B] flex flex-col z-50"
           >
             {/* Header Area */}
-            <div className="p-4 bg-gradient-to-r from-purple-950/80 via-[#0d0724]/90 to-purple-950/80 border-b border-purple-500/15 flex items-center justify-between">
+            <div className="p-4 bg-[#1E293B] border-b border-[#334155] flex items-center justify-between">
               <div className="flex items-center gap-2.5">
                 <div className="relative">
-                  <div className="w-9 h-9 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 flex items-center justify-center text-white border border-pink-400/20">
+                  <div className="w-9 h-9 rounded-full bg-gradient-to-r from-[#3B82F6] to-[#2563EB] flex items-center justify-center text-white border border-blue-400/20">
                     <Sparkles className="w-4.5 h-4.5 text-yellow-300 animate-pulse" />
                   </div>
-                  <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 border-2 border-[#070310] rounded-full" />
+                  <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-400 border-2 border-[#1E293B] rounded-full" />
                 </div>
                 <div>
                   <div className="flex items-center gap-1.5">
                     <h4 className="text-xs sm:text-sm font-black text-white tracking-wide">Ali Asgar Interactive Bot</h4>
                     <span className="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[8px] px-1.2 py-0.5 rounded font-extrabold uppercase tracking-wider">Ready</span>
                   </div>
-                  <p className="text-[9.5px] text-purple-300">⚡ Touch any question or tutorial tag for live player</p>
+                  <p className="text-[9.5px] text-blue-300">⚡ Touch any question or tutorial tag for live player</p>
                 </div>
               </div>
 
@@ -475,7 +475,7 @@ export default function AiChatBot({ isStickyVisible = false }: AiChatBotProps) {
               <button
                 type="button"
                 onClick={resetChat}
-                className="p-1.5 rounded-lg bg-purple-950/50 border border-purple-900/30 text-gray-400 hover:text-white transition-all cursor-pointer active:scale-95"
+                className="p-1.5 rounded-lg bg-[#0F172A] border border-[#334155] text-gray-400 hover:text-white transition-all cursor-pointer active:scale-95"
                 title="Reset conversation logs"
                 aria-label="Reset conversation logs"
               >
@@ -484,12 +484,12 @@ export default function AiChatBot({ isStickyVisible = false }: AiChatBotProps) {
             </div>
 
             {/* Chat Messages Log list */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-purple-900/30 overscroll-contain">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-blue-900/30 overscroll-contain">
               
               {/* Official Assurance badge */}
-              <div className="bg-gradient-to-r from-purple-950/40 to-indigo-950/40 border border-purple-500/10 rounded-2xl p-3 text-[11px] text-purple-200">
-                <div className="flex items-center gap-1.5 font-bold text-pink-400 mb-1">
-                  <ShieldCheck className="w-4 h-4 text-pink-400" />
+              <div className="bg-[#0F172A] border border-[#334155] rounded-2xl p-3 text-[11px] text-gray-200">
+                <div className="flex items-center gap-1.5 font-bold text-[#3B82F6] mb-1">
+                  <ShieldCheck className="w-4 h-4 text-[#3B82F6]" />
                   <span>Ali Asgar's Official Policy:</span>
                 </div>
                 <p className="leading-relaxed opacity-95 pl-5">
@@ -505,16 +505,16 @@ export default function AiChatBot({ isStickyVisible = false }: AiChatBotProps) {
                 >
                   <div className={`max-w-[85%] rounded-2xl px-4 py-2.5 text-xs leading-relaxed ${
                     msg.role === 'user'
-                      ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-tr-none shadow-[0_4px_12px_rgba(219,39,119,0.2)] border border-pink-400/10'
-                      : 'bg-purple-950/50 border border-purple-900/20 text-gray-200 rounded-tl-none'
+                      ? 'bg-gradient-to-r from-[#3B82F6] to-[#2563EB] text-white rounded-tr-none shadow-[0_4px_12px_rgba(59,130,246,0.2)] border border-blue-400/10'
+                      : 'bg-[#0F172A] border border-[#334155] text-gray-200 rounded-tl-none'
                   }`}>
                     {/* Render using the dynamic native beauty parser to fix double stars and raw dots */}
                     {renderFormattedContent(msg.text, playingVideoUrl, setPlayingVideoUrl)}
                     
                     {msg.role === 'model' && (
-                      <div className="mt-2 pt-1 border-t border-purple-500/5 text-[9px] text-purple-400/60 flex items-center justify-between">
+                      <div className="mt-2 pt-1 border-t border-[#334155] text-[9px] text-[#3B82F6]/60 flex items-center justify-between">
                         <span>Verified Guidance System</span>
-                        <span className="text-[8px] uppercase tracking-wider text-pink-400 font-extrabold font-mono">Instant Verified</span>
+                        <span className="text-[8px] uppercase tracking-wider text-[#3B82F6] font-extrabold font-mono">Instant Verified</span>
                       </div>
                     )}
                   </div>
@@ -523,13 +523,13 @@ export default function AiChatBot({ isStickyVisible = false }: AiChatBotProps) {
 
               {loading && (
                 <div className="flex justify-start animate-pulse">
-                  <div className="bg-purple-950/40 border border-purple-900/20 rounded-2xl rounded-tl-none px-4 py-3 text-xs text-gray-400 flex items-center gap-2">
+                  <div className="bg-[#0F172A] border border-[#334155] rounded-2xl rounded-tl-none px-4 py-3 text-xs text-gray-400 flex items-center gap-2">
                     <span className="flex gap-1">
-                      <span className="w-1.5 h-1.5 bg-pink-500 rounded-full animate-bounce" />
-                      <span className="w-1.5 h-1.5 bg-pink-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }} />
-                      <span className="w-1.5 h-1.5 bg-pink-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
+                      <span className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-bounce" />
+                      <span className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }} />
+                      <span className="w-1.5 h-1.5 bg-blue-500 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
                     </span>
-                    <span className="font-mono text-[9px] text-purple-300">Analyzing criteria...</span>
+                    <span className="font-mono text-[9px] text-blue-300">Analyzing criteria...</span>
                   </div>
                 </div>
               )}
@@ -538,10 +538,10 @@ export default function AiChatBot({ isStickyVisible = false }: AiChatBotProps) {
             </div>
 
              {/* Smart Interactive Navigation Dashboard (Predefined queries instead of search inputs) */}
-            <div className="bg-[#0b051b]/98 border-t border-purple-500/15 flex flex-col">
+            <div className="bg-[#1E293B] border-t border-[#334155] flex flex-col">
               
               {/* Category tabs scroll panel */}
-              <div className="p-2 border-b border-purple-500/10 bg-[#070311]/90 flex gap-1.5 overflow-x-auto scrollbar-none whitespace-nowrap">
+              <div className="p-2 border-b border-[#334155]/60 bg-[#0F172A] flex gap-1.5 overflow-x-auto scrollbar-none whitespace-nowrap font-sans">
                 {categories.map((cat, idx) => {
                   const IconComponent = cat.icon;
                   const isCatActive = activeCategory === cat.name;
@@ -555,8 +555,8 @@ export default function AiChatBot({ isStickyVisible = false }: AiChatBotProps) {
                       }}
                       className={`px-3 py-1.5 rounded-full text-[10.5px] font-black tracking-wide flex items-center gap-1.5 transition-all outline-none cursor-pointer ${
                         isCatActive 
-                          ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md shadow-pink-500/10 scale-102' 
-                          : 'bg-purple-950/30 border border-purple-900/10 text-gray-400 hover:text-white hover:bg-purple-900/20'
+                          ? 'bg-gradient-to-r from-[#3B82F6] to-[#2563EB] text-white shadow-md shadow-blue-500/10 scale-102' 
+                          : 'bg-[#1E293B] border border-[#334155] text-gray-400 hover:text-white hover:bg-[#334155]'
                       }`}
                     >
                       <IconComponent className={`w-3 h-3 ${isCatActive ? 'text-white' : cat.color.split(' ')[0]}`} />
@@ -567,26 +567,26 @@ export default function AiChatBot({ isStickyVisible = false }: AiChatBotProps) {
               </div>
 
               {/* Collapsible Questions Container */}
-              <div className="bg-[#090416] flex flex-col border-b border-purple-500/10">
+              <div className="bg-[#0F172A] flex flex-col border-b border-[#334155]">
                 {/* Header Toggle bar */}
                 <button
                   type="button"
                   onClick={() => setIsOptionsExpanded(!isOptionsExpanded)}
-                  className="w-full flex items-center justify-between p-3 py-2.5 hover:bg-purple-950/20 transition-all outline-none text-left select-none border-b border-purple-500/5 cursor-pointer"
+                  className="w-full flex items-center justify-between p-3 py-2.5 hover:bg-[#1E293B] transition-all outline-none text-left select-none border-b border-[#334155]/35 cursor-pointer"
                 >
-                  <p className="text-[10px] text-purple-300 font-extrabold uppercase tracking-widest flex items-center gap-1">
-                    <Sparkle className="w-3.5 h-3.5 text-pink-400 animate-spin" />
+                  <p className="text-[10px] text-gray-300 font-extrabold uppercase tracking-widest flex items-center gap-1">
+                    <Sparkle className="w-3.5 h-3.5 text-[#3B82F6] animate-spin" />
                     <span>Select to Ask/Play:</span>
                   </p>
                   <div className="flex items-center gap-1.5">
-                    <span className="text-[8.5px] text-pink-400 font-bold tracking-wide uppercase">
+                    <span className="text-[8.5px] text-[#3B82F6] font-bold tracking-wide uppercase">
                       {isOptionsExpanded ? "Hide options [-]" : "Show options [+]"}
                     </span>
                     <motion.span
                       animate={{ rotate: isOptionsExpanded ? 90 : 0 }}
-                      className="inline-block text-pink-500 font-bold"
+                      className="inline-block text-[#3B82F6] font-bold"
                     >
-                      <ChevronRight className="w-3.5 h-3.5 text-pink-500 shrink-0" />
+                      <ChevronRight className="w-3.5 h-3.5 text-[#3B82F6] shrink-0" />
                     </motion.span>
                   </div>
                 </button>
@@ -601,7 +601,7 @@ export default function AiChatBot({ isStickyVisible = false }: AiChatBotProps) {
                       transition={{ duration: 0.25, ease: "easeInOut" }}
                       className="overflow-hidden"
                     >
-                      <div className="p-3 max-h-[165px] overflow-y-auto space-y-2.5 scrollbar-thin scrollbar-thumb-purple-950 overscroll-contain">
+                      <div className="p-3 max-h-[165px] overflow-y-auto space-y-2.5 scrollbar-thin scrollbar-thumb-[#1E293B] overscroll-contain">
                         <div className="grid grid-cols-1 gap-2">
                           {FAQ_DATA.filter(faq => faq.category === activeCategory).map((faq, idx) => (
                             <motion.button
@@ -611,10 +611,10 @@ export default function AiChatBot({ isStickyVisible = false }: AiChatBotProps) {
                               type="button"
                               onClick={() => handleSelectQuestion(faq)}
                               disabled={loading}
-                              className="w-full text-left p-2.5 rounded-xl bg-purple-950/35 hover:bg-pink-950/20 border border-purple-900/30 hover:border-pink-500/20 text-[11px] font-bold text-gray-200 hover:text-white flex items-center justify-between gap-2.5 transition-all outline-none cursor-pointer duration-200"
+                              className="w-full text-left p-2.5 rounded-xl bg-[#1E293B] hover:bg-[#334155]/50 border border-[#334155] hover:border-[#3B82F6]/30 text-[11px] font-bold text-gray-200 hover:text-white flex items-center justify-between gap-2.5 transition-all outline-none cursor-pointer duration-200"
                             >
                               <span className="leading-snug">{faq.question}</span>
-                              <ChevronRight className="w-3.5 h-3.5 text-pink-500 shrink-0" />
+                              <ChevronRight className="w-3.5 h-3.5 text-[#3B82F6] shrink-0" />
                             </motion.button>
                           ))}
                         </div>
@@ -627,7 +627,7 @@ export default function AiChatBot({ isStickyVisible = false }: AiChatBotProps) {
             </div>
 
             {/* Bottom Actions row with clickable converting links & official owner support contact */}
-            <div className="p-3 px-4 bg-[#05020c] border-t border-purple-500/15 flex items-center justify-between gap-3">
+            <div className="p-3 px-4 bg-[#0F172A] border-t border-[#334155] flex items-center justify-between gap-3">
               {/* Highlightive Pulsing BUY NOW Button */}
               <motion.a 
                 href="https://superprofile.bio/vp/meesho-auto-listing---low-shipping-tool?checkout=true"
@@ -635,7 +635,7 @@ export default function AiChatBot({ isStickyVisible = false }: AiChatBotProps) {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="buy-btn-effect flex shadow-[0_0_15px_rgba(236,72,153,0.4)] hover:shadow-[0_0_25px_rgba(236,72,153,0.7)] group bg-gradient-to-r from-pink-600 via-purple-600 to-pink-600 border border-pink-400 text-white text-[11px] font-black uppercase tracking-wider py-2 px-4 rounded-xl items-center justify-center gap-1.5 transition-all text-center flex-1 cursor-pointer"
+                className="buy-btn-effect flex shadow-[0_0_15px_rgba(59,130,246,0.4)] hover:shadow-[0_0_25px_rgba(59,130,246,0.7)] group bg-gradient-to-r from-[#3B82F6] to-[#2563EB] border border-blue-400 text-white text-[11px] font-black uppercase tracking-wider py-2 px-4 rounded-xl items-center justify-center gap-1.5 transition-all text-center flex-1 cursor-pointer"
               >
                 <span>BUY NOW (LIFETIME)</span>
                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform animate-pulse text-white shrink-0" />

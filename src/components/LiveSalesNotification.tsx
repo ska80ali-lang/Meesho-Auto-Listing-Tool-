@@ -80,10 +80,10 @@ export default function LiveSalesNotification({ isStickyVisible }: LiveSalesNoti
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -10, scale: 0.95 }}
             transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            className="w-full bg-[#090514]/95 border border-pink-500/20 rounded-xl px-2.5 py-2 flex items-center gap-2.5 shadow-[0_8px_30px_rgba(0,0,0,0.8)] pointer-events-auto"
+            className="w-full bg-[#1E293B]/95 border border-[#334155] rounded-xl px-2.5 py-2 flex items-center gap-2.5 shadow-[0_8px_30px_rgba(0,0,0,0.8)] pointer-events-auto"
           >
             {/* Compact Action Icon */}
-            <div className="p-1.5 rounded-lg bg-pink-500/10 text-pink-400 shrink-0 border border-pink-500/20">
+            <div className="p-1.5 rounded-lg bg-blue-500/10 text-[#3B82F6] shrink-0 border border-[#334155]">
               <ShoppingBag className="w-3.5 h-3.5" />
             </div>
 

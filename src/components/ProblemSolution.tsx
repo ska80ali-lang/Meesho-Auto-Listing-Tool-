@@ -6,7 +6,7 @@ export default function ProblemSolution() {
   const { title, problems, solutions } = PROBLEMS_SOLUTIONS;
 
   return (
-    <section id="problem-solution-section" className="py-16 relative bg-[#030009] overflow-hidden">
+    <section id="problem-solution-section" className="py-16 relative bg-[#0F172A] overflow-hidden">
       {/* Absolute glow points for ambient aesthetic */}
       <div className="absolute top-1/4 left-10 w-48 h-48 bg-red-500/5 blur-[90px] rounded-full pointer-events-none" />
       <div className="absolute bottom-1/4 right-10 w-48 h-48 bg-emerald-500/5 blur-[90px] rounded-full pointer-events-none" />
@@ -15,7 +15,7 @@ export default function ProblemSolution() {
         
         {/* Section Heading */}
         <div className="text-center mb-10">
-          <span className="text-xs font-mono font-bold text-purple-400 uppercase tracking-widest block mb-1">Modern Challenge vs Solution</span>
+          <span className="text-xs font-mono font-bold text-[#3B82F6] uppercase tracking-widest block mb-1">Modern Challenge vs Solution</span>
           <h2 className="text-2xl md:text-3xl font-extrabold text-white font-display">
             {title}
           </h2>
@@ -68,7 +68,7 @@ export default function ProblemSolution() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="rounded-2xl p-6 md:p-8 bg-emerald-950/5 border border-emerald-500/20 shadow-lg glow-purple flex flex-col justify-between relative overflow-hidden"
+            className="rounded-2xl p-6 md:p-8 bg-[#1E293B] border border-[#334155] shadow-lg flex flex-col justify-between relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 blur-3xl pointer-events-none" />
 

@@ -181,14 +181,14 @@ export default function App() {
   };
 
   return (
-    <div id="landing-page-root" className="min-h-screen w-full relative overflow-x-hidden bg-[#050505] text-gray-100 font-sans selection:bg-pink-500 selection:text-white">
+    <div id="landing-page-root" className="min-h-screen w-full relative overflow-x-hidden bg-[#0F172A] text-[#F8FAFC] font-sans selection:bg-[#3B82F6] selection:text-white">
       
       {/* 1. TOP HERO SECTION (MOST IMPORTANT) */}
       <header className="relative pt-2 pb-16 md:pt-4 md:pb-24 overflow-hidden">
         {/* Ambient color blobs */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] bg-gradient-to-b from-purple-900/10 via-pink-900/5 to-transparent blur-3xl pointer-events-none" />
-        <div className="absolute -top-32 -left-32 w-96 h-96 bg-purple-600/10 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute top-64 right-10 w-80 h-80 bg-pink-500/5 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] bg-gradient-to-b from-blue-900/10 via-sky-900/5 to-transparent blur-3xl pointer-events-none" />
+        <div className="absolute -top-32 -left-32 w-96 h-96 bg-blue-600/10 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute top-64 right-10 w-80 h-80 bg-sky-500/5 rounded-full blur-[120px] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
           
@@ -200,9 +200,9 @@ export default function App() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.4 }}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-purple-500/20 bg-[#0d0725] text-[10px] md:text-xs font-semibold text-purple-300 uppercase tracking-widest font-mono"
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#334155] bg-[#1E293B] text-[10px] md:text-xs font-semibold text-[#94A3B8] uppercase tracking-widest font-mono"
             >
-              <Sparkles className="w-3.5 h-3.5 text-pink-500 animate-pulse" />
+              <Sparkles className="w-3.5 h-3.5 text-[#3B82F6] animate-pulse" />
               Meesho Sellers Special Formula
             </motion.div>
 
@@ -213,7 +213,7 @@ export default function App() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-tight font-display"
             >
-              1-Click <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 glow-text-purple">Meesho Auto Listing</span> Tool + Low Shipping Cost Trick
+              1-Click <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-300 to-blue-400 glow-text-purple">Meesho Auto Listing</span> Tool + Low Shipping Cost Trick
             </motion.h1>
 
             {/* FULL WIDTH CINEMATIC VIDEO PLAYER (16:9) */}
@@ -222,7 +222,7 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.35 }}
               onClick={handleToggleHeroPlay}
-              className="relative w-full max-w-4xl mx-auto rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_15px_60px_rgba(147,51,234,0.3)] border-2 border-purple-500/20 bg-black aspect-video group cursor-pointer"
+              className="relative w-full max-w-4xl mx-auto rounded-2xl md:rounded-3xl overflow-hidden shadow-[0_15px_60px_rgba(59,130,246,0.25)] border-2 border-[#334155] bg-[#1E293B] aspect-video group cursor-pointer"
             >
               <video
                 ref={heroVideoRef}
@@ -246,11 +246,11 @@ export default function App() {
                   <motion.div 
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
-                    className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center border-2 border-pink-400 shadow-[0_0_40px_rgba(236,72,153,0.7)] hover:shadow-[0_0_55px_rgba(236,72,153,0.9)] transition-shadow duration-300 pointer-events-auto"
+                    className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-r from-[#3B82F6] to-[#2563EB] flex items-center justify-center border-2 border-blue-400 shadow-[0_0_40px_rgba(59,130,246,0.6)] hover:shadow-[0_0_55px_rgba(59,130,246,0.8)] transition-shadow duration-300 pointer-events-auto"
                   >
                     <Play className="w-8 h-8 md:w-10 md:h-10 text-white fill-white ml-1.5" />
                   </motion.div>
-                  <span className="text-white text-[10px] md:text-xs font-black uppercase tracking-widest font-mono bg-purple-950/90 border border-purple-500/45 px-4.5 py-2 rounded-full shadow-[0_4px_25px_rgba(0,0,0,0.8)] glow-purple">
+                  <span className="text-white text-[10px] md:text-xs font-black uppercase tracking-widest font-mono bg-[#1E293B]/95 border border-[#334155] px-4.5 py-2 rounded-full shadow-[0_4px_25px_rgba(0,0,0,0.8)] glow-purple">
                     Click to play tutorial
                   </span>
                 </div>
@@ -266,12 +266,12 @@ export default function App() {
                 >
                   {/* Active fill of the timeline */}
                   <div 
-                    className="absolute top-0 left-0 h-full bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 rounded-full"
+                    className="absolute top-0 left-0 h-full bg-gradient-to-r from-[#3B82F6] via-blue-400 to-[#2563EB] rounded-full"
                     style={{ width: `${heroDuration ? (heroCurrentTime / heroDuration) * 100 : 0}%` }}
                   />
                   {/* Indicator handle */}
                   <div 
-                    className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-pink-400 border border-white shadow-xl transition-all scale-0 group-hover/progress:scale-100"
+                    className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-blue-400 border border-white shadow-xl transition-all scale-0 group-hover/progress:scale-100"
                     style={{ left: `${heroDuration ? (heroCurrentTime / heroDuration) * 100 : 0}%`, transform: 'translate(-50%, -50%)' }}
                   />
                 </div>
@@ -287,26 +287,26 @@ export default function App() {
                       className="p-1.5 rounded-lg hover:bg-white/10 text-white cursor-pointer hover:scale-105 active:scale-95 duration-150 transition-all shrink-0"
                       title={heroPlaying ? "Pause Video" : "Play Video"}
                     >
-                      {heroPlaying ? <Pause className="w-4.5 h-4.5 text-pink-400" /> : <Play className="w-4.5 h-4.5 text-emerald-400 fill-emerald-400" />}
+                      {heroPlaying ? <Pause className="w-4.5 h-4.5 text-blue-400" /> : <Play className="w-4.5 h-4.5 text-emerald-400 fill-emerald-400" />}
                     </button>
 
                     {/* Skip -10s */}
                     <button
                       onClick={(e) => handleSkipHero(e, -10)}
-                      className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-purple-950/60 hover:bg-purple-900/60 border border-purple-500/20 text-[10px] md:text-xs font-mono font-bold text-gray-200 cursor-pointer hover:scale-105 active:scale-95 transition-all shrink-0"
+                      className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#1E293B]/80 hover:bg-[#1E293B] border border-[#334155] text-[10px] md:text-xs font-mono font-bold text-gray-200 cursor-pointer hover:scale-105 active:scale-95 transition-all shrink-0"
                       title="Rewind 10s"
                     >
-                      <RotateCcw className="w-3.5 h-3.5 text-pink-400 shrink-0" />
+                      <RotateCcw className="w-3.5 h-3.5 text-blue-400 shrink-0" />
                       <span>-10s</span>
                     </button>
 
                     {/* Skip +10s */}
                     <button
                       onClick={(e) => handleSkipHero(e, 10)}
-                      className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-purple-950/60 hover:bg-purple-900/60 border border-purple-500/20 text-[10px] md:text-xs font-mono font-bold text-gray-200 cursor-pointer hover:scale-105 active:scale-95 transition-all shrink-0"
+                      className="flex items-center gap-1 px-2.5 py-1 rounded-lg bg-[#1E293B]/80 hover:bg-[#1E293B] border border-[#334155] text-[10px] md:text-xs font-mono font-bold text-gray-200 cursor-pointer hover:scale-105 active:scale-95 transition-all shrink-0"
                       title="Forward 10s"
                     >
-                      <RotateCw className="w-3.5 h-3.5 text-purple-400 shrink-0" />
+                      <RotateCw className="w-3.5 h-3.5 text-blue-400 shrink-0" />
                       <span>+10s</span>
                     </button>
 
@@ -339,9 +339,9 @@ export default function App() {
             </motion.div>
 
             {/* Small Trust Text below Video - Beautifully Placed & Spaced */}
-            <div className="flex items-center justify-center gap-2 text-center text-[11px] md:text-sm text-purple-200 font-sans max-w-sm md:max-w-xl mx-auto bg-purple-950/30 border border-purple-800/20 px-4 py-2 rounded-xl md:rounded-full">
+            <div className="flex items-center justify-center gap-2 text-center text-[11px] md:text-sm text-[#94A3B8] font-sans max-w-sm md:max-w-xl mx-auto bg-[#1E293B] border border-[#334155] px-4 py-2 rounded-xl md:rounded-full">
               <ShieldCheck className="w-4.5 h-4.5 text-emerald-400 shrink-0" />
-              <span className="font-medium">Rated <span className="text-pink-400 font-bold">4.9/5</span> stars by active Meesho wholesalers of Surat & Jaipur</span>
+              <span className="font-medium">Rated <span className="text-[#3B82F6] font-bold">4.9/5</span> stars by active Meesho wholesalers of Surat & Jaipur</span>
             </div>
 
             {/* Primary Action Call to Action (Instant purchase trigger) */}
@@ -352,7 +352,7 @@ export default function App() {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="buy-btn-effect flex w-full h-16 px-4 sm:px-8 rounded-2xl bg-gradient-to-r from-purple-600 via-pink-600 to-purple-600 hover:from-purple-500 hover:to-pink-500 text-white font-extrabold items-center justify-between gap-3 border border-pink-400/20 cursor-pointer shadow-[0_12px_40px_rgba(236,72,153,0.45)] uppercase tracking-wider font-sans"
+                className="buy-btn-effect flex w-full h-16 px-4 sm:px-8 rounded-2xl bg-gradient-to-r from-[#3B82F6] via-blue-500 to-[#2563EB] hover:from-[#2563EB] hover:to-[#1D4ED8] text-white font-extrabold items-center justify-between gap-3 border border-blue-400/20 cursor-pointer shadow-[0_12px_40px_rgba(59,130,246,0.45)] uppercase tracking-wider font-sans"
               >
                 <Zap className="w-5.5 h-5.5 text-yellow-300 animate-pulse fill-yellow-300 shrink-0" />
                 <span className="font-extrabold text-center tracking-wide leading-none flex-1 whitespace-nowrap text-[13px] min-[360px]:text-[14px] min-[380px]:text-[15.5px] sm:text-[17px] md:text-lg">BUY TOOL NOW FOR ₹199 ONLY</span>
@@ -447,17 +447,17 @@ export default function App() {
       <ProblemSolution />
 
       {/* 7. REDUCED FEATURES GRID (6 maximum) */}
-      <section id="features-section" className="py-20 relative bg-[#04000b]">
+      <section id="features-section" className="py-20 relative bg-[#0F172A]">
         {/* Glow circle overlay */}
-        <div className="absolute top-1/2 left-1/3 w-72 h-72 bg-purple-500/5 blur-[120px] rounded-full pointer-events-none" />
+        <div className="absolute top-1/2 left-1/3 w-72 h-72 bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           
           {/* Header */}
           <div className="text-center mb-12">
-            <span className="text-xs font-mono font-bold text-pink-400 uppercase tracking-widest block mb-2">Core Product Highlights</span>
+            <span className="text-xs font-mono font-bold text-[#3B82F6] uppercase tracking-widest block mb-2">Core Product Highlights</span>
             <h2 className="text-2xl md:text-4xl font-extrabold text-white font-display">
-              Built to Force <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 glow-text-purple">Maximum Sales</span>
+              Built to Force <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-300 to-blue-400 glow-text-purple">Maximum Sales</span>
             </h2>
             <p className="text-gray-400 text-xs md:text-sm mt-1.5 max-w-md mx-auto">
               Our lightweight script bypasses daily listing constraints and triggers Meesho's lowest delivery weight thresholds.
@@ -471,12 +471,12 @@ export default function App() {
             {/* Feature 1 */}
             <motion.div
               whileHover={{ y: -4 }}
-              className="glass-panel p-6 rounded-2xl relative overflow-hidden group hover:border-pink-500/25 transition-all"
+              className="glass-panel p-6 rounded-2xl relative overflow-hidden group hover:border-blue-500/25 transition-all"
             >
-              <div className="p-3 rounded-xl bg-purple-950/40 text-pink-400 w-fit mb-4 border border-purple-900/30">
+              <div className="p-3 rounded-xl bg-[#1E293B] text-[#3B82F6] w-fit mb-4 border border-[#334155]">
                 <Cpu className="w-5.5 h-5.5" />
               </div>
-              <h3 className="text-base font-bold text-white font-display group-hover:text-pink-400 transition-colors">
+              <h3 className="text-base font-bold text-white font-display group-hover:text-[#3B82F6] transition-colors">
                 Robotic Auto Listing
               </h3>
               <p className="text-xs text-gray-400 leading-relaxed mt-2 font-sans">
@@ -487,12 +487,12 @@ export default function App() {
             {/* Feature 2 */}
             <motion.div
               whileHover={{ y: -4 }}
-              className="glass-panel p-6 rounded-2xl relative overflow-hidden group hover:border-pink-500/25 transition-all"
+              className="glass-panel p-6 rounded-2xl relative overflow-hidden group hover:border-blue-500/25 transition-all"
             >
-              <div className="p-3 rounded-xl bg-purple-950/40 text-pink-400 w-fit mb-4 border border-purple-900/30">
+              <div className="p-3 rounded-xl bg-[#1E293B] text-[#3B82F6] w-fit mb-4 border border-[#334155]">
                 <Table className="w-5.5 h-5.5" />
               </div>
-              <h3 className="text-base font-bold text-white font-display group-hover:text-pink-400 transition-colors">
+              <h3 className="text-base font-bold text-white font-display group-hover:text-[#3B82F6] transition-colors">
                 Smart Bulk Spreadsheet
               </h3>
               <p className="text-xs text-gray-400 leading-relaxed mt-2 font-sans">
@@ -503,12 +503,12 @@ export default function App() {
             {/* Feature 3 */}
             <motion.div
               whileHover={{ y: -4 }}
-              className="glass-panel p-6 rounded-2xl relative overflow-hidden group hover:border-pink-500/25 transition-all"
+              className="glass-panel p-6 rounded-2xl relative overflow-hidden group hover:border-blue-500/25 transition-all"
             >
-              <div className="p-3 rounded-xl bg-purple-950/40 text-pink-400 w-fit mb-4 border border-purple-900/30">
+              <div className="p-3 rounded-xl bg-[#1E293B] text-[#3B82F6] w-fit mb-4 border border-[#334155]">
                 <TrendingDown className="w-5.5 h-5.5" />
               </div>
-              <h3 className="text-base font-bold text-white font-display group-hover:text-pink-400 transition-colors">
+              <h3 className="text-base font-bold text-white font-display group-hover:text-[#3B82F6] transition-colors">
                 Low Shipping Code-Trick
               </h3>
               <p className="text-xs text-gray-400 leading-relaxed mt-2 font-sans">
@@ -519,12 +519,12 @@ export default function App() {
             {/* Feature 4 */}
             <motion.div
               whileHover={{ y: -4 }}
-              className="glass-panel p-6 rounded-2xl relative overflow-hidden group hover:border-pink-500/25 transition-all"
+              className="glass-panel p-6 rounded-2xl relative overflow-hidden group hover:border-blue-500/25 transition-all"
             >
-              <div className="p-3 rounded-xl bg-purple-950/40 text-pink-400 w-fit mb-4 border border-purple-900/30">
+              <div className="p-3 rounded-xl bg-[#1E293B] text-[#3B82F6] w-fit mb-4 border border-[#334155]">
                 <Smartphone className="w-5.5 h-5.5" />
               </div>
-              <h3 className="text-base font-bold text-white font-display group-hover:text-pink-400 transition-colors">
+              <h3 className="text-base font-bold text-white font-display group-hover:text-[#3B82F6] transition-colors">
                 100% Mobile Friendly
               </h3>
               <p className="text-xs text-gray-400 leading-relaxed mt-2 font-sans">
@@ -535,12 +535,12 @@ export default function App() {
             {/* Feature 5 */}
             <motion.div
               whileHover={{ y: -4 }}
-              className="glass-panel p-6 rounded-2xl relative overflow-hidden group hover:border-pink-500/25 transition-all"
+              className="glass-panel p-6 rounded-2xl relative overflow-hidden group hover:border-blue-500/25 transition-all"
             >
-              <div className="p-3 rounded-xl bg-purple-950/40 text-pink-400 w-fit mb-4 border border-purple-900/30">
+              <div className="p-3 rounded-xl bg-[#1E293B] text-[#3B82F6] w-fit mb-4 border border-[#334155]">
                 <Sparkles className="w-5.5 h-5.5 animate-pulse" />
               </div>
-              <h3 className="text-base font-bold text-white font-display group-hover:text-pink-400 transition-colors">
+              <h3 className="text-base font-bold text-white font-display group-hover:text-[#3B82F6] transition-colors">
                 Beginner Friendly Video
               </h3>
               <p className="text-xs text-gray-400 leading-relaxed mt-2 font-sans">
@@ -551,12 +551,12 @@ export default function App() {
             {/* Feature 6 */}
             <motion.div
               whileHover={{ y: -4 }}
-              className="glass-panel p-6 rounded-2xl relative overflow-hidden group hover:border-pink-500/25 transition-all"
+              className="glass-panel p-6 rounded-2xl relative overflow-hidden group hover:border-blue-500/25 transition-all"
             >
-              <div className="p-3 rounded-xl bg-purple-950/40 text-pink-400 w-fit mb-4 border border-purple-900/30">
+              <div className="p-3 rounded-xl bg-[#1E293B] text-[#3B82F6] w-fit mb-4 border border-[#334155]">
                 <Clock className="w-5.5 h-5.5" />
               </div>
-              <h3 className="text-base font-bold text-white font-display group-hover:text-pink-400 transition-colors">
+              <h3 className="text-base font-bold text-white font-display group-hover:text-[#3B82F6] transition-colors">
                 Time & Money Optimizer
               </h3>
               <p className="text-xs text-gray-400 leading-relaxed mt-2 font-sans">
@@ -570,16 +570,16 @@ export default function App() {
       </section>
 
       {/* 8. REVIEWS SECTION (Brought HIGHER on page for high trust conversions) */}
-      <section id="reviews-section" className="py-16 relative bg-[#030009]">
-        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-900/20 to-transparent" />
+      <section id="reviews-section" className="py-16 relative bg-[#0F172A]">
+        <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-900/20 to-transparent" />
         
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           
           {/* Header */}
           <div className="text-center mb-10">
-            <span className="text-xs font-mono font-bold text-pink-400 uppercase tracking-widest block mb-1">Authentic Seller Feedback</span>
+            <span className="text-xs font-mono font-bold text-[#3B82F6] uppercase tracking-widest block mb-1">Authentic Seller Feedback</span>
             <h2 className="text-2xl md:text-3xl font-extrabold text-white font-display">
-              Reviews That Inspire <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 glow-text-purple">Trust</span>
+              Reviews That Inspire <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-sky-300 glow-text-purple">Trust</span>
             </h2>
             <p className="text-gray-400 text-xs md:text-sm mt-1 max-w-sm mx-auto">
               Only 4 real, believable customer quotes with physical verified locations.
@@ -594,7 +594,7 @@ export default function App() {
                 initial={{ opacity: 0, scale: 0.98 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                className="glass-panel p-5.5 rounded-2xl relative border-purple-500/10 hover:border-pink-500/15 duration-300 transition-all flex flex-col justify-between"
+                className="glass-panel p-5.5 rounded-2xl relative border-[#334155]/40 hover:border-blue-500/25 duration-300 transition-all flex flex-col justify-between"
               >
                 <div>
                   {/* Rating Stars Row */}
@@ -611,12 +611,12 @@ export default function App() {
                 </div>
 
                 {/* User avatar / Metadata footer */}
-                <div className="flex justify-between items-center pt-3 border-t border-purple-950/40">
+                <div className="flex justify-between items-center pt-3 border-t border-[#334155]">
                   <div className="flex items-center gap-3">
                     <img 
                       src={review.avatar} 
                       alt={review.name} 
-                      className="w-10 h-10 rounded-full object-cover border border-purple-500/40 referrerPolicy shadow-md"
+                      className="w-10 h-10 rounded-full object-cover border border-[#334155] referrerPolicy shadow-md"
                       referrerPolicy="no-referrer"
                     />
                     <div>
@@ -650,18 +650,18 @@ export default function App() {
       <PricingCard />
 
       {/* 12. FOOTER */}
-      <footer className="bg-[#020008] border-t border-purple-950/45 py-12 pb-28 md:pb-20 relative">
+      <footer className="bg-[#0F172A] border-t border-[#334155] py-12 pb-28 md:pb-20 relative">
         <div className="max-w-7xl mx-auto px-4 md:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             
             {/* Column 1: Info */}
             <div className="space-y-3.5">
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-600 to-pink-600 flex items-center justify-center border border-pink-400/20">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#3B82F6] to-[#2563EB] flex items-center justify-center border border-blue-400/20">
                   <Cpu className="w-4.5 h-4.5 text-white" />
                 </div>
                 <span className="font-extrabold text-base tracking-tight font-display text-white">
-                  Meesho<span className="text-pink-500">AutoListing</span>
+                  Meesho<span className="text-[#3B82F6]">AutoListing</span>
                 </span>
               </div>
               <p className="text-xs text-gray-400 leading-relaxed font-sans">
@@ -671,7 +671,7 @@ export default function App() {
 
             {/* Column 2: Quick trust highlights */}
             <div className="space-y-2 text-left">
-              <h4 className="text-xs font-bold uppercase tracking-widest text-[#ec4899] font-mono mb-2">Legal Disclaimer</h4>
+              <h4 className="text-xs font-bold uppercase tracking-widest text-[#3B82F6] font-mono mb-2">Legal Disclaimer</h4>
               <p className="text-[10px] text-gray-500 font-sans leading-relaxed">
                 This digital tool is designed for optimization and efficiency. We are an independent software helper and are NOT officially endorsed by, affiliated with, or partnered with Meesho Pvt. Ltd. Vendor results vary based on marketplace trends and catalogs content.
               </p>
@@ -679,19 +679,19 @@ export default function App() {
 
             {/* Column 3: Contact support details */}
             <div className="space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-widest text-purple-400 font-mono">Instant Support</h4>
+              <h4 className="text-xs font-bold uppercase tracking-widest text-[#3B82F6] font-mono">Instant Support</h4>
               <p className="text-xs text-gray-400 font-sans leading-relaxed">
                 Need manual setting assistance or direct billing files? Send an email or message on WhatsApp.
               </p>
               
               <div className="space-y-1.5 font-mono text-xs">
-                <div className="flex items-center gap-2 text-pink-400">
+                <div className="flex items-center gap-2 text-[#3B82F6]">
                   <MessageSquare className="w-4 h-4" />
                   <a href={`https://wa.me/91${whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="hover:underline">
                     WhatsApp: +91 {whatsappNumber}
                   </a>
                 </div>
-                <div className="flex items-center gap-2 text-purple-400">
+                <div className="flex items-center gap-2 text-[#3B82F6]">
                   <Layers className="w-4 h-4" />
                   <span>Support: {CONFIG.supportEmail}</span>
                 </div>
@@ -701,41 +701,41 @@ export default function App() {
           </div>
 
           {/* Copyright bar */}
-          <div className="mt-8 pt-6 border-t border-purple-950/20 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-gray-500 font-mono">
+          <div className="mt-8 pt-6 border-t border-[#334155]/40 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] text-gray-500 font-mono">
             <span>© 2026 Meesho AutoListing Automation Suites. All Rights Saved.</span>
             
             <div className="flex flex-wrap justify-center gap-4">
               <button 
                 onClick={() => setActiveModal('privacy')}
-                className="hover:text-pink-400 transition-colors cursor-pointer bg-transparent border-none text-[10px] font-mono text-gray-400 font-medium"
+                className="hover:text-[#3B82F6] transition-colors cursor-pointer bg-transparent border-none text-[10px] font-mono text-gray-400 font-medium"
               >
                 Privacy Policy
               </button>
               <span>•</span>
               <button 
                 onClick={() => setActiveModal('terms')}
-                className="hover:text-pink-400 transition-colors cursor-pointer bg-transparent border-none text-[10px] font-mono text-gray-400 font-medium"
+                className="hover:text-[#3B82F6] transition-colors cursor-pointer bg-transparent border-none text-[10px] font-mono text-gray-400 font-medium"
               >
                 Terms of Service
               </button>
               <span>•</span>
               <button 
                 onClick={() => setActiveModal('refund')}
-                className="hover:text-pink-400 transition-colors cursor-pointer bg-transparent border-none text-[10px] font-mono text-gray-400 font-medium"
+                className="hover:text-[#3B82F6] transition-colors cursor-pointer bg-transparent border-none text-[10px] font-mono text-gray-400 font-medium"
               >
                 Refund Policy
               </button>
               <span>•</span>
               <button 
                 onClick={() => setActiveModal('shipping')}
-                className="hover:text-pink-400 transition-colors cursor-pointer bg-transparent border-none text-[10px] font-mono text-gray-400 font-medium"
+                className="hover:text-[#3B82F6] transition-colors cursor-pointer bg-transparent border-none text-[10px] font-mono text-gray-400 font-medium"
               >
                 Shipping & Delivery
               </button>
               <span>•</span>
               <button 
                 onClick={() => setActiveModal('support')}
-                className="hover:text-pink-400 transition-colors cursor-pointer bg-transparent border-none text-[10px] font-mono text-gray-400 font-medium"
+                className="hover:text-[#3B82F6] transition-colors cursor-pointer bg-transparent border-none text-[10px] font-mono text-gray-400 font-medium"
               >
                 Contact Support Help
               </button>
@@ -747,7 +747,7 @@ export default function App() {
 
       {/* 13. STICKY BUY BAR (Bottom centered glass bar desktop, pill mobile) */}
       <div className={`fixed bottom-4 left-0 right-0 mx-auto z-45 w-[92%] max-w-sm sm:max-w-lg md:max-w-xl px-1 transition-all duration-300 ${!isHeroButtonVisible ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-10 pointer-events-none"}`}>
-        <div className="w-full glass-panel-heavy p-2.5 sm:p-3 md:p-4 rounded-xl sm:rounded-2xl md:rounded-3xl shadow-[0_15px_40px_rgba(0,0,0,0.8)] border border-pink-500/20 flex items-center justify-between gap-3 sm:gap-4 pointer-events-auto">
+        <div className="w-full glass-panel-heavy p-2.5 sm:p-3 md:p-4 rounded-xl sm:rounded-2xl md:rounded-3xl shadow-[0_15px_40px_rgba(0,0,0,0.8)] border border-blue-500/20 flex items-center justify-between gap-3 sm:gap-4 pointer-events-auto">
           
           {/* Left info */}
           <div className="text-left font-sans pl-1 sm:pl-2 select-none min-w-0 flex-1">
@@ -771,7 +771,7 @@ export default function App() {
             href={globalCtaUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="buy-btn-effect h-10 sm:h-11 md:h-13 px-3 sm:px-5 md:px-6 rounded-lg sm:rounded-xl md:rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-extrabold text-[10px] sm:text-xs md:text-sm flex items-center gap-1.5 sm:gap-2 border border-pink-400/20 shadow-md cursor-pointer uppercase tracking-wider font-display shrink-0 transition-transform hover:scale-[1.02]"
+            className="buy-btn-effect h-10 sm:h-11 md:h-13 px-3 sm:px-5 md:px-6 rounded-lg sm:rounded-xl md:rounded-2xl bg-gradient-to-r from-[#3B82F6] to-[#2563EB] hover:from-[#2563EB] hover:to-[#1D4ED8] text-white font-extrabold text-[10px] sm:text-xs md:text-sm flex items-center gap-1.5 sm:gap-2 border border-blue-400/20 shadow-md cursor-pointer uppercase tracking-wider font-display shrink-0 transition-transform hover:scale-[1.02]"
           >
             <Zap className="w-3.5 h-3.5 text-yellow-300 fill-yellow-300 animate-pulse shrink-0" />
             <span>Buy Now</span>
@@ -796,12 +796,12 @@ export default function App() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 15 }}
               transition={{ duration: 0.2 }}
-              className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto glass-panel-heavy rounded-3xl p-6 md:p-8 shadow-[0_25px_60px_rgba(147,51,234,0.25)] border border-purple-500/30 text-left font-sans"
+              className="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto glass-panel-heavy rounded-3xl p-6 md:p-8 shadow-[0_25px_60px_rgba(59,130,246,0.25)] border border-[#334155] text-left font-sans"
             >
               {/* Close Button */}
               <button
                 onClick={() => setActiveModal(null)}
-                className="absolute top-4 right-4 p-2 rounded-lg bg-purple-950/40 border border-purple-900/30 text-gray-400 hover:text-white hover:bg-pink-500 transition-all cursor-pointer"
+                className="absolute top-4 right-4 p-2 rounded-lg bg-[#1E293B] border border-[#334155] text-gray-400 hover:text-white hover:bg-[#3B82F6] transition-all cursor-pointer"
                 aria-label="Close modal"
               >
                 <span className="text-sm font-bold font-mono">✕</span>
@@ -809,7 +809,7 @@ export default function App() {
 
               {activeModal === 'privacy' && (
                 <div className="space-y-4">
-                  <h3 className="text-lg font-extrabold text-white font-display flex items-center gap-2 border-b border-purple-900/30 pb-3">
+                  <h3 className="text-lg font-extrabold text-white font-display flex items-center gap-2 border-b border-[#334155] pb-3">
                     <span className="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse" />
                     Privacy Policy
                   </h3>
@@ -820,7 +820,7 @@ export default function App() {
                     <p>
                       Welcome to Meesho AutoListing Automation Suites (operated by <strong>Sk Ali Asgar</strong>). We respect your privacy and are committed to protecting your personal data. This privacy policy outlines how we handle information to make your automation experience fast, safe, and secure.
                     </p>
-                    <p className="font-bold text-pink-400">
+                    <p className="font-bold text-[#3B82F6]">
                       1. Information We Collect
                     </p>
                     <p>
@@ -828,20 +828,20 @@ export default function App() {
                       <br />• <strong>Personal Information:</strong> Name, Email Address, Contact/WhatsApp Phone Number, and Billing Details.
                       <br />• <strong>Non-Personal Data:</strong> IP Address, browser type, cookies, and standard session details.
                     </p>
-                    <p className="font-bold text-pink-400">
+                    <p className="font-bold text-[#3B82F6]">
                       2. Client Data Security (Absolute Local Sandbox)
                     </p>
                     <p>
                       Our 1-Click Excel script and bulk automation tools run strictly local inside your own browser tab or secure sheets. 
                       We <strong>DO NOT</strong> collect, store, transmit, or share your Meesho Seller credentials, catalog descriptions, passwords, shop keys, or invoice details. All automation processes are 100% server-isolated and client-confined.
                     </p>
-                    <p className="font-bold text-pink-400">
+                    <p className="font-bold text-[#3B82F6]">
                       3. Secured Payment Processing (Cashfree Gateway)
                     </p>
                     <p>
                       All checkout transactions are processed via our verified secure payment partner gateway, <strong>Cashfree Payments</strong>. Your transaction, card details, or UPI information are fully encrypted using SSL with AES-256 standards. We never store credit cards, UPI codes, or bank passwords inside our server environments.
                     </p>
-                    <p className="font-bold text-pink-400">
+                    <p className="font-bold text-[#3B82F6]">
                       4. WhatsApp & Customer Support Interactions
                     </p>
                     <p>
@@ -853,7 +853,7 @@ export default function App() {
 
               {activeModal === 'terms' && (
                 <div className="space-y-4">
-                  <h3 className="text-lg font-extrabold text-white font-display flex items-center gap-2 border-b border-purple-900/30 pb-3">
+                  <h3 className="text-lg font-extrabold text-white font-display flex items-center gap-2 border-b border-[#334155] pb-3">
                     <span className="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse" />
                     Terms of Service / Conditions of Use
                   </h3>
@@ -864,25 +864,25 @@ export default function App() {
                     <p>
                       This website is owned and operated by <strong>Sk Ali Asgar</strong>, Haldia, Purba Medinipur, West Bengal, India, PIN: 721628. By browsing or purchasing from our platform, you agree to comply with the following simple terms and conditions of use.
                     </p>
-                    <p className="font-bold text-pink-400">
+                    <p className="font-bold text-[#3B82F6]">
                       1. Lifetime Personal Use License
                     </p>
                     <p>
                       Your one-time fee of ₹199 entitles you to a single-seat personal license for your designated seller accounts. You are strictly forbidden from copying, distributing, cracking, selling, or modifying the sheets code or automation binaries to secondary users.
                     </p>
-                    <p className="font-bold text-pink-400">
+                    <p className="font-bold text-[#3B82F6]">
                       2. Companion Productivity Tool Disclaimer
                     </p>
                     <p>
                       This automation tool serves strictly as a high-speed productivity helper to compile and submit catalogs faster. High-volume uploads should be supervised closely by vendor operators. We make every effort to optimize code algorithms, but the ultimate marketplace sales performance relies on your product quality, trends, and compliance with respective marketplace terms. The tool is provided "as is" without warranty of any kind.
                     </p>
-                    <p className="font-bold text-pink-400">
+                    <p className="font-bold text-[#3B82F6]">
                       3. Instant Digital Fulfilment & Payments
                     </p>
                     <p>
                       All prices listed on our platform are in Indian Rupees (INR). Payments must be cleared via our secure gateway Cashfree. Because our product is fully electronic (Google Sheets templates, coding macros, and video guides), links are dispatched instantly upon successful payment.
                     </p>
-                    <p className="font-bold text-pink-400">
+                    <p className="font-bold text-[#3B82F6]">
                       4. Governing Law & Jurisdiction
                     </p>
                     <p>
@@ -894,7 +894,7 @@ export default function App() {
 
               {activeModal === 'refund' && (
                 <div className="space-y-4">
-                  <h3 className="text-lg font-extrabold text-white font-display flex items-center gap-2 border-b border-purple-900/30 pb-3">
+                  <h3 className="text-lg font-extrabold text-white font-display flex items-center gap-2 border-b border-[#334155] pb-3">
                     <span className="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse" />
                     Refund, Cancellation & Return Policy
                   </h3>
@@ -905,13 +905,13 @@ export default function App() {
                     <p>
                       At Meesho AutoListing Automation Suites, we strive to maintain transparency. Since our product suite is 100% digital, we have designed the following balanced refund policy:
                     </p>
-                    <p className="font-bold text-pink-400">
+                    <p className="font-bold text-[#3B82F6]">
                       1. Cancellation Policy
                     </p>
                     <p>
                       Cancellations are accepted only prior to downloading or receiving the files on your email or phone. Once the digital download link is clicked or files are generated and dispatched to your email, the transaction cannot be cancelled.
                     </p>
-                    <p className="font-bold text-pink-400">
+                    <p className="font-bold text-[#3B82F6]">
                       2. Refund Eligibility & Support Guarantee
                     </p>
                     <p>
@@ -920,7 +920,7 @@ export default function App() {
                       <br />• Our engineering team will assist you to set up the tool or provide manual customized configuration sheets matching your device within 24-48 hours.
                       <br />• In the rare scenario that our support specialists cannot resolve the technical problem and the tool remains completely unusable on your specified device, a <strong>full refund of ₹199</strong> will be approved immediately.
                     </p>
-                    <p className="font-bold text-pink-400">
+                    <p className="font-bold text-[#3B82F6]">
                       3. Refund Processing & Timelines
                     </p>
                     <p>
@@ -933,7 +933,7 @@ export default function App() {
 
               {activeModal === 'shipping' && (
                 <div className="space-y-4">
-                  <h3 className="text-lg font-extrabold text-white font-display flex items-center gap-2 border-b border-purple-900/30 pb-3">
+                  <h3 className="text-lg font-extrabold text-white font-display flex items-center gap-2 border-b border-[#334155] pb-3">
                     <span className="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse" />
                     Shipping & Delivery Policy
                   </h3>
@@ -944,7 +944,7 @@ export default function App() {
                     <p>
                       All products and services sold on Meesho AutoListing Automation Suites are 100% digital, virtual software sheets, instructions, and video packages. <strong>No physical delivery or courier shipment is required.</strong>
                     </p>
-                    <p className="font-bold text-pink-400">
+                    <p className="font-bold text-[#3B82F6]">
                       1. Delivery Mechanism
                     </p>
                     <p>
@@ -952,7 +952,7 @@ export default function App() {
                       <br />• <strong>Automatic Email Delivery:</strong> A confirmation email enclosing download credentials, setup files, and video tutorial links is dispatched to your registered billing email within <strong>5 to 10 minutes</strong>.
                       <br />• <strong>WhatsApp Backup:</strong> A backup link with manual templates is also sent to your registered billing WhatsApp contact number automatically.
                     </p>
-                    <p className="font-bold text-pink-400">
+                    <p className="font-bold text-[#3B82F6]">
                       2. Delayed Delivery Handling
                     </p>
                     <p>
@@ -964,7 +964,7 @@ export default function App() {
 
               {activeModal === 'support' && (
                 <div className="space-y-4">
-                  <h3 className="text-lg font-extrabold text-white font-display flex items-center gap-2 border-b border-purple-900/30 pb-3">
+                  <h3 className="text-lg font-extrabold text-white font-display flex items-center gap-2 border-b border-[#334155] pb-3">
                     <span className="w-2.5 h-2.5 bg-emerald-400 rounded-full animate-pulse" />
                     Contact Us / Help Center
                   </h3>
@@ -973,7 +973,7 @@ export default function App() {
                       Need immediate help, customized sheets, or have any pre-purchase billing questions? Our helpdesk is active to serve you inside 15 minutes!
                     </p>
                     
-                    <div className="glass-panel p-4 rounded-xl border-purple-500/20 space-y-3 bg-purple-950/20">
+                    <div className="glass-panel p-4 rounded-xl border-[#334155] space-y-3 bg-[#1E293B]">
                       <div className="flex items-center gap-3">
                         <div className="p-2.5 rounded-lg bg-emerald-500/20 text-emerald-400">
                           <MessageSquare className="w-5 h-5 flex-shrink-0" />
@@ -987,19 +987,19 @@ export default function App() {
                       </div>
 
                       <div className="flex items-center gap-3">
-                        <div className="p-2.5 rounded-lg bg-purple-500/20 text-purple-400">
+                        <div className="p-2.5 rounded-lg bg-blue-500/20 text-[#3B82F6]">
                           <Layers className="w-5 h-5 flex-shrink-0" />
                         </div>
                         <div>
                           <p className="text-[10px] text-gray-400 uppercase font-mono">Support Email ID</p>
-                          <a href={`mailto:${CONFIG.supportEmail}`} className="text-xs sm:text-sm font-bold text-white hover:underline hover:text-purple-300 transition-colors break-all">
+                          <a href={`mailto:${CONFIG.supportEmail}`} className="text-xs sm:text-sm font-bold text-white hover:underline hover:text-blue-300 transition-colors break-all">
                             {CONFIG.supportEmail}
                           </a>
                         </div>
                       </div>
 
                       <div className="flex items-start gap-3">
-                        <div className="p-2.5 rounded-lg bg-pink-500/20 text-pink-400 mt-0.5">
+                        <div className="p-2.5 rounded-lg bg-blue-500/20 text-[#3B82F6] mt-0.5">
                           <Lock className="w-5 h-5 flex-shrink-0" />
                         </div>
                         <div>
@@ -1018,10 +1018,10 @@ export default function App() {
                 </div>
               )}
 
-              <div className="mt-6 pt-4 border-t border-purple-900/30 text-center">
+              <div className="mt-6 pt-4 border-t border-[#334155] text-center">
                 <button
                   onClick={() => setActiveModal(null)}
-                  className="px-6 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-xs hover:from-purple-500 hover:to-pink-500 cursor-pointer"
+                  className="px-6 py-2 rounded-xl bg-[#3B82F6] text-white font-bold text-xs hover:bg-[#2563EB] cursor-pointer"
                 >
                   Close Window
                 </button>

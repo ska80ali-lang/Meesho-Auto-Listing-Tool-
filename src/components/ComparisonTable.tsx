@@ -4,12 +4,12 @@ import { XCircle, CheckCircle, Info } from 'lucide-react';
 
 export default function ComparisonTable() {
   return (
-    <section id="comparison-section" className="py-16 bg-[#04000b] relative">
+    <section id="comparison-section" className="py-16 bg-[#0F172A] relative">
       <div className="max-w-4xl mx-auto px-4 md:px-8">
         
         {/* Header */}
         <div className="text-center mb-10">
-          <span className="text-xs font-mono font-bold text-purple-400 uppercase tracking-widest block mb-1">Side-by-Side Analysis</span>
+          <span className="text-xs font-mono font-bold text-[#3B82F6] uppercase tracking-widest block mb-1">Side-by-Side Analysis</span>
           <h2 className="text-2xl md:text-3xl font-extrabold text-white font-display">
             The Difference Is <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-emerald-400 glow-text-purple">Day & Night</span>
           </h2>
@@ -19,18 +19,18 @@ export default function ComparisonTable() {
         </div>
 
         {/* Desktop View Table */}
-        <div className="hidden md:block overflow-hidden rounded-2xl border border-purple-950/40 bg-[#090514]/40 shadow-[0_15px_40px_rgba(0,0,0,0.6)]">
+        <div className="hidden md:block overflow-hidden rounded-2xl border border-[#334155] bg-[#1E293B] shadow-[0_15px_40px_rgba(0,0,0,0.6)]">
           <table className="w-full text-left border-collapse text-sm">
             <thead>
-              <tr className="border-b border-purple-950/60 bg-[#0c071d]/60 text-xs font-semibold text-gray-300 tracking-wider font-mono">
+              <tr className="border-b border-[#334155] bg-[#0F172A] text-xs font-semibold text-gray-300 tracking-wider font-mono">
                 <th className="py-4.5 px-6">METRIC / SPEC</th>
                 <th className="py-4.5 px-6 text-red-400 bg-red-950/10">WITHOUT AUTOMATION</th>
                 <th className="py-4.5 px-6 text-emerald-400 bg-emerald-950/10">WITH MEESHO AUTO TOOL</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-purple-950/30 text-gray-300">
+            <tbody className="divide-y divide-[#334155]/60 text-gray-300">
               {COMPARISONS.map((row, idx) => (
-                <tr key={idx} className="hover:bg-purple-950/10 transition-colors">
+                <tr key={idx} className="hover:bg-[#334155]/20 transition-colors">
                   <td className="py-4 px-6 font-semibold font-display text-gray-200">
                     {row.criteria}
                   </td>
@@ -59,10 +59,10 @@ export default function ComparisonTable() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.05 }}
-              className="p-4 rounded-xl bg-purple-950/10 border border-purple-950/30 space-y-3"
+              className="p-4 rounded-xl bg-[#1E293B] border border-[#334155] space-y-3"
             >
-              <div className="flex items-center gap-2 border-b border-purple-950/30 pb-2 text-sm font-bold text-gray-100 font-display">
-                <Info className="w-4 h-4 text-purple-400 shrink-0" />
+              <div className="flex items-center gap-2 border-b border-[#334155] pb-2 text-sm font-bold text-gray-100 font-display">
+                <Info className="w-4 h-4 text-[#3B82F6] shrink-0" />
                 <span>{row.criteria}</span>
               </div>
               

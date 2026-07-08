@@ -22,18 +22,18 @@ export default function ProofSlider() {
   };
 
   return (
-    <section id="proof-slider-section" className="py-16 relative bg-[#04000d]">
-      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-900/30 to-transparent" />
+    <section id="proof-slider-section" className="py-16 relative bg-[#0F172A]">
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-blue-900/10 to-transparent" />
       
       <div className="max-w-5xl mx-auto px-4 md:px-8">
         
         {/* Section header */}
         <div className="text-center mb-8">
-          <span className="text-[10px] md:text-sm font-mono tracking-widest text-pink-400 font-bold uppercase block mb-1">
+          <span className="text-[10px] md:text-sm font-mono tracking-widest text-[#3B82F6] font-bold uppercase block mb-1">
             Visual Proof & Tool Interface
           </span>
           <h2 className="text-2xl md:text-3xl font-extrabold text-white font-display">
-            Screegrab & Proof <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 glow-text-purple">Slider</span>
+            Screegrab & Proof <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-sky-400">Slider</span>
           </h2>
           <p className="text-gray-400 text-xs md:text-sm mt-1 max-w-lg mx-auto">
             Swipe or use arrow keys to inspect the simple auto-listing workflow.
@@ -41,10 +41,10 @@ export default function ProofSlider() {
         </div>
 
         {/* Carousel Outer Wrapper */}
-        <div className="relative glass-panel rounded-2xl md:rounded-3xl p-3 md:p-6 shadow-[0_10px_40px_rgba(0,0,0,0.6)] border-purple-500/10 overflow-hidden">
+        <div className="relative bg-[#1E293B] border border-[#334155] rounded-2xl md:rounded-3xl p-3 md:p-6 shadow-[0_10px_40px_rgba(0,0,0,0.6)] overflow-hidden">
           
           {/* Viewport Box (Fully contained image to prevent ANY cutting of screenshot) */}
-          <div className="relative w-full h-[280px] sm:h-[420px] md:h-[540px] bg-[#03010b] rounded-xl md:rounded-2xl overflow-hidden group flex items-center justify-center">
+          <div className="relative w-full h-[280px] sm:h-[420px] md:h-[540px] bg-[#0F172A] rounded-xl md:rounded-2xl overflow-hidden group flex items-center justify-center">
             
             <AnimatePresence mode="wait">
               <motion.div
@@ -69,7 +69,7 @@ export default function ProofSlider() {
             <div className="absolute top-1/2 -translate-y-1/2 left-3 z-10 hidden md:block">
               <button
                 onClick={handlePrev}
-                className="p-3 rounded-full bg-purple-950/80 border border-purple-500/30 text-white hover:bg-pink-500 hover:border-pink-400 transition-all shadow-md cursor-pointer"
+                className="p-3 rounded-full bg-[#0F172A]/80 border border-[#334155] text-white hover:bg-[#3B82F6] hover:border-blue-400 transition-all shadow-md cursor-pointer"
                 aria-label="Previous image"
               >
                 <ArrowLeft className="w-5 h-5" />
@@ -78,7 +78,7 @@ export default function ProofSlider() {
             <div className="absolute top-1/2 -translate-y-1/2 right-3 z-10 hidden md:block">
               <button
                 onClick={handleNext}
-                className="p-3 rounded-full bg-purple-950/80 border border-purple-500/30 text-white hover:bg-pink-500 hover:border-pink-400 transition-all shadow-md cursor-pointer"
+                className="p-3 rounded-full bg-[#0F172A]/80 border border-[#334155] text-white hover:bg-[#3B82F6] hover:border-blue-400 transition-all shadow-md cursor-pointer"
                 aria-label="Next image"
               >
                 <ArrowRight className="w-5 h-5" />
@@ -86,15 +86,15 @@ export default function ProofSlider() {
             </div>
 
             {/* Security Indicator */}
-            <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-purple-950/90 text-[10px] text-pink-400 font-mono border border-purple-500/30 flex items-center gap-1.5 backdrop-blur-md">
+            <div className="absolute top-3 left-3 px-2.5 py-1 rounded-md bg-[#0F172A]/90 text-[10px] text-[#3B82F6] font-mono border border-[#334155] flex items-center gap-1.5 backdrop-blur-md">
               <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
               Verified Safe Seller Proof
             </div>
           </div>
 
           {/* Description details card placed neatly below, preventing overlay coverage */}
-          <div className="mt-4 p-4 rounded-xl bg-purple-950/20 border border-purple-950/40 relative">
-            <div className="flex gap-2 items-center text-xs text-pink-400 font-mono mb-1">
+          <div className="mt-4 p-4 rounded-xl bg-[#0F172A]/40 border border-[#334155] relative">
+            <div className="flex gap-2 items-center text-xs text-[#3B82F6] font-mono mb-1">
               <Eye className="w-3.5 h-3.5" />
               <span>Proof Screenshot {activeIdx + 1} of {SCREENSHOT_SLIDES.length}</span>
             </div>
@@ -115,8 +115,8 @@ export default function ProofSlider() {
                 <button
                   key={idx}
                   onClick={() => setActiveIdx(idx)}
-                  className={`h-2 rounded-full transition-all duration-350 cursor-pointer ${
-                    activeIdx === idx ? 'w-6 bg-pink-500' : 'w-2 bg-purple-950 border border-purple-900/50'
+                  className={`h-2 rounded-full transition-all duration-355 cursor-pointer ${
+                    activeIdx === idx ? 'w-6 bg-[#3B82F6]' : 'w-2 bg-[#1E293B] border border-[#334155]'
                   }`}
                   aria-label={`Go to slide ${idx + 1}`}
                 />
@@ -127,14 +127,14 @@ export default function ProofSlider() {
             <div className="flex gap-2 md:hidden">
               <button
                 onClick={handlePrev}
-                className="p-2.5 rounded-lg bg-purple-950/60 border border-purple-900/30 text-white hover:bg-pink-500 transition-colors cursor-pointer"
+                className="p-2.5 rounded-lg bg-[#0F172A]/60 border border-[#334155] text-white hover:bg-[#3B82F6] transition-colors cursor-pointer"
                 aria-label="Previous slide"
               >
                 <ArrowLeft className="w-4 h-4" />
               </button>
               <button
                 onClick={handleNext}
-                className="p-2.5 rounded-lg bg-purple-950/60 border border-purple-900/30 text-white hover:bg-pink-500 transition-colors cursor-pointer"
+                className="p-2.5 rounded-lg bg-[#0F172A]/60 border border-[#334155] text-white hover:bg-[#3B82F6] transition-colors cursor-pointer"
                 aria-label="Next slide"
               >
                 <ArrowRight className="w-4 h-4" />
