@@ -98,8 +98,8 @@ const FAQ_DATA: FAQItem[] = [
   },
   {
     category: "📞 Owner Contact",
-    question: "📞 Owner Connect, Timing & Address Details?",
-    answer: "Aap direct software developer dynamic creator and foundation head se support setup check kar sakte hain:\n\n• **Founder/Owner Lead:** Founder Sk Ali Asgar sir, based in Haldia, West Bengal, PIN Code: 721628.\n• **Primary Whatsapp Call/SMS Hotline:** **6295429762**.\n• **Helper assistant hours:** Support daily Morning 09:00 AM to Night 10:00 PM Jaipur and Surat sellers dynamic integrations ke liye active backup guides dynamic details calls supports provide karta h."
+    question: "📞 Support Connect, Timing & Address Details?",
+    answer: "Aap direct support and setup details check kar sakte hain:\n\n• **Support Contact:** Direct WhatsApp Helpline at **6295429762**.\n• **Timing:** Daily Morning 09:00 AM to Night 10:00 PM (IST) for instant installation and onboarding help.\n• **Address:** Haldia, Purba Medinipur, West Bengal, PIN Code: 721628."
   }
 ];
 
@@ -263,7 +263,7 @@ export default function AiChatBot({ isStickyVisible = false, isOpen, setIsOpen }
   const [messages, setMessages] = useState<Message[]>([
     { 
       role: 'model', 
-      text: "Namaste! 🙏 Main aapka Sk Ali Asgar Official Tool Assistant hu.\n\nType karne ki bilkul tension mat lijiye! Neeche diye gaye dynamic categories se apne pasand ka question ya **🎬 Direct Video Demo** select karne ke liye tab click karein aur automatic instant detailed answer payein.\n\nHamare sabhi auto-listing tools aur combo packs permanent **LIFETIME ACCESS** ke sath aate hain (No monthly renewal billing & No hidden software taxes). Main aapko details Hinglish me batata hu. 👇" 
+      text: "Welcome! 🙏 Main aapka Automated Tool Assistant hu.\n\nApne business ko scale karne aur processes ko dhyan se samajhne ke liye neeche diye gaye options par click karein. Aap direct 🎬 Video Tutorials dekh kar live demo bhi check kar sakte hain." 
     }
   ]);
   const [loading, setLoading] = useState(false);
@@ -435,7 +435,7 @@ export default function AiChatBot({ isStickyVisible = false, isOpen, setIsOpen }
             animate="visible"
             exit="exit"
             style={{ willChange: "transform, opacity" }} // Hardware acceleration to prevent any lag
-            className="fixed bottom-0 left-0 right-0 w-full h-[88vh] rounded-t-[24px] rounded-b-none md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:bottom-auto md:right-auto md:w-[430px] md:h-[610px] md:max-h-[82vh] md:rounded-3xl overflow-hidden shadow-[0_15px_40px_rgba(59,130,246,0.25)] border border-[#334155] bg-[#1E293B] flex flex-col z-50 pointer-events-auto"
+            className="fixed bottom-0 left-0 right-0 w-full h-[88vh] rounded-t-[24px] rounded-b-none md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 md:bottom-auto md:right-auto md:w-[560px] md:h-[610px] md:max-h-[82vh] md:rounded-3xl overflow-hidden shadow-[0_15px_40px_rgba(59,130,246,0.25)] border border-[#334155] bg-[#1E293B] flex flex-col z-50 pointer-events-auto"
           >
             {/* Header Area */}
             <div className="p-4 bg-[#1E293B] border-b border-[#334155] flex items-center justify-between">
@@ -448,7 +448,7 @@ export default function AiChatBot({ isStickyVisible = false, isOpen, setIsOpen }
                 </div>
                 <div>
                   <div className="flex items-center gap-1.5">
-                    <h4 className="text-xs sm:text-sm font-black text-white tracking-wide">Ali Asgar Interactive Bot</h4>
+                    <h4 className="text-xs sm:text-sm font-black text-white tracking-wide">Meesho Auto-Listing AI Assistant</h4>
                     <span className="bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[8px] px-1.2 py-0.5 rounded font-extrabold uppercase tracking-wider">Ready</span>
                   </div>
                   <p className="text-[9.5px] text-blue-300">⚡ Touch any question or tutorial tag for live player</p>
@@ -486,12 +486,12 @@ export default function AiChatBot({ isStickyVisible = false, isOpen, setIsOpen }
               <div className="bg-[#0F172A] border border-[#334155] rounded-2xl p-3 text-[11px] text-gray-200">
                 <div className="flex items-center gap-1.5 font-bold text-[#3B82F6] mb-1">
                   <ShieldCheck className="w-4 h-4 text-[#3B82F6]" />
-                  <span>Ali Asgar's Official Policy:</span>
+                  <span>🛡️ Our Guarantee & Policy:</span>
                 </div>
-                <p className="leading-relaxed opacity-95 pl-5">
-                  ✅ <strong>LIFETIME FREE ACCESS</strong> (One-time pay, no monthly renewals, no hidden fees ever!). <br />
-                  🛡️ <strong>24-Hour Refund protection</strong> agar actual setup config me error aaye.
-                </p>
+                <div className="leading-relaxed opacity-95 pl-5 space-y-1">
+                  <p>✅ <strong>Lifetime Access:</strong> One-time investment. No monthly renewals, no hidden fees.</p>
+                  <p>⚡ <strong>100% Setup Protection:</strong> Complete installation support or full refund if any technical error occurs.</p>
+                </div>
               </div>
 
               {messages.map((msg, idx) => (
@@ -633,13 +633,12 @@ export default function AiChatBot({ isStickyVisible = false, isOpen, setIsOpen }
                 whileTap={{ scale: 0.95 }}
                 className="buy-btn-effect flex shadow-[0_0_15px_rgba(59,130,246,0.4)] hover:shadow-[0_0_25px_rgba(59,130,246,0.7)] group bg-gradient-to-r from-[#3B82F6] to-[#2563EB] border border-blue-400 text-white text-[11px] font-black uppercase tracking-wider py-2 px-4 rounded-xl items-center justify-center gap-1.5 transition-all text-center flex-1 cursor-pointer"
               >
-                <span>BUY NOW (LIFETIME)</span>
-                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform animate-pulse text-white shrink-0" />
+                <span>BUY NOW →</span>
               </motion.a>
 
               {/* Support Number link */}
               <a 
-                href="https://wa.me/916295429762?text=Hello%20Sk%20Ali%20Asgar%20sir,%20I%20visited%20your%20Auto%20Listing%20Tool%20app..."
+                href="https://wa.me/916295429762?text=Hello,%20I%20visited%20your%20Meesho%20Auto%20Listing%20AI%20Assistant%20app..."
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-emerald-400 hover:text-emerald-300 font-extrabold flex items-center gap-1 transition-colors hover:underline text-[10.5px] cursor-pointer"
