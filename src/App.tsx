@@ -226,7 +226,9 @@ export default function App() {
             >
               <video
                 ref={heroVideoRef}
-                src={CONFIG.heroVideoUrl}
+                src={`${CONFIG.heroVideoUrl}#t=0.1`}
+                poster={CONFIG.heroVideoUrl.replace(/\.mp4$/, '.jpg')}
+                preload="auto"
                 muted={heroMuted}
                 loop
                 playsInline
