@@ -1,25 +1,26 @@
 import express from "express";
 import path from "path";
-import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
 import fs from "fs";
 import { initializeApp } from "firebase/app";
 import { getFirestore, doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
+import { fileURLToPath } from "url";
 
 dotenv.config();
 
+// Deriving __dirname in ESM
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 // Load Firebase Config
-const firebaseConfigPath = path.join(process.cwd(), "firebase-applet-config.json");
+const firebaseConfigPath = path.join(__dirname, "firebase-applet-config.json");
 const firebaseConfig = JSON.parse(fs.readFileSync(firebaseConfigPath, "utf-8"));
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getFirestore(firebaseApp);
 
-async function startServer() {
-  const app = express();
-  const PORT = 3000;
-
-  app.use(express.json());
+const app = express();
+app.use(express.json());
 
   // Lazy Initialization of Gemini SDK safegaurded against missing / empty keys
   let aiClient: GoogleGenAI | null = null;
@@ -400,7 +401,7 @@ Tone: Strictly text-oriented. No voice calls, mics, speaking, voice playback ref
       }
 
       // Load Downloads Config
-      const downloadsConfigPath = path.join(process.cwd(), "src", "downloads-config.json");
+      const downloadsConfigPath = path.join(__dirname, "src", "downloads-config.json");
       const downloadsConfig = JSON.parse(fs.readFileSync(downloadsConfigPath, "utf-8"));
 
       // Filter based on purchase type
@@ -430,24 +431,36 @@ Tone: Strictly text-oriented. No voice calls, mics, speaking, voice playback ref
     }
   });
 
-  // Vite Middleware mounting
+  // Export app for serverless or local execution
+  export default app;
+
+  // Conditional Server Start
   if (process.env.NODE_ENV !== "production") {
-    const vite = await createViteServer({
-      server: { middlewareMode: true },
-      appType: "spa",
+    // Mount Vite asynchronously in development
+    import("vite").then(({ createServer: createViteServer }) => {
+      createViteServer({
+        server: { middlewareMode: true },
+        appType: "spa",
+      }).then((vite) => {
+        app.use(vite.middlewares);
+        const PORT = 3000;
+        app.listen(PORT, "0.0.0.0", () => {
+          console.log(`Server running in development on http://localhost:${PORT}`);
+        });
+      });
+    }).catch((err) => {
+      console.error("Failed to load Vite dev server:", err);
     });
-    app.use(vite.middlewares);
-  } else {
-    const distPath = path.join(process.cwd(), 'dist');
+  } else if (!process.env.VERCEL) {
+    // In production container (Cloud Run), serve static files and listen
+    const distPath = path.join(__dirname, 'dist');
     app.use(express.static(distPath));
     app.get('*', (req, res) => {
       res.sendFile(path.join(distPath, 'index.html'));
     });
+
+    const PORT = 3000;
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`Server running in production on port ${PORT}`);
+    });
   }
-
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`Server running on http://0.0.0.0:${PORT}`);
-  });
-}
-
-startServer();
