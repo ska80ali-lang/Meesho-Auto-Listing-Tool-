@@ -1,26 +1,16 @@
 import express from "express";
 import path from "path";
+import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
-import fs from "fs";
-import { initializeApp } from "firebase/app";
-import { getFirestore, doc, setDoc, getDoc, updateDoc } from "firebase/firestore";
-import { fileURLToPath } from "url";
 
 dotenv.config();
 
-// Deriving __dirname in ESM
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+async function startServer() {
+  const app = express();
+  const PORT = 3000;
 
-// Load Firebase Config
-const firebaseConfigPath = path.join(__dirname, "firebase-applet-config.json");
-const firebaseConfig = JSON.parse(fs.readFileSync(firebaseConfigPath, "utf-8"));
-const firebaseApp = initializeApp(firebaseConfig);
-const db = getFirestore(firebaseApp);
-
-const app = express();
-app.use(express.json());
+  app.use(express.json());
 
   // Lazy Initialization of Gemini SDK safegaurded against missing / empty keys
   let aiClient: GoogleGenAI | null = null;
@@ -224,243 +214,24 @@ Tone: Strictly text-oriented. No voice calls, mics, speaking, voice playback ref
     }
   });
 
-  // ==========================================
-  // CASHFREE INTEGRATION API ENDPOINTS
-  // ==========================================
-
-  // 1. Create Checkout Session Order
-  app.post("/api/create-order", async (req, res) => {
-    try {
-      const { name, email, phone, isCombo } = req.body;
-
-      if (!name || !email || !phone) {
-        return res.status(400).json({ error: "Name, email, and phone are required." });
-      }
-
-      const cleanPhone = phone.replace(/[^a-zA-Z0-9]/g, "");
-      if (cleanPhone.length < 10) {
-        return res.status(400).json({ error: "Please enter a valid phone number (at least 10 digits)." });
-      }
-
-      const amount = isCombo ? 348 : 199;
-      const purchaseType = isCombo ? "Combo" : "Single";
-      const orderId = `order_ML_${Date.now()}_${Math.floor(1000 + Math.random() * 9000)}`;
-
-      // Store in Firestore as PENDING
-      const orderRef = doc(db, "orders", orderId);
-      await setDoc(orderRef, {
-        orderId,
-        name,
-        email,
-        phone: cleanPhone,
-        purchaseType,
-        amount,
-        paymentStatus: "PENDING",
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
-      });
-
-      const appId = process.env.CASHFREE_APP_ID || "1328720fa4876cfc5f2d083d40b0278231";
-      const secretKey = process.env.CASHFREE_SECRET_KEY || "cfsk_ma_prod_191a5a5fa4c7f489f3101dbe6712549a_fcb45fb9";
-      
-      const origin = process.env.APP_URL || `${req.protocol}://${req.get("host")}`;
-      const returnUrl = `${origin}/api/verify-payment?order_id=${orderId}`;
-
-      const cashfreePayload = {
-        order_amount: amount,
-        order_currency: "INR",
-        order_id: orderId,
-        customer_details: {
-          customer_id: `cust_${cleanPhone}`,
-          customer_name: name,
-          customer_email: email,
-          customer_phone: cleanPhone
-        },
-        order_meta: {
-          return_url: returnUrl
-        }
-      };
-
-      console.log(`Initiating Cashfree Order: ${orderId} | Amount: ₹${amount}`);
-
-      const cashfreeResponse = await fetch("https://api.cashfree.com/pg/orders", {
-        method: "POST",
-        headers: {
-          "x-client-id": appId,
-          "x-client-secret": secretKey,
-          "x-api-version": "2023-08-01",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(cashfreePayload)
-      });
-
-      if (!cashfreeResponse.ok) {
-        const errorText = await cashfreeResponse.text();
-        console.error("Cashfree API Order Creation Failed:", errorText);
-        return res.status(500).json({ error: "Failed to initiate payment session with Cashfree.", details: errorText });
-      }
-
-      const responseData: any = await cashfreeResponse.json();
-      console.log("Cashfree Order created successfully on payment gateway:", responseData.order_id);
-
-      const paymentLink = responseData.payment_link || (responseData.payments && responseData.payments.payment_link);
-      const paymentSessionId = responseData.payment_session_id;
-
-      return res.json({
-        success: true,
-        order_id: orderId,
-        payment_link: paymentLink,
-        payment_session_id: paymentSessionId
-      });
-
-    } catch (err: any) {
-      console.error("Error in /api/create-order:", err);
-      return res.status(500).json({ error: "Internal server error during order creation." });
-    }
-  });
-
-  // 2. Verify Payment Status & Redirect
-  app.get("/api/verify-payment", async (req, res) => {
-    try {
-      const { order_id } = req.query;
-
-      if (!order_id || typeof order_id !== "string") {
-        return res.status(400).send("Order ID is missing or invalid.");
-      }
-
-      console.log("Verifying payment on Cashfree API for Order:", order_id);
-
-      const appId = process.env.CASHFREE_APP_ID || "1328720fa4876cfc5f2d083d40b0278231";
-      const secretKey = process.env.CASHFREE_SECRET_KEY || "cfsk_ma_prod_191a5a5fa4c7f489f3101dbe6712549a_fcb45fb9";
-
-      const statusResponse = await fetch(`https://api.cashfree.com/pg/orders/${order_id}`, {
-        method: "GET",
-        headers: {
-          "x-client-id": appId,
-          "x-client-secret": secretKey,
-          "x-api-version": "2023-08-01",
-          "Content-Type": "application/json"
-        }
-      });
-
-      if (!statusResponse.ok) {
-        const errorText = await statusResponse.text();
-        console.error("Cashfree status check failed:", errorText);
-        return res.redirect(`/#/download?order_id=${order_id}&verified=false`);
-      }
-
-      const gatewayOrder: any = await statusResponse.json();
-      const orderStatus = gatewayOrder.order_status;
-      const paymentId = gatewayOrder.cf_order_id ? String(gatewayOrder.cf_order_id) : "";
-
-      console.log(`Verified Status for ${order_id}: ${orderStatus}`);
-
-      const orderDocRef = doc(db, "orders", order_id);
-
-      if (orderStatus === "PAID") {
-        await updateDoc(orderDocRef, {
-          paymentStatus: "PAID",
-          paymentId: paymentId,
-          updatedAt: new Date().toISOString()
-        });
-        return res.redirect(`/#/download?order_id=${order_id}&verified=true`);
-      } else {
-        await updateDoc(orderDocRef, {
-          paymentStatus: "FAILED",
-          updatedAt: new Date().toISOString()
-        });
-        return res.redirect(`/#/download?order_id=${order_id}&verified=false`);
-      }
-
-    } catch (err: any) {
-      console.error("Error in /api/verify-payment:", err);
-      return res.status(500).send("Internal server error during payment verification.");
-    }
-  });
-
-  // 3. Get Order Details & Secure Downloads Config
-  app.get("/api/check-order-status", async (req, res) => {
-    try {
-      const { order_id } = req.query;
-
-      if (!order_id || typeof order_id !== "string") {
-        return res.status(400).json({ error: "Order ID is missing or invalid." });
-      }
-
-      const orderDocRef = doc(db, "orders", order_id);
-      const orderDoc = await getDoc(orderDocRef);
-
-      if (!orderDoc.exists()) {
-        return res.status(404).json({ error: "Order not found." });
-      }
-
-      const orderData = orderDoc.data();
-
-      if (orderData.paymentStatus !== "PAID") {
-        return res.status(403).json({ error: "Access Denied. Payment is not verified." });
-      }
-
-      // Load Downloads Config
-      const downloadsConfigPath = path.join(__dirname, "src", "downloads-config.json");
-      const downloadsConfig = JSON.parse(fs.readFileSync(downloadsConfigPath, "utf-8"));
-
-      // Filter based on purchase type
-      const activeDownloads: any = {};
-      activeDownloads.meesho = downloadsConfig.meesho;
-      if (orderData.purchaseType === "Combo") {
-        activeDownloads.flipkart = downloadsConfig.flipkart;
-      }
-
-      return res.json({
-        success: true,
-        order: {
-          orderId: orderData.orderId,
-          name: orderData.name,
-          email: orderData.email,
-          phone: orderData.phone,
-          purchaseType: orderData.purchaseType,
-          amount: orderData.amount,
-          createdAt: orderData.createdAt
-        },
-        downloads: activeDownloads
-      });
-
-    } catch (err: any) {
-      console.error("Error in /api/check-order-status:", err);
-      return res.status(500).json({ error: "Internal server error while retrieving download credentials." });
-    }
-  });
-
-  // Export app for serverless or local execution
-  export default app;
-
-  // Conditional Server Start
+  // Vite Middleware mounting
   if (process.env.NODE_ENV !== "production") {
-    // Mount Vite asynchronously in development
-    import("vite").then(({ createServer: createViteServer }) => {
-      createViteServer({
-        server: { middlewareMode: true },
-        appType: "spa",
-      }).then((vite) => {
-        app.use(vite.middlewares);
-        const PORT = 3000;
-        app.listen(PORT, "0.0.0.0", () => {
-          console.log(`Server running in development on http://localhost:${PORT}`);
-        });
-      });
-    }).catch((err) => {
-      console.error("Failed to load Vite dev server:", err);
+    const vite = await createViteServer({
+      server: { middlewareMode: true },
+      appType: "spa",
     });
-  } else if (!process.env.VERCEL) {
-    // In production container (Cloud Run), serve static files and listen
-    const distPath = path.join(__dirname, 'dist');
+    app.use(vite.middlewares);
+  } else {
+    const distPath = path.join(process.cwd(), 'dist');
     app.use(express.static(distPath));
     app.get('*', (req, res) => {
       res.sendFile(path.join(distPath, 'index.html'));
     });
-
-    const PORT = 3000;
-    app.listen(PORT, "0.0.0.0", () => {
-      console.log(`Server running in production on port ${PORT}`);
-    });
   }
+
+  app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server running on http://0.0.0.0:${PORT}`);
+  });
+}
+
+startServer();
