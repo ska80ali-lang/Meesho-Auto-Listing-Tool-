@@ -1,0 +1,12 @@
+{
+  "meesho": {
+    "toolLink": "https://drive.google.com/uc?export=download&id=meesho_extension_12345",
+    "videoLink": "https://res.cloudinary.com/dutdmkrhc/video/upload/v1781288334/InShot_20260525_212334170_de2rkp_kdf2ho.mp4",
+    "resourceLink": "https://docs.google.com/spreadsheets/d/1_meesho_spreadsheet_template/edit"
+  },
+  "flipkart": {
+    "toolLink": "https://drive.google.com/uc?export=download&id=flipkart_extension_12345",
+    "videoLink": "https://res.cloudinary.com/ddkdxc1lj/video/upload/v1779724680/InShot_20260525_211127373_wjvbit.mp4",
+    "resourceLink": "https://docs.google.com/spreadsheets/d/1_flipkart_spreadsheet_template/edit"
+  }
+}

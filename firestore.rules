@@ -1,0 +1,31 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Default deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    match /orders/{orderId} {
+      // Allow fetching a single order by its ID (for direct download verification)
+      allow get: if true;
+      
+      // Allow creating an order, but enforce strict validations
+      allow create: if incoming().paymentStatus == 'PENDING'
+                    && incoming().orderId == orderId
+                    && (incoming().amount == 199 || incoming().amount == 348)
+                    && incoming().name is string && incoming().name.size() > 0 && incoming().name.size() < 100
+                    && incoming().email is string && incoming().email.size() > 0 && incoming().email.size() < 100
+                    && incoming().phone is string && incoming().phone.size() > 0 && incoming().phone.size() < 30;
+      
+      // Allow status updates from PENDING to PAID or FAILED
+      allow update: if resource.data.paymentStatus == 'PENDING'
+                    && (incoming().paymentStatus == 'PAID' || incoming().paymentStatus == 'FAILED');
+    }
+  }
+
+  function incoming() {
+    return request.resource.data;
+  }
+}

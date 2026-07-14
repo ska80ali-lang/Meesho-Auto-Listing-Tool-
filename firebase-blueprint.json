@@ -1,0 +1,63 @@
+{
+  "entities": {
+    "Order": {
+      "title": "Order",
+      "description": "Order payment and purchase details",
+      "type": "object",
+      "properties": {
+        "orderId": {
+          "type": "string",
+          "description": "Unique order identifier generated for Cashfree"
+        },
+        "name": {
+          "type": "string",
+          "description": "Customer full name"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Customer email address"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Customer phone number"
+        },
+        "purchaseType": {
+          "type": "string",
+          "enum": ["Single", "Combo"],
+          "description": "Whether customer purchased single Meesho tool or Combo"
+        },
+        "amount": {
+          "type": "number",
+          "description": "Amount paid in INR"
+        },
+        "paymentStatus": {
+          "type": "string",
+          "enum": ["PENDING", "PAID", "FAILED"],
+          "description": "Current status of payment"
+        },
+        "paymentId": {
+          "type": "string",
+          "description": "Cashfree transaction reference ID"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation timestamp"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last updated timestamp"
+        }
+      },
+      "required": ["orderId", "name", "email", "phone", "purchaseType", "amount", "paymentStatus"]
+    }
+  },
+  "firestore": {
+    "orders/{orderId}": {
+      "schema": "Order",
+      "description": "Secure storage for purchase records and payment confirmation"
+    }
+  }
+}

@@ -195,9 +195,7 @@ export default function PricingCard() {
           {/* Conversion CTA */}
           <div className="space-y-4">
             <motion.a 
-              href={CONFIG.ctaRedirectUrl}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#/checkout"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="buy-btn-effect w-full h-14 rounded-2xl bg-gradient-to-r from-[#3B82F6] to-[#2563EB] hover:from-[#2563EB] hover:to-[#1D4ED8] text-white font-bold text-base flex justify-center items-center gap-3.5 border border-blue-400/20 cursor-pointer shadow-[0_0_30px_rgba(59,130,246,0.35)] transition-all duration-300 uppercase tracking-wider font-display"

@@ -40,10 +40,30 @@ import FAQSection from './components/FAQSection';
 import PricingCard from './components/PricingCard';
 import LiveSalesNotification from './components/LiveSalesNotification';
 
+import CheckoutPage from './components/CheckoutPage';
+import DownloadPage from './components/DownloadPage';
+
 export default function App() {
   // Global CTA Variable
-  const globalCtaUrl = CONFIG.ctaRedirectUrl;
+  const globalCtaUrl = '#/checkout';
   const whatsappNumber = CONFIG.whatsappNumber;
+
+  // Simple Client-side Hash Router State & Listener
+  const [currentHash, setCurrentHash] = useState(typeof window !== 'undefined' ? window.location.hash : '');
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const handleHashChange = () => {
+      setCurrentHash(window.location.hash);
+      window.scrollTo(0, 0);
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  const navigateToHash = (hash: string) => {
+    window.location.hash = hash;
+  };
 
   // Hero Video Control States
   const [heroPlaying, setHeroPlaying] = useState(false);
@@ -178,6 +198,15 @@ export default function App() {
       });
     }
   };
+
+  // Render routing views
+  if (currentHash.startsWith('#/checkout')) {
+    return <CheckoutPage onBackToHome={() => navigateToHash('#/')} />;
+  }
+
+  if (currentHash.startsWith('#/download')) {
+    return <DownloadPage onBackToHome={() => navigateToHash('#/')} />;
+  }
 
   return (
     <div id="landing-page-root" className="min-h-screen w-full relative overflow-x-hidden bg-[#0F172A] text-[#F8FAFC] font-sans selection:bg-[#3B82F6] selection:text-white">
@@ -347,8 +376,6 @@ export default function App() {
             <div ref={heroButtonRef} className="pt-4 max-w-md sm:max-w-lg mx-auto px-1 sm:px-0">
               <motion.a 
                 href={globalCtaUrl}
-                target="_blank" 
-                rel="noopener noreferrer"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 className="buy-btn-effect flex w-full h-16 px-4 sm:px-8 rounded-2xl bg-gradient-to-r from-[#3B82F6] via-blue-500 to-[#2563EB] hover:from-[#2563EB] hover:to-[#1D4ED8] text-white font-extrabold items-center justify-between gap-3 border border-blue-400/20 cursor-pointer shadow-[0_12px_40px_rgba(59,130,246,0.45)] uppercase tracking-wider font-sans"
@@ -770,8 +797,6 @@ export default function App() {
           {/* Right Action CTA Button */}
           <a
             href={globalCtaUrl}
-            target="_blank"
-            rel="noopener noreferrer"
             className="buy-btn-effect h-10 sm:h-11 md:h-13 px-3 sm:px-5 md:px-6 rounded-lg sm:rounded-xl md:rounded-2xl bg-gradient-to-r from-[#3B82F6] to-[#2563EB] hover:from-[#2563EB] hover:to-[#1D4ED8] text-white font-extrabold text-[10px] sm:text-xs md:text-sm flex items-center gap-1.5 sm:gap-2 border border-blue-400/20 shadow-md cursor-pointer uppercase tracking-wider font-display shrink-0 transition-transform hover:scale-[1.02]"
           >
             <Zap className="w-3.5 h-3.5 text-yellow-300 fill-yellow-300 animate-pulse shrink-0" />
